@@ -441,7 +441,7 @@ function fire(side){                      // side: "T"(left) | "S"(right)
 function resetCore(){
   G.phase="ready"; G.pastChoices=""; G.pastCR=""; G.trial=0; G.you=0; G.prot=0;
   G.streak=0; G.bestStreak=0; G.protStreak=0; G.protBestStreak=0;
-  G.lockCounts.fill(0); G.lockedTrials=0; G.log=[]; G.fl=null; G.runWin=[];
+  G.lockCounts.fill(0); G.lockedTrials=0; G.log=[]; G.fl=null;
   G.shake=0; G.endFlash=0; G.protFlash=0; particles.length=0;
   G.locked=false; G.lockAt=0; G.lastCommit=null; G.next=null;
   G.wsls={sw:0,nw:0,sl:0,nl:0}; G.figHist=[];
@@ -455,7 +455,7 @@ function resetCore(){
    and Proteus's displayed lane is the mirror of its logged action — a pure
    relabeling that preserves every statistic in the session. */
 let SESS=null;
-G.playing=false; G.runWin=[];
+G.playing=false;
 function loadSession(){
   const g=document.getElementById("selModel").value;
   const m=document.getElementById("selMode").value;
@@ -508,7 +508,6 @@ function resolve(fl){
     G.bestStreak=Math.max(G.bestStreak,G.streak); }
   G.log.push({side:fl.side,cpu:fl.cpu,hit:fl.hit,lockN:fl.lockN});
   G.bz.ta=BZ_REST;   // trial over — the clock hand swings back upright, neutral
-  G.runWin.push(G.you/G.trial);
   if(G.log.length>=2){
     const prev=G.log[G.log.length-2];
     const stay=fl.side===prev.side;
@@ -1168,24 +1167,6 @@ function drawHUD(){
     ctx.fillText(`TRIAL ${G.trial}/${SESS?SESS.choices.length:200} · ${SESS?SESS.prompt_mode.toUpperCase():""} FRAME`,W/2,y0-5);
   }
 }
-/* live running win-rate strip (Fig 3A forming in real time) */
-function drawMiniCurve(){
-  if(MODE!=="watch"||G.runWin.length<2||G.phase==="gameover"||G.phase==="field") return;
-  const x0=16,y0=286,w=118,h=84,n=SESS.choices.length;
-  ctx.fillStyle="rgba(8,10,26,0.72)"; ctx.fillRect(x0,y0,w,h);
-  ctx.strokeStyle="rgba(120,140,220,0.3)"; ctx.lineWidth=1; ctx.strokeRect(x0,y0,w,h);
-  const yOf=v=>y0+h-Math.max(0.05,Math.min(0.95,v))*h;
-  dashLine(x0,yOf(0.5),x0+w,yOf(0.5),"rgba(255,210,79,0.5)",[3,3]);
-  ctx.strokeStyle=CYAN; ctx.lineWidth=1.4; ctx.beginPath();
-  for(let i=0;i<G.runWin.length;i++){
-    const x=x0+i/(n-1)*w, y=yOf(G.runWin[i]);
-    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-  }
-  ctx.stroke();
-  ctx.textAlign="left"; ctx.font="9px monospace"; ctx.fillStyle="rgba(170,185,255,0.9)";
-  ctx.fillText("win rate "+(G.runWin[G.runWin.length-1]*100).toFixed(0)+"%",x0+4,y0+11);
-}
-
 /* ---- flight update/draw ---- */
 function updateFlight(now){
   const fl=G.fl; if(!fl) return;
@@ -1567,7 +1548,6 @@ function frame(now){
   drawFlight();
   drawParticles();
   drawHUD();
-  drawMiniCurve();
   if(G.phase==="title") drawTitle(now);
   if(MODE==="watch"&&!G.playing&&G.phase==="ready"&&G.trial===0){
     ctx.fillStyle="rgba(5,6,15,0.92)"; ctx.fillRect(0,0,W,H);
