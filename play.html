@@ -46,13 +46,20 @@
   .sect-title em { color: #5a6390; font-style: normal; font-weight: 400;
     letter-spacing: .5px; font-size: 8.5px; overflow: hidden; text-overflow: ellipsis; }
   /* threat board */
-  .tr { display: flex; align-items: center; gap: 8px; margin: 5px 0; font-size: 10px; }
-  .tr-name { width: 62px; color: #7f88b8; letter-spacing: 1px; white-space: nowrap; }
-  .tr-track { flex: 1; height: 7px; background: rgba(79,216,255,.08); position: relative; }
+  .tr { display: flex; align-items: center; gap: 8px; margin: 7px 0; font-size: 10px; }
+  .tr-left { width: 84px; flex: none; display: flex; flex-direction: column; gap: 2px; }
+  .tr-name { color: #7f88b8; letter-spacing: 1px; white-space: nowrap; }
+  .tr-seq { font-size: 10px; letter-spacing: 1px; white-space: nowrap; color: #6870a0; overflow: hidden; }
+  .tr-seq .g-tri, .tr-seq .g-star { color: #9fb2d8; }
+  .tr-seq .g-win { color: #ffd24f; font-weight: 700; }
+  .tr-seq .g-loss { color: #ff4f6d; font-weight: 700; }
+  .tr-seq .g-pair { margin-right: 4px; }
+  .tr-seq .sq-all { color: #4a5488; font-style: italic; letter-spacing: .5px; }
+  .tr-track { flex: 1; height: 16px; background: rgba(79,216,255,.08); position: relative; }
   .tr-fill { display: block; height: 100%; background: #8890c0; opacity: .7; transition: width .18s; }
-  .tr-line { position: absolute; top: -3px; bottom: -3px; left: 80%; width: 1px;
+  .tr-line { position: absolute; top: 0; bottom: 0; left: 80%; width: 1px;
     background: rgba(255,79,109,.55); }
-  .tr-out { width: 58px; text-align: right; color: #5a6390; font-size: 9px; }
+  .tr-out { width: 46px; text-align: right; color: #5a6390; font-size: 9px; }
   .tr.warm .tr-fill { background: #ffd24f; opacity: .9; }
   .tr.lock .tr-name { color: #ff8fa0; }
   .tr.lock .tr-fill { background: #ff4f6d; opacity: 1; box-shadow: 0 0 8px rgba(255,79,109,.7); }
@@ -194,7 +201,7 @@ function twoTailedBinomialP(n,k,p=0.5){
   for(let i=0;i<=n;i++){ const v=binomialPmf(n,i,p); if(v<=obs+1e-12) s+=v; }
   return Math.min(s,1);
 }
-function emptyChannel(n){ return {n,sig:false,bside:null,bsideprob:0,total:0,p:NaN}; }
+function emptyChannel(n){ return {n,sig:false,bside:null,bsideprob:0,total:0,p:NaN,ctx:""}; }
 function majorityStat(n,nT,nS){
   const total=nT+nS;
   if(total<1) return emptyChannel(n);
@@ -209,31 +216,33 @@ function detectChannel(cn,pastChoices,pastCR){
   const M=pastChoices.length;
   if(cn===0){
     if(M<1) return emptyChannel(0);
-    return majorityStat(0,countChar(pastChoices,"T"),countChar(pastChoices,"S"));
+    const r=majorityStat(0,countChar(pastChoices,"T"),countChar(pastChoices,"S")); r.ctx=""; return r;
   }
   if(cn>=1&&cn<=4){
     const n=cn;
-    if(M<n+1) return emptyChannel(n);
-    const ctx=pastChoices.slice(M-n); let nT=0,nS=0;
+    const ctx=M>=n?pastChoices.slice(M-n):"";
+    if(M<n+1){ const r=emptyChannel(n); r.ctx=ctx; return r; }
+    let nT=0,nS=0;
     for(let i=0;i<M-n;i++){
       if(pastChoices.slice(i,i+n)===ctx){
         const nx=pastChoices[i+n];
         if(nx==="T") nT++; else if(nx==="S") nS++;
       }
     }
-    return majorityStat(n,nT,nS);
+    const r=majorityStat(n,nT,nS); r.ctx=ctx; return r;
   }
   if(cn>=5&&cn<=8){
     const k=cn-4, cl=2*k, L=pastCR.length;
-    if(M<k+1||L<cl+1) return emptyChannel(cn);
-    const ctx=pastCR.slice(L-cl); let nT=0,nS=0;
+    const ctx=L>=cl?pastCR.slice(L-cl):"";
+    if(M<k+1||L<cl+1){ const r=emptyChannel(cn); r.ctx=ctx; return r; }
+    let nT=0,nS=0;
     for(let i=0;i<L-cl;i++){
       if(pastCR.slice(i,i+cl)===ctx){
         const nx=pastCR[i+cl];
         if(nx==="T") nT++; else if(nx==="S") nS++;
       }
     }
-    return majorityStat(cn,nT,nS);
+    const r=majorityStat(cn,nT,nS); r.ctx=ctx; return r;
   }
   throw new Error("bad channel "+cn);
 }
@@ -263,6 +272,8 @@ const CHANNEL_NAMES=[
 const W=520, H=780;
 const LANE_L=W*0.30, LANE_R=W*0.70;
 const ENDZONE_Y=78, PROT_Y=148, MID_Y=440, PLAYER_Y=684;
+const BZ_R=W*0.20;         // blue-circle track radius — pivot at the core, rim at the batteries
+const BZ_REST=Math.PI/2;   // resting angle: straight up from the core (12 o'clock)
 const V_UP=0.65, V_AFTER=1.15, V_DOWN=0.75;   // px per ms
 const T_MID=(PLAYER_Y-MID_Y)/V_UP;            // ~375 ms to midfield
 const MAX_MISSILES=200;
@@ -331,6 +342,7 @@ const G={
   lockCounts:new Array(9).fill(0), lockedTrials:0,
   log:[],                   // per-trial {side,cpu,hit,lockN}
   fl:null,                  // active flight
+  bz:{a:BZ_REST,ta:BZ_REST,r:0,flash:0},  // blue circle: track angle, target angle, radius, hit flash
   shake:0, endFlash:0, protFlash:0, readyAt:0, overAt:0,
   locked:false, lockAt:0,   // a Proteus channel is currently significant
   wsls:{sw:0,nw:0,sl:0,nl:0}, figHist:[],   // running stay/shift policy + trail
@@ -360,6 +372,7 @@ function resetGame(){
   G.lockCounts.fill(0); G.lockedTrials=0; G.log=[]; G.fl=null;
   G.shake=0; G.endFlash=0; G.protFlash=0; particles.length=0;
   G.locked=false; G.lockAt=0; G.lastCommit=null;
+  G.bz.a=BZ_REST; G.bz.ta=BZ_REST; G.bz.r=0; G.bz.flash=0;   // disc grows in at rest for a fresh session
   G.wsls={sw:0,nw:0,sl:0,nl:0}; G.figHist=[];
   precompute();
   renderPanels();
@@ -378,10 +391,14 @@ function fire(side){                      // side: "T"(left) | "S"(right)
     lockProb: dec.pred?dec.pred.bsideprob:0,
     mx: side==="T"?LANE_L:LANE_R,
     cx: cpu==="T"?LANE_L:LANE_R,
+    openX: cpu==="T"?LANE_R:LANE_L,   // lane Proteus is NOT defending — the breakthrough gap
+    circleHit:false,
     exploded:false, fizzled:false, scored:false, resolved:false,
     trail:[], ctrail:[],
   };
   G.phase="flight";
+  G.bz.ta=G.fl.openX===LANE_L?Math.PI:0;   // clock hand swings the disc to the undefended
+                                           // battery NOW — revealed only at launch
   G.lastCommit={results:dec.results,pred:dec.pred,cpu:dec.cpu,ranval:dec.ranval,side};
   renderChannels();                // telemetry reveals THIS trial's commitment only
   sfx.launch(); setTimeout(()=>sfx.counter(),40);
@@ -398,6 +415,7 @@ function resolve(fl){
   else { G.you++; G.streak++; G.protStreak=0;
     G.bestStreak=Math.max(G.bestStreak,G.streak); }
   G.log.push({side:fl.side,cpu:fl.cpu,hit:fl.hit,lockN:fl.lockN});
+  G.bz.ta=BZ_REST;   // trial over — the clock hand swings back upright, neutral
   if(G.log.length>=2){                      // running stay/shift policy
     const prev=G.log[G.log.length-2];
     const stay=fl.side===prev.side;
@@ -495,6 +513,20 @@ function threatFrac(p){
   if(!Number.isFinite(p)||p>=1) return 0;
   return Math.min(1, Math.log(Math.max(p,1e-12))/Math.log(0.05));
 }
+function seqGlyphs(r){
+  if(!r) return "";
+  if(r.n===0) return `<span class="sq-all">all trials</span>`;
+  const ctx=r.ctx||"";
+  if(!ctx) return `<span class="sq-all">—</span>`;
+  const shp=c=>c==="T"?`<span class="g-tri">▲</span>`:`<span class="g-star">★</span>`;
+  if(r.n>=1&&r.n<=4){ let s=""; for(const c of ctx) s+=shp(c); return s; }
+  let s="";
+  for(let i=0;i+1<ctx.length;i+=2){
+    const dig=ctx[i+1]==="w"?`<span class="g-win">1</span>`:`<span class="g-loss">0</span>`;
+    s+=`<span class="g-pair">${shp(ctx[i])}${dig}</span>`;
+  }
+  return s;
+}
 function renderChannels(){
   const lc=G.lastCommit;
   let h="";
@@ -510,7 +542,7 @@ function renderChannels(){
       ? `${r.bside==="Triangle"?"◄":"►"} ${r.bsideprob.toFixed(0)}%`
       : (r&&r.total>=1 ? `p=${pLabel(r.p)}` : "n=0");
     h+=`<div class="${cls}" title="${CHANNEL_NAMES[i]}${r?` · n=${r.total}`:""}">
-      <span class="tr-name">${i} ${PANEL_NAMES[i]}</span>
+      <span class="tr-left"><span class="tr-name">${i} ${PANEL_NAMES[i]}</span><span class="tr-seq">${seqGlyphs(r)}</span></span>
       <span class="tr-track"><span class="tr-fill" style="width:${fill.toFixed(1)}%"></span><i class="tr-line"></i></span>
       <span class="tr-out">${out}</span></div>`;
   }
@@ -758,34 +790,14 @@ function drawBackground(t){
   ctx.setLineDash([12,10]); ctx.beginPath(); ctx.moveTo(16,MID_Y); ctx.lineTo(W-16,MID_Y); ctx.stroke();
   ctx.setLineDash([]);
 }
-function drawEndzone(t){
-  const flash=Math.max(0,G.endFlash);
-  const base=0.55+0.2*Math.sin(t*0.004);
-  const grd=ctx.createLinearGradient(0,0,0,ENDZONE_Y);
-  grd.addColorStop(0,`rgba(255,210,79,${0.20+0.5*flash})`);
-  grd.addColorStop(1,`rgba(255,210,79,${0.05+0.3*flash})`);
-  ctx.fillStyle=grd; ctx.fillRect(0,0,W,ENDZONE_Y);
-  ctx.strokeStyle=`rgba(255,210,79,${base+flash*0.4})`; ctx.lineWidth=2;
-  ctx.strokeRect(1,1,W-2,ENDZONE_Y-1);
-  // chevrons
-  ctx.strokeStyle=`rgba(255,210,79,${0.35+0.4*flash})`; ctx.lineWidth=2;
-  for(let x=24;x<W;x+=44){
-    ctx.beginPath(); ctx.moveTo(x,ENDZONE_Y-14); ctx.lineTo(x+11,ENDZONE_Y-30); ctx.lineTo(x+22,ENDZONE_Y-14); ctx.stroke();
-  }
-  glow(GOLD,12+flash*24);
-  ctx.fillStyle=`rgba(255,224,130,${0.85+0.15*flash})`;
-  ctx.font="700 21px monospace"; ctx.textAlign="center";
-  ctx.fillText("★  E N D   Z O N E  ★",W/2,34);
-  noglow();
-  // breach counter — missiles that reached the end zone
-  ctx.textAlign="left";
-  glow(GOLD,6+flash*22);
-  ctx.fillStyle=`rgba(255,238,175,${0.9+0.1*flash})`;
-  ctx.font="700 19px monospace";
-  ctx.fillText(String(G.you).padStart(2,"0"),14,30);
-  ctx.font="700 8px monospace";
-  ctx.fillStyle="rgba(255,224,130,0.78)";
-  ctx.fillText("BREACHED",14,42);
+function drawHitCounter(t){
+  // CIRCLE HITS — top center, above the disc's resting spot; flares when the disc is rung
+  const f=G.bz?G.bz.flash:0;
+  glow(GOLD,8+f*24);
+  ctx.textAlign="center";
+  ctx.fillStyle=`rgba(255,238,175,${(0.85+0.15*f).toFixed(3)})`;
+  ctx.font="700 15px monospace";
+  ctx.fillText(`CIRCLE HITS: ${String(G.you).padStart(2,"0")}`,W/2,22);
   noglow();
 }
 function drawProteus(t){
@@ -804,12 +816,23 @@ function drawProteus(t){
     ctx.strokeStyle=RED; ctx.lineWidth=2;
     ctx.beginPath(); ctx.moveTo(x-16,y-8); ctx.lineTo(x+16,y-8); ctx.lineTo(x+9,y+16); ctx.lineTo(x-9,y+16); ctx.closePath();
     ctx.fill(); ctx.stroke();
-    // countermeasure shape — LEFT = Star, RIGHT = Triangle (opposite the player's
-    // silos, so a shape MATCH means breakthrough and a MISMATCH means interception)
+    // blinking turret status light
     ctx.fillStyle=`rgba(255,130,150,${0.62+0.38*Math.sin(t*0.008+x)})`;
-    ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.font="700 12px monospace";
-    ctx.fillText(x===LANE_L?"★":"▲", x, y+3);
-    ctx.textBaseline="alphabetic";
+    ctx.beginPath(); ctx.arc(x,y+3,3,0,6.283); ctx.fill();
+    // faint lane-identity emblem ensconcing the battery — ▲ left, ★ right
+    ctx.strokeStyle="rgba(255,130,150,0.25)"; ctx.lineWidth=1.25;
+    ctx.beginPath();
+    if(x===LANE_L){
+      ctx.moveTo(x,y-36); ctx.lineTo(x+31.2,y+18); ctx.lineTo(x-31.2,y+18); ctx.closePath();
+    } else {
+      for(let i=0;i<10;i++){
+        const rr=i%2?16.2:36, aa=-Math.PI/2+i*Math.PI/5;
+        const px=x+rr*Math.cos(aa), py=y+rr*Math.sin(aa);
+        if(i) ctx.lineTo(px,py); else ctx.moveTo(px,py);
+      }
+      ctx.closePath();
+    }
+    ctx.stroke();
   }
   noglow();
   ctx.fillStyle="rgba(255,140,160,0.9)";
@@ -896,6 +919,58 @@ function drawLockIndicator(t){
   }
   ctx.restore();
 }
+/* Proteus's blue circle (Fig. 1) on a semicircular track. The arm is a clock hand
+   pivoting at the pulsing core: upright at rest between trials, and on fire it
+   swings the disc along the arc to the countermeasure battery Proteus left open —
+   revealed only at launch, like the target lock (moving it sooner would leak the
+   hidden commitment). A breakthrough rings the disc — white-hot flash + gold
+   shockwave — but it persists; no dissolve, so rapid trials never lose the target. */
+function bzPos(){
+  const b=G.bz;
+  return [W/2+BZ_R*Math.cos(b.a), PROT_Y-BZ_R*Math.sin(b.a)];
+}
+function updateBlueDisc(dt){
+  const b=G.bz;
+  b.a+=(b.ta-b.a)*(1-Math.exp(-dt*TURBO/70));    // clock-hand sweep (~0.2s)
+  b.r+=(10-b.r)*(1-Math.exp(-dt*TURBO/170));     // grow-in at session start (~0.5s);
+                                                 // no dissolve, so it never shrinks after
+  b.flash=Math.max(0,b.flash-dt*TURBO*0.0035);   // hit flash decays over ~0.3s
+}
+function drawBlueTarget(t){
+  if(G.phase!=="ready"&&G.phase!=="flight") return;
+  const b=G.bz, [x,y]=bzPos();
+  ctx.save();
+  // the clock hand — Proteus red at the pivot, blue where it grips the disc
+  const lg=ctx.createLinearGradient(W/2,PROT_Y,x,y);
+  lg.addColorStop(0,"rgba(255,79,109,0.50)");
+  lg.addColorStop(0.5,"rgba(150,110,220,0.32)");
+  lg.addColorStop(1,"rgba(79,155,255,0.75)");
+  glow("#4f9bff",5);
+  ctx.strokeStyle=lg; ctx.lineWidth=1.6;
+  ctx.beginPath(); ctx.moveTo(W/2,PROT_Y); ctx.lineTo(x,y); ctx.stroke();
+  if(b.r>0.5){
+    const r=b.r*(1+0.05*Math.sin(t*0.006)), f=b.flash;
+    glow("#4f9bff",14+f*18);
+    ctx.strokeStyle=`rgba(150,196,255,${(0.9*Math.min(1,b.r/10)).toFixed(3)})`; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(x,y,r+3,0,6.283); ctx.stroke();
+    const g=ctx.createRadialGradient(x-r*0.3,y-r*0.4,1,x,y,r);
+    g.addColorStop(0,"#cfe6ff"); g.addColorStop(0.55,"#4f9bff"); g.addColorStop(1,"#1f5fd0");
+    ctx.fillStyle=g;
+    ctx.beginPath(); ctx.arc(x,y,r,0,6.283); ctx.fill();
+    if(f>0){
+      // hit registration: disc flashes white-hot and throws an expanding gold ring
+      ctx.globalAlpha=f;
+      ctx.fillStyle="#fff7d9";
+      ctx.beginPath(); ctx.arc(x,y,r,0,6.283); ctx.fill();
+      ctx.globalAlpha=f*0.9;
+      glow(GOLD,20);
+      ctx.strokeStyle=GOLD; ctx.lineWidth=2.5;
+      ctx.beginPath(); ctx.arc(x,y,r+4+(1-f)*30,0,6.283); ctx.stroke();
+      ctx.globalAlpha=1;
+    }
+  }
+  ctx.restore(); noglow();
+}
 function drawMissile(x,y,color,up){
   glow(color,14);
   ctx.fillStyle=color;
@@ -944,7 +1019,7 @@ function updateFlight(now){
   if(!fl.hit && e>tMid) my = MID_Y - V_AFTER*(e-tMid); // afterburner past midfield
   let cy = PROT_Y + 18 + V_DOWN*e;                     // countermeasure
   // trails
-  if(!fl.exploded && (fl.hit || my>ENDZONE_Y)) fl.trail.push({x:fl.mx,y:Math.max(my+8,ENDZONE_Y)});
+  if(!fl.exploded && (fl.hit || my>PROT_Y)) fl.trail.push({x:fl.mx,y:Math.max(my+8,PROT_Y)});
   if(fl.trail.length>26) fl.trail.shift();
   if(!fl.exploded && !fl.fizzled) fl.ctrail.push({x:fl.cx,y:cy-8});
   if(fl.ctrail.length>20) fl.ctrail.shift();
@@ -961,11 +1036,17 @@ function updateFlight(now){
       fl.fizzled=true;
       burst(fl.cx,cy,"#8a90c0",12,0.12,380); sfx.fizzle();
     }
-    if(!fl.scored && my<=ENDZONE_Y){
-      fl.scored=true; G.endFlash=1;
-      burst(fl.mx,ENDZONE_Y,GOLD,34,0.3,600); sfx.score();
+    if(!fl.scored && my<=PROT_Y+4){
+      fl.scored=true; fl.circleHit=true;
+      // breakthrough missile rings Proteus's blue circle at the battery it capped —
+      // white-hot flash + gold shockwave; the disc persists (no dissolve)
+      const [bx,by]=bzPos();
+      burst(bx,by,"#8fc4ff",24,0.30,560);
+      burst(bx,by,GOLD,20,0.26,520);
+      G.bz.flash=1; G.shake=Math.max(G.shake,5);
+      sfx.score();
     }
-    if(fl.scored && e>=tMid+((MID_Y-ENDZONE_Y)/V_AFTER)+230 && !fl.resolved) resolve(fl);
+    if(fl.scored && e>=tMid+((MID_Y-PROT_Y)/V_AFTER)+230 && !fl.resolved) resolve(fl);
   }
   fl._my=my; fl._cy=cy;
 }
@@ -973,7 +1054,7 @@ function drawFlight(){
   const fl=G.fl; if(!fl) return;
   drawTrail(fl.trail,"rgba(79,216,255,ALPHA)");
   if(!fl.exploded && !(fl.scored))
-    { if(fl._my>ENDZONE_Y-4) drawMissile(fl.mx,fl._my,CYAN,true); }
+    { if(fl._my>PROT_Y-4) drawMissile(fl.mx,fl._my,CYAN,true); }
   if(!fl.exploded){
     drawTrail(fl.ctrail,"rgba(255,79,109,ALPHA)");
     if(!fl.fizzled && fl._cy<MID_Y+70) drawMissile(fl.cx,fl._cy,RED,false);
@@ -1011,7 +1092,7 @@ function drawTitle(t){
   const lines=[
     "◄ / ►  fire LEFT or RIGHT.",
     "PROTEUS commits its countermeasure BEFORE you",
-    "press — match = intercepted, slip past = score.",
+    "press — dodge it and hit the blue circle to score.",
     "",
     "200 missiles. The only unbeatable strategy is",
     "a fair coin. Can you be random?",
@@ -1282,13 +1363,15 @@ function frame(now){
   G.protFlash=Math.max(0,G.protFlash-dt*0.003*TURBO);
   if(G.phase==="flight") updateFlight(now);
   updateParticles(dt);
+  updateBlueDisc(dt);
 
   ctx.setTransform(DPR,0,0,DPR,0,0);
   const sx=(Math.random()*2-1)*G.shake, sy=(Math.random()*2-1)*G.shake;
   ctx.translate(sx,sy);
   drawBackground(now);
-  drawEndzone(now);
+  drawHitCounter(now);
   drawProteus(now);
+  drawBlueTarget(now);   // after Proteus so the disc caps the battery it swings onto
   drawPlayerBase(now);
   drawLockIndicator(now);
   drawFlight();
