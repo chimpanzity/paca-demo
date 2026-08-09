@@ -104,6 +104,18 @@
   .demo .btn.line { color:#EDEBE4; border-color:#4A4844; }
   .demo .btn.line:hover { border-color:#EDEBE4; }
   .demo .note { font-size:11.5px; color:#8A867C; margin-top:12px; }
+  .demo + .demo { margin-top:14px; }
+  /* light variant — the paper-faithful lab version */
+  .demo.light { background:#FFFFFF; border:1px solid var(--rule); color:var(--ink); }
+  .demo.light h3 { color:var(--ink); letter-spacing:1px; }
+  .demo.light p { color:var(--muted); }
+  .demo.light .btn.dark { background:var(--ink); color:var(--paper); }
+  .demo.light .btn.dark:hover { background:#33322F; }
+  .demo.light .btn.line { color:var(--ink); border-color:#C9C4B8; }
+  .demo.light .btn.line:hover { border-color:var(--ink); }
+  .demo.light .note { color:var(--muted); }
+  .demo.light .note b { color:var(--ink); }
+  .demo.light img { filter:none; }
 
   /* ---- filter chips ---- */
   .chips { display:flex; gap:8px; margin:14px 0 16px; font-family:var(--sans); }
@@ -226,7 +238,7 @@
     <a class="lnk" href="#figures">Figures</a>
     <a class="lnk" href="#study">The Study</a>
     <a class="lnk" href="#paper">Paper</a>
-    <a class="pill" href="arcade.html">Play the demo</a>
+    <a class="pill" href="#demos">Play the demo</a>
   </div>
 </nav>
 
@@ -235,8 +247,8 @@
   <h1>Prescribing unexploitable play made language models more exploitable</h1>
   <div class="dateline">Christopher Flynn Martin &nbsp;·&nbsp; August 2026</div>
   <div class="heroctas">
-    <a class="btn dark" href="arcade.html">Play the demo</a>
-    <a class="btn line" href="arcade.html?mode=watch">Watch the models</a>
+    <a class="btn dark" href="#demos">Play the demo</a>
+    <a class="btn line" href="#demos">Watch the models</a>
     <a class="btn line" href="https://doi.org/10.5281/zenodo.21781962">Read the paper</a>
   </div>
 
@@ -257,7 +269,7 @@
   </div>
 </header>
 
-<div class="sect narrow">
+<div class="sect narrow" id="demos" style="scroll-margin-top:70px">
   <p>The Protean Adversarial Choice Assay (PACA) embeds a language model in repeated
   matching pennies against <i>Proteus</i> — the adaptive opponent Lee, Conroy, McGreevy
   &amp; Barraclough built in 2004 to study decision-making in macaques. Proteus watches
@@ -269,21 +281,35 @@
   opponent, and prescribed the equilibrium strategy. If stating the optimal policy aids
   execution, informed framing should help. It hurt.</p>
 
+  <div class="demo light">
+    <img src="logo-lab.png" alt="PROTEUS — Matching Pennies, Lab Version">
+    <div class="dtxt">
+      <h3>LAB VERSION</h3>
+      <p>Play the task exactly as it appears in the paper — the Figure&nbsp;1 stimulus layout
+      and match-to-win rule, with live per-trial diagnostics. In watch mode, each model's
+      verbatim reasoning trace prints beneath the board as its real session replays.</p>
+      <div class="dctas">
+        <a class="btn dark" href="lab.html">▶ You play</a>
+        <a class="btn line" href="lab.html?mode=watch">Watch the models</a>
+      </div>
+      <div class="note"><b>Identical to the game played in the study</b> · includes the
+        models' reasoning traces, verbatim from the released data</div>
+    </div>
+  </div>
+
   <div class="demo">
     <img src="logo.png" alt="PROTEUS // BREAKTHROUGH — arcade demo artwork">
     <div class="dtxt">
       <h3>PROTEUS // BREAKTHROUGH</h3>
-      <p>The assay, playable — an arcade rendering of PACA with Proteus's nine detection
-      channels on a live telemetry rack. Fire 200 missiles and try to be random, or replay
-      the study's real sessions model by model, with pattern-lock states reconstructed
-      trial by trial.</p>
+      <p>The same assay reskinned as an arcade battle — missiles, countermeasures, and a
+      neon telemetry rack reading Proteus's nine detection channels in real time. Fire 200
+      missiles and try to be random, or replay the study's sessions at up to 64×.</p>
       <div class="dctas">
         <a class="btn dark" href="arcade.html">▶ You play</a>
         <a class="btn line" href="arcade.html?mode=watch">Watch the models</a>
-        <a class="btn line" href="lab.html">Lab view</a>
       </div>
-      <div class="note">Runs in the browser · no install · sound recommended ·
-        lab view reproduces the paper's Figure 1 task layout</div>
+      <div class="note">An illustrative reskinning of the task — maintains full functional
+        and logical parity with the study</div>
     </div>
   </div>
 </div>
@@ -428,8 +454,8 @@
 
 <div class="foot">
   Site and interactive demo accompany the preprint. Replay data is the released study
-  data, verbatim. &nbsp;·&nbsp; <a href="arcade.html">Play PACA</a> &nbsp;·&nbsp;
-  <a href="arcade.html?mode=watch">Watch the models</a>
+  data, verbatim. &nbsp;·&nbsp; <a href="lab.html">Lab version</a> &nbsp;·&nbsp;
+  <a href="arcade.html">Arcade version</a>
 </div>
 
 <script src="data/data.js"></script>
@@ -462,7 +488,7 @@ function buildLB(){
       <td class="r"><div class="wr"><span class="wrnum">—</span>
         <span class="bar"><span class="nash" style="left:${(0.5/0.6*100).toFixed(1)}%"></span></span></div></td>
       <td class="r" colspan="3" style="text-align:right">
-        <a href="arcade.html">play 200 missiles to find out →</a></td></tr>`;
+        <a href="#demos">play 200 trials to find out →</a></td></tr>`;
   rows.forEach((c,i)=>{
     const inf=c.prompt_mode==="informed";
     const wpct=Math.min(1,c.win_rate/0.6)*100;
@@ -688,8 +714,8 @@ function fillPanel(){
     <p class="p-sum">Under the informed prompt, ${SHORT[selModel]||f.model_display} ${bal} and ${ser};
       Proteus locked on ${(f.activation*100).toFixed(0)}% of trials.</p>
     <div class="p-links">
-      <a href="arcade.html?mode=watch&model=${selModel}&frame=informed">▸ Watch its informed sessions</a>
-      <a href="arcade.html?mode=watch&model=${selModel}&frame=minimalist">▸ Watch its minimalist sessions</a>
+      <a href="lab.html?mode=watch&model=${selModel}&frame=informed">▸ Watch its informed sessions</a>
+      <a href="lab.html?mode=watch&model=${selModel}&frame=minimalist">▸ Watch its minimalist sessions</a>
     </div>`;
 }
 /* ---- hover tooltips ---- */

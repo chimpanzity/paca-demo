@@ -26,6 +26,10 @@
   #bar button.on { border-color: #4fd8ff; color: #4fd8ff; }
   #bar #btnPlay { border-color: #ffd24f; color: #ffd24f; min-width: 76px; }
   #bar select:disabled, #bar button:disabled { opacity: .35; cursor: default; }
+  #skinLink { position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #8890c0; text-decoration: none; font: 700 10px monospace; letter-spacing: 1px;
+    border: 1px solid #39406b; border-radius: 99px; padding: 5px 12px; white-space: nowrap; }
+  #skinLink:hover { color: #4fd8ff; border-color: #4fd8ff; }
   #modeToggle { display: flex; width: 100%; margin: 0 0 12px;
     border: 1px solid #39406b; border-radius: 6px; overflow: hidden; }
   #modeToggle button { flex: 1; background: #101538; color: #7f88b8; border: none;
@@ -152,6 +156,7 @@
   <button class="spd" data-s="16">16×</button>
   <button class="spd" data-s="64">64×</button>
   <button id="btnRestart">⟲</button>
+  <a id="skinLink" href="lab.html">TRY LAB VERSION →</a>
 </div>
 <div id="wrap"><aside id="leftrack">
     <div id="modeToggle">
@@ -882,6 +887,8 @@ cv.addEventListener("pointerdown",e=>{
 // mode toggle — the switch in the bar's upper left
 function setMode(m){
   MODE=m;
+  const sk=document.getElementById("skinLink");
+  if(sk) sk.href="lab.html"+(m==="watch"?"?mode=watch":"");
   document.getElementById("mtPlay").classList.toggle("on",m==="play");
   document.getElementById("mtWatch").classList.toggle("on",m==="watch");
   for(const el of document.querySelectorAll("#selModel,#selMode,#btnPlay,#btnRestart,.spd"))

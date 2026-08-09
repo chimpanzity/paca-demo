@@ -23,8 +23,8 @@
     background: #101538; color: #cdd6ff; border: 1px solid #39406b;
     font: inherit; padding: 4px 9px; border-radius: 4px; cursor: pointer;
   }
-  #bar button.on { border-color: #B8860B; color: #B8860B; }
-  #bar #btnPlay { border-color: #C99A2E; color: #C99A2E; min-width: 76px; }
+  #bar button.on { border-color: #141413; color: #141413; }
+  #bar #btnPlay { border-color: #141413; color: #141413; min-width: 76px; }
   #bar select:disabled, #bar button:disabled { opacity: .35; cursor: default; }
   #modeToggle { display: flex; width: 100%; margin: 0 0 12px;
     border: 1px solid #39406b; border-radius: 6px; overflow: hidden; }
@@ -33,15 +33,15 @@
     padding: 10px 6px; cursor: pointer; letter-spacing: 1.5px; }
   #modeToggle button + button { border-left: 1px solid #39406b; }
   #modeToggle button.on { background: #18204a; }
-  #modeToggle button.on.play { color: #B8860B; text-shadow: 0 0 10px rgba(184,134,11,.7); }
-  #modeToggle button.on.watch { color: #C99A2E; text-shadow: 0 0 10px rgba(122,155,109,.7); }
+  #modeToggle button.on.play { color: #141413; text-shadow: 0 0 10px rgba(20,20,19,.7); }
+  #modeToggle button.on.watch { color: #141413; text-shadow: 0 0 10px rgba(20,20,19,.7); }
   #wrap {
     position: fixed; inset: 58px 0 0 0; display: flex;
-    align-items: center; justify-content: center; gap: 16px;
+    align-items: center; justify-content: center; gap: 12px;
     background: radial-gradient(120% 90% at 50% 8%, #FAF9F5 0%, #FAF9F5 62%);
   }
   /* ---- telemetry rack: one instrument, matched to the cabinet ---- */
-  :root { --tick: rgba(122,155,109,.45); }
+  :root { --tick: rgba(20,20,19,.45); }
   #side, #leftrack { width: 312px; display: flex; flex-direction: column;
     padding: 13px 15px; overflow-y: auto; scrollbar-width: none;
     background: rgba(255,255,255,.74); border: 1px solid #1d2450;
@@ -58,8 +58,8 @@
   .racklogo { display: block; width: 100%; height: auto; mix-blend-mode: screen; }
   .rack-head { display: flex; justify-content: space-between; align-items: baseline;
     padding-bottom: 10px; border-bottom: 1px solid rgba(150,146,138,.18); }
-  .rack-title { color: #3E8FC7; font-weight: 700; font-size: 12px; letter-spacing: 3px;
-    text-shadow: 0 0 10px rgba(62,143,199,.55); }
+  .rack-title { color: #8A867C; font-weight: 700; font-size: 12px; letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(90,86,80,.55); }
   .rack-sub { color: #5a6390; font-size: 9px; letter-spacing: 1.5px; }
   .sect { padding-top: 10px; }
   .sect + .sect { margin-top: 10px; border-top: 1px dashed rgba(150,146,138,.16); }
@@ -79,23 +79,23 @@
   .tr-seq { font-size: 10px; letter-spacing: 1px; white-space: nowrap; color: #6870a0;
             overflow: hidden; height: 13px; line-height: 13px; }
   .tr-seq .g-tri, .tr-seq .g-star { color: #9fb2d8; }
-  .tr-seq .g-win { color: #C99A2E; font-weight: 700; }
-  .tr-seq .g-loss { color: #3E8FC7; font-weight: 700; }
+  .tr-seq .g-win { color: #141413; font-weight: 700; }
+  .tr-seq .g-loss { color: #8A867C; font-weight: 700; }
   .tr-seq .g-pair { margin-right: 4px; }
   .tr-seq .sq-all { color: #4a5488; font-style: italic; letter-spacing: .5px; }
-  .tr-track { flex: 1; height: 16px; background: rgba(184,134,11,.08); position: relative; }
+  .tr-track { flex: 1; height: 16px; background: rgba(20,20,19,.08); position: relative; }
   .tr-fill { display: block; height: 100%; background: #8890c0; opacity: .7; transition: width .18s; }
   .tr-line { position: absolute; top: 0; bottom: 0; left: 80%; width: 1px;
-    background: rgba(62,143,199,.55); }
+    background: rgba(90,86,80,.55); }
   .tr-out { width: 46px; text-align: right; color: #5a6390; font-size: 9px;
             height: 13px; line-height: 13px; }
-  .tr.warm .tr-fill { background: #C99A2E; opacity: .9; }
-  .tr.lock .tr-name { color: #3E8FC7; }
-  .tr.lock .tr-fill { background: #3E8FC7; opacity: 1; box-shadow: 0 0 8px rgba(62,143,199,.7); }
-  .tr.lock .tr-out { color: #3E8FC7; font-weight: 700; }  /* no size bump — geometry stays put */
+  .tr.warm .tr-fill { background: #8A867C; opacity: .9; }
+  .tr.lock .tr-name { color: #8A867C; }
+  .tr.lock .tr-fill { background: #8A867C; opacity: 1; box-shadow: 0 0 8px rgba(90,86,80,.7); }
+  .tr.lock .tr-out { color: #8A867C; font-weight: 700; }  /* no size bump — geometry stays put */
   .tr.off { opacity: .45; }
   #commitLine { margin-top: 9px; font-size: 10px; color: #7f88b8; line-height: 1.55; min-height: 3.1em; }
-  #commitLine b { color: #3E8FC7; }
+  #commitLine b { color: #8A867C; }
   .trow { display: flex; align-items: flex-start; gap: 6px; }
   .glab { width: 16px; flex: none; height: 24px; display: flex; flex-direction: column;
           justify-content: space-between; font: 10px monospace; color: #9fb2d8; line-height: 1; }
@@ -106,8 +106,8 @@
   #shots { display: flex; align-items: flex-start; gap: 2px; height: 24px; }
   .sq { width: 6px; height: 10px; border-radius: 1px; flex: none; }
   .sq.L { margin-top: 0; } .sq.R { margin-top: 12px; }
-  .sq.b { background: #C99A2E; box-shadow: 0 0 4px rgba(122,155,109,.55); }
-  .sq.x { background: #3E8FC7; box-shadow: 0 0 4px rgba(62,143,199,.55); }
+  .sq.b { background: #141413; box-shadow: 0 0 4px rgba(20,20,19,.55); }
+  .sq.x { background: #8A867C; box-shadow: 0 0 4px rgba(90,86,80,.55); }
   #fig3b, #fig4 { display: block; width: 100%; }
   /* session */
   #rateBig { text-align: center; font-size: 12px; color: #7f88b8;
@@ -118,8 +118,8 @@
   .rate-row { display: flex; justify-content: space-between; color: #7f88b8;
     font-size: 10px; margin: 3px 0; }
   .rate-row b { color: #cdd6ff; }
-  .cyan { color: #B8860B; } .red { color: #3E8FC7; }
-  .gold { color: #C99A2E; } .dim { color: #5a6390; }
+  .cyan { color: #141413; } .red { color: #8A867C; }
+  .gold { color: #141413; } .dim { color: #5a6390; }
   @media (max-width: 940px) { #side, #leftrack { display: none; } }
   canvas {
     display: block; image-rendering: auto;
@@ -149,51 +149,65 @@
                              font-family:inherit; }
   #bar button.on { border-color:#141413; color:#141413; font-weight:600; }
   #bar #btnPlay { border-color:#141413; color:#141413; font-weight:600; }
-  #modeToggle { border-color:#D9D4C9; }
-  #modeToggle button { background:#fff; color:#8A867C;
-                       font-family:inherit; font-weight:600; }
-  #modeToggle button + button { border-left:1px solid #D9D4C9; }
+  #skinLink { position:absolute; right:12px; top:50%; transform:translateY(-50%);
+    color:#63605A; text-decoration:none; font:600 10.5px -apple-system,Arial,sans-serif;
+    letter-spacing:1px; border:1px solid #C9C4B8; border-radius:99px; padding:5px 12px;
+    white-space:nowrap; }
+  #skinLink:hover { color:#141413; border-color:#141413; }
+  #modeToggle { border:1px solid #141413; border-radius:8px; background:#fff; margin:0 0 8px; }
+  #modeToggle button { background:#fff; color:#63605A; font-family:inherit; font-weight:700;
+                       letter-spacing:1.5px; }
+  #modeToggle button + button { border-left:1px solid #141413; }
   #modeToggle button.on { background:#141413; }
   #modeToggle button.on.play  { color:#FAF9F5; text-shadow:none; }
   #modeToggle button.on.watch { color:#FAF9F5; text-shadow:none; }
-  #leftrack, #side { background:#FFFFFF; border:1px solid #E8E4DB; border-radius:12px;
-                     box-shadow:none; }
+  /* racks are invisible containers — every section floats as its own card */
+  #leftrack, #side { background:transparent; border:none; border-radius:0; box-shadow:none; }
+  .sect { background:#FFFFFF; border:1px solid #E8E4DB; border-radius:12px;
+          padding:12px 10px !important; overflow:hidden; }
   .rack-brand { font:700 15px/1.3 Georgia,serif; color:#141413; padding:4px 0 2px; }
   .rack-brand span { display:block; font:600 8.5px -apple-system,"Helvetica Neue",Arial,sans-serif;
                      letter-spacing:1.5px; color:#8A867C; margin-top:4px; text-transform:uppercase; }
-  .rack-head { border-bottom:1px solid #E8E4DB; }
+  .rack-head { border-bottom:none; padding:0 2px 2px; }
+  .racklogo { mix-blend-mode:multiply; margin-bottom:2px; }  /* white ground melts into the page */
   .rack-title { color:#141413; text-shadow:none; letter-spacing:2px; }
   .rack-sub { color:#8A867C; }
-  .sect + .sect { border-top:1px dashed #E8E4DB; }
+  .sect + .sect { border-top:1px solid #E8E4DB; margin-top:8px; }  /* gap shows the page between cards */
   .sect-title { color:#63605A; }
   .sect-title em { color:#A09B8F; }
   .tr-name { color:#63605A; }
   .tr-seq { color:#8A867C; }
   .tr-seq .g-tri, .tr-seq .g-star { color:#63605A; }
-  .tr-seq .g-win { color:#B8860B; }
-  .tr-seq .g-loss { color:#3E8FC7; }
+  .tr-seq .g-win { color:#2FA24A; }
+  .tr-seq .g-loss { color:#D93A2B; }
   .tr-seq .sq-all { color:#B5B0A6; }
   .tr-track { background:#EFEBE1; }
   .tr-fill { background:#B5B0A6; opacity:.85; }
-  .tr-line { background:rgba(193,95,60,.6); }
-  .tr.warm .tr-fill { background:#C99A2E; }
-  .tr.lock .tr-name { color:#C15F3C; }
-  .tr.lock .tr-fill { background:#C15F3C; box-shadow:none; }
-  .tr.lock .tr-out { color:#C15F3C; }
+  .tr-line { background:rgba(20,20,19,.6); }
+  .tr.warm .tr-fill { background:#8A867C; }
+  .tr.lock .tr-name { color:#141413; }
+  .tr.lock .tr-fill { background:#141413; box-shadow:none; }
+  .tr.lock .tr-out { color:#141413; }
   .tr-out { color:#8A867C; }
   #commitLine { color:#63605A; }
-  #commitLine b { color:#C15F3C; }
+  #commitLine b { color:#141413; }
   .glab { color:#63605A; }
-  .sq.b { background:#C99A2E; box-shadow:none; }
-  .sq.x { background:#3E8FC7; box-shadow:none; }
+  .sq.b { background:#2FA24A; box-shadow:none; }   /* vivid at 6px: unmistakable green win */
+  .sq.x { background:#D93A2B; box-shadow:none; }   /* unmistakable red loss */
   .crow .cell { color:#63605A; }
   #rateBig { color:#63605A; }
   #rateBig b { text-shadow:none; }
   .rate-row { color:#63605A; }
-  .gold { color:#7A9B6D; } .cyan { color:#B8860B; } .red { color:#3E8FC7; }
+  .gold { color:#4C8A45; } .cyan { color:#141413; } .red { color:#B5493A; }
+  /* the channel Proteus actually played this trial */
+  .tr.used .tr-name { color:#B5493A; }
+  .tr.used .tr-fill { background:#B5493A; }
+  .tr.used .tr-out { color:#B5493A; font-weight:700; }
+  /* steel-blue figure headers, echoing the debrief */
+  .sect-title { color:#4A7FA5; }
   .dim { color:#B5B0A6; }
   /* the reasoning-trace panel under the cabinet */
-  #centercol { display:flex; flex-direction:column; align-items:center; gap:14px; }
+  #centercol { display:flex; flex-direction:column; align-items:center; gap:10px; }
   #tracePanel { background:#fff; border:1px solid #E8E4DB; border-radius:12px;
     padding:10px 16px 12px; overflow-y:auto; text-align:left;
     font:10.5px/1.5 -apple-system,"Helvetica Neue","Segoe UI",Arial,sans-serif; color:#3C3A36; }
@@ -203,9 +217,11 @@
   #traceHead em { font-style:normal; font-weight:400; color:#A09B8F; letter-spacing:.5px;
     margin-left:10px; }
   #traceBody .tl { margin:0 0 9px; white-space:pre-wrap; }
-  #traceBody .tl b { color:#B8860B; font-weight:700; margin-right:9px;
+  #traceBody .tl b { color:#141413; font-weight:700; margin-right:9px;
     font-variant-numeric:tabular-nums; }
   #traceBody .tr-empty { color:#B5B0A6; font-style:italic; }
+  /* journal figures: flat — no halo, no rounding on the rack canvases */
+  #side canvas, #leftrack canvas { box-shadow:none; border-radius:0; }
 </style>
 </head>
 <body>
@@ -221,15 +237,16 @@
   <button class="spd" data-s="16">16×</button>
   <button class="spd" data-s="64">64×</button>
   <button id="btnRestart">⟲</button>
+  <a id="skinLink" href="arcade.html">TRY ARCADE VERSION →</a>
 </div>
 <div id="wrap"><aside id="leftrack">
     <div id="modeToggle">
       <button id="mtPlay" class="play">YOU PLAY</button>
       <button id="mtWatch" class="watch">WATCH MODELS</button>
     </div>
-    <div class="rack-brand">Dodging Proteus<span>Protean Adversarial Choice Assay</span></div>
-    <div class="sect" style="border-top:1px dashed rgba(150,146,138,.16); margin-top:12px;">
-      <div class="sect-title">CHOICE TAPE <em>amber = match · blue = miss</em></div>
+    <img class="racklogo" src="logo-lab.png" alt="PROTEUS — Matching Pennies, Lab Version">
+    <div class="sect" style="margin-top:12px;">
+      <div class="sect-title">CHOICE TAPE <em>black = match · gray = miss</em></div>
       <div class="trow">
         <div class="glab"><span>▲:</span><span>★:</span></div>
         <div id="shots"></div>
@@ -393,7 +410,7 @@ const CHANNEL_NAMES=[
 const W=928, H=780;   // wide-bench format: at the 56% height budget this displays at
                       // exactly the arcade cabinet's width (520/0.56 ≈ 928)
 const LANE_L=W*0.30, LANE_R=W*0.70;
-const ENDZONE_Y=78, PROT_Y=76, MID_Y=440, PLAYER_Y=684;   // Proteus sits high — no dead space above
+const ENDZONE_Y=78, PROT_Y=110, MID_Y=440, PLAYER_Y=684;  // scoreboard band above Proteus
 const V_UP=0.65, V_AFTER=1.15, V_DOWN=0.75;   // px per ms
 const T_MID=(PLAYER_Y-MID_Y)/V_UP;            // ~375 ms to midfield
 const MAX_MISSILES=200;
@@ -451,6 +468,9 @@ const sfx={
   counter(){ tone(720,180,0.14,"square",0.05); },
   boom(){ noise(0.42,0.5,120); tone(120,32,0.42,"sine",0.35); },
   fizzle(){ noise(0.12,0.10,1500); },
+  wrong(){  // two-note losing horn: high, then lower and held a touch longer
+    tone(196,196,0.22,"sawtooth",0.10);
+    tone(139,128,0.55,"sawtooth",0.12,0.24); },
   score(){ tone(523,523,0.09,"square",0.12); tone(659,659,0.09,"square",0.12,0.08);
            tone(784,784,0.09,"square",0.12,0.16); tone(1047,1047,0.16,"square",0.14,0.24); },
   over(){ tone(392,392,0.15,"square",0.1); tone(311,311,0.15,"square",0.1,0.15);
@@ -729,6 +749,7 @@ function renderChannels(){
     if(!r||r.total<1){ cls+=" off"; fill=0; }
     else if(locked){ cls+=" lock"; fill=80+20*Math.max(0,Math.min(1,(r.bsideprob-50)/50)); }
     else { if(t>0.6) cls+=" warm"; fill=80*t; }
+    if(lc&&lc.pred&&lc.pred.n===i) cls+=" used";   // the channel Proteus actually played
     const out=locked
       ? `${r.bside==="Triangle"?"◄":"►"} ${r.bsideprob.toFixed(0)}%`
       : (r&&r.total>=1 ? `p=${pLabel(r.p)}` : "n=0");
@@ -749,7 +770,7 @@ function renderChannels(){
     : `last commit: defended <b>${dir}</b> — no lock${Number.isFinite(lc.ranval)?" · random draw "+lc.ranval.toFixed(3):""}`;
 }
 function renderShots(){
-  const rec=G.log.slice(-32);
+  const rec=G.log.slice(-28);   // 28 fits the card width without clipping
   document.getElementById("shots").innerHTML=rec.length
     ? rec.map(r=>`<span class="sq ${r.side==="T"?"L":"R"} ${r.hit?"x":"b"}"></span>`).join("")
     : `<span class="dim" style="font-size:10px">no trials yet — your pattern will print here</span>`;
@@ -772,13 +793,13 @@ function drawFig3C(){
   x.clearRect(0,0,w,h);
   const X=v=>x0+(Math.max(LO,Math.min(HI,v))-LO)/(HI-LO)*(x1-x0);
   // Nash zone |z| < 1.96 — green = i.i.d.-consistent
-  x.fillStyle="rgba(122,155,109,0.16)";
+  x.fillStyle="rgba(20,20,19,0.16)";
   x.fillRect(X(-1.96),y-11,X(1.96)-X(-1.96),22);
-  x.strokeStyle="rgba(122,155,109,0.45)"; x.lineWidth=1;
+  x.strokeStyle="rgba(20,20,19,0.45)"; x.lineWidth=1;
   x.strokeRect(X(-1.96),y-11,X(1.96)-X(-1.96),22);
   x.strokeStyle="rgba(150,146,138,0.3)"; x.lineWidth=1;
   x.beginPath(); x.moveTo(x0,y); x.lineTo(x1,y); x.stroke();
-  x.setLineDash([3,3]); x.strokeStyle="rgba(122,155,109,0.6)";
+  x.setLineDash([3,3]); x.strokeStyle="rgba(20,20,19,0.6)";
   x.beginPath(); x.moveTo(X(0),y-14); x.lineTo(X(0),y+14); x.stroke(); x.setLineDash([]);
   x.font="9px monospace"; x.fillStyle="rgba(99,96,90,0.9)";
   x.textAlign="left"; x.fillText("◄ streaks",x0,h-2);
@@ -793,7 +814,7 @@ function drawFig3C(){
     if(va>0){
       const z=(R-mu)/Math.sqrt(va);
       const ok=Math.abs(z)<1.96, col=ok?GRN:RED;
-      x.shadowColor=col; x.shadowBlur=8; x.fillStyle=col;
+      x.fillStyle=col;
       x.beginPath(); x.moveTo(X(z),y-4); x.lineTo(X(z)+6,y-14); x.lineTo(X(z)-6,y-14);
       x.closePath(); x.fill(); x.shadowBlur=0;
       x.textAlign="center"; x.font="700 11px monospace"; x.fillStyle=col;
@@ -810,13 +831,13 @@ function drawFig3B(){
   const n=G.trial;
   const band=n?Math.min(0.5,1.96*Math.sqrt(0.25/n)):0.5;
   // i.i.d. 95% band — green = Nash-consistent, tightens as n grows
-  x.fillStyle="rgba(122,155,109,0.16)";
+  x.fillStyle="rgba(20,20,19,0.16)";
   x.fillRect(X(0.5-band),y-11,X(0.5+band)-X(0.5-band),22);
-  x.strokeStyle="rgba(122,155,109,0.45)"; x.lineWidth=1;
+  x.strokeStyle="rgba(20,20,19,0.45)"; x.lineWidth=1;
   x.strokeRect(X(0.5-band),y-11,X(0.5+band)-X(0.5-band),22);
   x.strokeStyle="rgba(150,146,138,0.3)"; x.lineWidth=1;
   x.beginPath(); x.moveTo(x0,y); x.lineTo(x1,y); x.stroke();
-  x.setLineDash([3,3]); x.strokeStyle="rgba(122,155,109,0.6)";
+  x.setLineDash([3,3]); x.strokeStyle="rgba(20,20,19,0.6)";
   x.beginPath(); x.moveTo(X(0.5),y-14); x.lineTo(X(0.5),y+14); x.stroke(); x.setLineDash([]);
   x.font="9px monospace"; x.fillStyle="rgba(99,96,90,0.9)";
   x.textAlign="left"; x.fillText("◄ all LEFT",x0,h-2);
@@ -824,7 +845,7 @@ function drawFig3B(){
   if(n){
     const p=countChar(G.pastChoices,"T")/n;
     const ok=Math.abs(p-0.5)<=band, col=ok?GRN:RED;
-    x.shadowColor=col; x.shadowBlur=8; x.fillStyle=col;
+    x.fillStyle=col;
     x.beginPath(); x.moveTo(X(p),y-4); x.lineTo(X(p)+6,y-14); x.lineTo(X(p)-6,y-14);
     x.closePath(); x.fill(); x.shadowBlur=0;
     x.textAlign="center"; x.font="700 11px monospace"; x.fillStyle=col;
@@ -844,9 +865,9 @@ function drawFig4(){
   x.strokeStyle="rgba(120,116,108,0.6)"; x.lineWidth=1.3;
   x.beginPath(); x.moveTo(ox,oy+S/2); x.lineTo(ox+S,oy+S/2);
   x.moveTo(ox+S/2,oy); x.lineTo(ox+S/2,oy+S); x.stroke();
-  x.setLineDash([5,5]); x.strokeStyle="rgba(122,155,109,0.3)";
+  x.setLineDash([5,5]); x.strokeStyle="rgba(20,20,19,0.3)";
   x.beginPath(); x.moveTo(ox,oy+S); x.lineTo(ox+S,oy); x.stroke(); x.setLineDash([]);
-  x.strokeStyle="#C99A2E"; x.lineWidth=1.6;
+  x.strokeStyle="#141413"; x.lineWidth=1.6;
   x.beginPath(); x.moveTo(ox+S/2-6,oy+S/2); x.lineTo(ox+S/2+6,oy+S/2);
   x.moveTo(ox+S/2,oy+S/2-6); x.lineTo(ox+S/2,oy+S/2+6); x.stroke();
   x.font="9px monospace"; x.fillStyle="rgba(99,96,90,0.9)";
@@ -861,7 +882,7 @@ function drawFig4(){
   const hist=G.figHist;
   if(hist.length){
     const tail=hist.slice(-24);
-    x.strokeStyle="rgba(184,134,11,0.35)"; x.lineWidth=1;
+    x.strokeStyle="rgba(20,20,19,0.35)"; x.lineWidth=1;
     x.beginPath();
     for(let i=0;i<tail.length;i++){
       const px=PX(tail[i].x), py=PY(tail[i].y);
@@ -869,8 +890,8 @@ function drawFig4(){
     }
     x.stroke();
     const cur=hist[hist.length-1];
-    x.shadowColor="#B8860B"; x.shadowBlur=8; x.fillStyle="#B8860B";
-    x.beginPath(); x.arc(PX(cur.x),PY(cur.y),4.5,0,6.283); x.fill(); x.shadowBlur=0;
+    x.fillStyle="#141413";
+    x.beginPath(); x.arc(PX(cur.x),PY(cur.y),4.5,0,6.283); x.fill();
   }
 }
 /* live Fig 3A: running breakthrough rate inside the shrinking i.i.d. funnel */
@@ -881,7 +902,7 @@ function drawSpark(){
   const yOf=v=>h-3-(Math.max(0.02,Math.min(0.98,v))-0.02)/0.96*(h-6);
   const N=MAX_MISSILES;
   if(G.trial>4){
-    x.fillStyle="rgba(122,155,109,0.12)";
+    x.fillStyle="rgba(20,20,19,0.12)";
     x.beginPath();
     for(let i=4;i<G.trial;i++){ const b=1.96*Math.sqrt(0.25/(i+1));
       const px=i/(N-1)*w;
@@ -890,12 +911,11 @@ function drawSpark(){
       x.lineTo(i/(N-1)*w,yOf(0.5-b)); }
     x.closePath(); x.fill();
   }
-  x.setLineDash([4,4]); x.strokeStyle="rgba(122,155,109,0.5)"; x.lineWidth=1;
+  x.setLineDash([4,4]); x.strokeStyle="rgba(20,20,19,0.5)"; x.lineWidth=1;
   x.beginPath(); x.moveTo(0,yOf(0.5)); x.lineTo(w,yOf(0.5)); x.stroke();
   x.setLineDash([]);
   if(G.log.length){
-    x.strokeStyle="#B8860B"; x.lineWidth=1.5;
-    x.shadowColor="#B8860B"; x.shadowBlur=5;
+    x.strokeStyle="#141413"; x.lineWidth=1.5;
     x.beginPath(); let cum=0;
     for(let i=0;i<G.log.length;i++){
       cum+=G.log[i].hit?0:1;
@@ -903,19 +923,19 @@ function drawSpark(){
       if(i===0) x.moveTo(px,py); else x.lineTo(px,py);
     }
     x.stroke(); x.shadowBlur=0;
-    x.fillStyle="#B8860B";
+    x.fillStyle="#141413";
     x.beginPath();
     x.arc((G.log.length-1)/(N-1)*w,yOf(G.you/G.trial),2.4,0,6.283);
     x.fill();
   }
 }
 function renderTapes(){
-  const log=G.log, win=log.slice(-32);
+  const log=G.log, win=log.slice(-28);   // 28 fits the card width without clipping
   const ct=document.getElementById("choiceTape"), rt=document.getElementById("crTape");
   if(!ct||!rt) return;
   const CH={T:"▲",S:"★"};
   ct.innerHTML = win.map(r=>`<span class="cell">${CH[r.side]}</span>`).join("");
-  rt.innerHTML = win.map(r=>`<span class="cell" style="color:${r.hit?"#3E8FC7":"#C99A2E"}">${r.hit?"0":"1"}</span>`).join("");
+  rt.innerHTML = win.map(r=>`<span class="cell" style="color:${r.hit?"#D93A2B":"#2FA24A"}">${r.hit?"0":"1"}</span>`).join("");
 }
 function renderPanels(){ renderChannels(); renderShots(); renderRate(); renderTapes(); }
 
@@ -975,6 +995,8 @@ cv.addEventListener("pointerdown",e=>{
 // mode toggle — the switch in the bar's upper left
 function setMode(m){
   MODE=m;
+  const sk=document.getElementById("skinLink");
+  if(sk) sk.href="arcade.html"+(m==="watch"?"?mode=watch":"");
   document.getElementById("mtPlay").classList.toggle("on",m==="play");
   document.getElementById("mtWatch").classList.toggle("on",m==="watch");
   for(const el of document.querySelectorAll("#selModel,#selMode,#btnPlay,#btnRestart,.spd"))
@@ -1019,11 +1041,12 @@ for(const b of document.querySelectorAll(".spd"))
 /* ---- drawing helpers ---- */
 function glow(color,blur){ ctx.shadowColor=color; ctx.shadowBlur=blur*0.3; }  // academic: whisper, not neon
 function noglow(){ ctx.shadowBlur=0; }
-const CYAN="#B8860B", RED="#3E8FC7", GOLD="#C99A2E", DIM="#B5B0A6", GRN="#7A9B6D";
-const INK="#141413", MUT="#63605A", PAINT="#FFD400", PROT=RED;
+const CYAN="#141413", RED="#B5493A", GOLD="#4C8A45", DIM="#B5B0A6", GRN="#4C8A45";
+// semantic accents: green = match/Nash-consistent · muted red = miss/violation/threat
+const INK="#141413", MUT="#63605A", PAINT="#FFD400", PROT="#3E8FC7";   // blue: the disc only
 const SANSC='-apple-system,"Helvetica Neue",Arial,sans-serif';
-const SH_Y=380, SH_W=176, SH_R=62;   // Fig-1 stimulus panels — centered exactly midway
-                                     // between the Proteus line (96) and player line (664)
+const SH_Y=397, SH_W=176, SH_R=62;   // Fig-1 stimulus panels — centered exactly midway
+                                     // between the Proteus line (130) and player line (664)
 
 function roundRectPath(x,y,w,h,r){
   ctx.beginPath();
@@ -1053,6 +1076,30 @@ function mix(a,b,t){
 }
 function drawBackground(t){
   ctx.fillStyle="#FAF9F5"; ctx.fillRect(0,0,W,H);
+}
+function drawScoreboard(t){
+  // split scoreboard in the top band, Breakthrough-style but in lab monochrome:
+  // each number flares softly in sync with the event that scored it
+  const fy=Math.max(0,G.endFlash), fp=Math.max(0,G.protFlash);
+  const ny=40;
+  ctx.textAlign="right";
+  glow(INK,6+fy*26);
+  ctx.fillStyle=`rgba(20,20,19,${(0.86+0.14*fy).toFixed(3)})`;
+  ctx.font="700 26px "+SANSC;
+  ctx.fillText(String(G.you).padStart(2,"0"),W/2-44,ny);
+  noglow();
+  ctx.font="600 10px "+SANSC; ctx.fillStyle=MUT;
+  ctx.fillText((MODE==="play"?"YOU":(SESS?WSHORT[SESS.model_group]:"MODEL"))+" · MATCHES",W/2-44,ny+16);
+  ctx.textAlign="center"; ctx.fillStyle="#B5B0A6"; ctx.font="600 13px "+SANSC;
+  ctx.fillText("vs",W/2,ny-7);
+  ctx.textAlign="left";
+  glow(INK,6+fp*26);
+  ctx.fillStyle=`rgba(20,20,19,${(0.86+0.14*fp).toFixed(3)})`;
+  ctx.font="700 26px "+SANSC;
+  ctx.fillText(String(G.prot).padStart(2,"0"),W/2+44,ny);
+  noglow();
+  ctx.font="600 10px "+SANSC; ctx.fillStyle=MUT;
+  ctx.fillText("PROTEUS · MISMATCHES",W/2+44,ny+16);
 }
 function drawProteus(t){
   const y=PROT_Y, flash=Math.max(0,G.protFlash);
@@ -1107,7 +1154,7 @@ function drawPlayerBase(t){
   ctx.fillText(who,W/2,y+36);
   if(MODE==="play"&&G.phase==="ready"){
     const a=0.5+0.5*Math.sin(t*0.006);
-    ctx.fillStyle=`rgba(153,121,44,${(0.35+0.5*a).toFixed(3)})`;
+    ctx.fillStyle=`rgba(20,20,19,${(0.35+0.5*a).toFixed(3)})`;
     ctx.font="700 18px "+SANSC;
     ctx.fillText("◄",LANE_L,SH_Y+SH_W/2+38); ctx.fillText("►",LANE_R,SH_Y+SH_W/2+38);
   }
@@ -1120,11 +1167,15 @@ function drawLockIndicator(t){
   if(G.phase!=="flight"||!G.fl||G.fl.lockN===null) return;
   const fl=G.fl;
   // dashed outline on the panel Proteus committed to defend, plus a quiet caption
-  ctx.setLineDash([6,5]); ctx.strokeStyle="#C15F3C"; ctx.lineWidth=1.5;
+  ctx.setLineDash([6,5]); ctx.strokeStyle="#B5493A"; ctx.lineWidth=1.5;
   roundRectPath(fl.cx-SH_W/2-7,SH_Y-SH_W/2-7,SH_W+14,SH_W+14,20); ctx.stroke();
   ctx.setLineDash([]);
-  ctx.textAlign="center"; ctx.font="600 13px "+SANSC; ctx.fillStyle="#C15F3C";
-  ctx.fillText(`pattern lock — ch ${fl.lockN} ${CHANNEL_NAMES[fl.lockN]} · ${fl.lockProb.toFixed(0)}% confidence`,W/2,PROT_Y+46);
+  // caption floats just above the locked panel — threat red, same as the played channel
+  ctx.textAlign="center"; ctx.fillStyle="#B5493A";
+  ctx.font="700 13px "+SANSC;
+  ctx.fillText(`PATTERN LOCK · ${fl.lockProb.toFixed(0)}%`,fl.cx,SH_Y-SH_W/2-28);
+  ctx.font="600 11px "+SANSC; ctx.fillStyle=MUT;
+  ctx.fillText(`ch ${fl.lockN} — ${CHANNEL_NAMES[fl.lockN]}`,fl.cx,SH_Y-SH_W/2-13);
 }
 const WSHORT={opus:"OPUS 4.8",sonnet:"SONNET 4.6",haiku:"HAIKU 4.5",gpt54:"GPT-5.4",
   gpt54mini:"GPT-5.4-MINI",gemini31fl:"GEMINI 3.1 FL",gemini3fp:"GEMINI 3 FP"};
@@ -1157,9 +1208,9 @@ function drawHUD(){
 function updateFlight(now){
   const fl=G.fl; if(!fl) return;
   const e=(now-fl.t0)*TURBO;
-  const T1=520, T2=T1+300, T3=T2+520;   // travel · land+fill · read the outcome
-  fl._p=Math.min(1,e/T1);
-  fl._fill=Math.max(0,Math.min(1,(e-T1+80)/240));
+  const T1=380, T2=T1+220, T3=T2+330;   // travel · land+fill · read the outcome —
+  fl._p=Math.min(1,e/T1);               // ~930ms/trial, matching Breakthrough's pace
+  fl._fill=Math.max(0,Math.min(1,(e-T1+60)/180));
   if(!fl.landed && e>=T1){
     fl.landed=true;
     burst(fl.mx,SH_Y,"#FFD400",10,0.10,300);   // paint splat
@@ -1167,8 +1218,8 @@ function updateFlight(now){
   }
   if(!fl.judged && e>=T2){
     fl.judged=true;
-    if(fl.hit){ sfx.fizzle(); G.protFlash=1; }              // mismatch — Proteus point
-    else { sfx.score();                                     // match!
+    if(fl.hit){ sfx.wrong(); G.protFlash=1; }               // mismatch — womp womp
+    else { sfx.score(); G.endFlash=1;                       // match! (endFlash = score flare)
            burst(fl.openX,SH_Y,"#FFD400",16,0.15,420); }
   }
   if(!fl.resolved && e>=T3) resolve(fl);
@@ -1179,25 +1230,24 @@ function drawFlight(){
   if(p<1){
     // yellow paint stream — subject → chosen shape
     const x0=W/2, y0=PLAYER_Y-24, x1=fl.mx, y1=SH_Y+SH_R*0.35;
-    const tail=Math.max(0,p-0.28);
-    const jx0=x0+(x1-x0)*tail, jy0=y0+(y1-y0)*tail;
-    const jx1=x0+(x1-x0)*p,    jy1=y0+(y1-y0)*p;
-    ctx.lineCap="round";
-    ctx.strokeStyle="#141413"; ctx.lineWidth=7;    // thin black border around the jet
-    ctx.beginPath(); ctx.moveTo(jx0,jy0); ctx.lineTo(jx1,jy1); ctx.stroke();
-    ctx.strokeStyle="#FFD400"; ctx.lineWidth=4.5;  // bright paint core
-    ctx.beginPath(); ctx.moveTo(jx0,jy0); ctx.lineTo(jx1,jy1); ctx.stroke();
-    ctx.lineWidth=1; ctx.lineCap="butt";
+    // yellow paint round — subject → chosen shape (black border, Fig-1 yellow);
+    // on arrival it bursts and floods the shape
+    const jx=x0+(x1-x0)*p, jy=y0+(y1-y0)*p;
+    ctx.beginPath(); ctx.arc(jx,jy,8,0,6.283);
+    ctx.fillStyle="#FFD400"; ctx.fill();
+    ctx.strokeStyle="#141413"; ctx.lineWidth=1.5; ctx.stroke(); ctx.lineWidth=1;
     // blue disc — Proteus → its chosen shape, growing as it approaches
     const bx0=W/2, by0=PROT_Y+16, bx1=fl.openX, by1=SH_Y;
     ctx.fillStyle=PROT;
     ctx.beginPath(); ctx.arc(bx0+(bx1-bx0)*p, by0+(by1-by0)*p, 4+15*p, 0, 6.283); ctx.fill();
   }
   if(fl.judged && !fl.resolved){
+    // outcome banner rides the open band between Proteus and the stimuli
+    const by=(PROT_Y+20+SH_Y-SH_W/2)/2+6;
     ctx.textAlign="center"; ctx.font="700 17px "+SANSC;
     const who=MODE==="play"?"you":(SESS?WSHORT[SESS.model_group]:"the model");
-    if(fl.hit){ ctx.fillStyle=PROT; ctx.fillText("MISMATCH — point to Proteus",W/2,SH_Y+SH_W/2+64); }
-    else { ctx.fillStyle="#8F6E14"; ctx.fillText("MATCH — point to "+who,W/2,SH_Y+SH_W/2+64); }
+    if(fl.hit){ ctx.fillStyle="#B5493A"; ctx.fillText("MISMATCH — point to Proteus",W/2,by); }
+    else { ctx.fillStyle="#4C8A45"; ctx.fillText("MATCH — point to "+who,W/2,by); }
   }
 }
 function updateParticles(dt){
@@ -1250,7 +1300,7 @@ function drawTitle(t){
   ];
   lines.forEach((s,i)=>ctx.fillText(s,W/2,398+i*23));
   const a=0.5+0.5*Math.sin(t*0.005);
-  ctx.fillStyle=`rgba(153,121,44,${(0.4+0.6*a).toFixed(3)})`; ctx.font="700 16px "+SANSC;
+  ctx.fillStyle=`rgba(20,20,19,${(0.4+0.6*a).toFixed(3)})`; ctx.font="700 16px "+SANSC;
   ctx.fillText("— press ◄ or ► to begin —",W/2,600);
   ctx.fillStyle="rgba(120,116,108,0.8)"; ctx.font="12px "+SANSC;
   ctx.fillText("M sound · Lee et al. (2004) Algorithm 2, intercept-modified",W/2,632);
@@ -1260,7 +1310,7 @@ function easeOut(u){ u=Math.max(0,Math.min(1,u)); return 1-Math.pow(1-u,3); }
 function anBlip(key,f){ if(!G.anFx[key]){ G.anFx[key]=true; tone(f,f*1.5,0.08,"square",0.08); } }
 function panelTitle(x,y,txt){
   ctx.textAlign="left"; ctx.font="700 11px monospace";
-  ctx.fillStyle="rgba(150,170,255,0.9)"; ctx.fillText(txt,x,y);
+  ctx.fillStyle="#4A7FA5"; ctx.fillText(txt,x,y);
 }
 function dashLine(x1,y1,x2,y2,color,dash){
   ctx.save(); ctx.setLineDash(dash); ctx.strokeStyle=color; ctx.lineWidth=1;
@@ -1301,7 +1351,7 @@ function drawGameOver(t){
   const yOf=v=>ay+ah-(Math.max(0.05,Math.min(0.95,v))-0.05)/0.9*ah;
   // i.i.d. funnel band around .5
   if(p3a>0){
-    ctx.fillStyle="rgba(122,155,109,0.10)";
+    ctx.fillStyle="rgba(20,20,19,0.10)";
     ctx.beginPath();
     const iMax=Math.max(2,Math.floor(A.n*p3a));
     for(let i=4;i<iMax;i++){ const b=1.96*Math.sqrt(0.25/(i+1));
@@ -1310,8 +1360,8 @@ function drawGameOver(t){
       ctx.lineTo(ax+i/(A.n-1)*aw,yOf(0.5-b)); }
     ctx.closePath(); ctx.fill();
   }
-  dashLine(ax,yOf(0.5),ax+aw,yOf(0.5),"rgba(122,155,109,0.55)",[5,5]);
-  ctx.textAlign="left"; ctx.font="10px monospace"; ctx.fillStyle="rgba(122,155,109,0.7)";
+  dashLine(ax,yOf(0.5),ax+aw,yOf(0.5),"rgba(20,20,19,0.55)",[5,5]);
+  ctx.textAlign="left"; ctx.font="10px monospace"; ctx.fillStyle="rgba(20,20,19,0.7)";
   ctx.fillText("Nash .50",ax+3,yOf(0.5)-4);
   if(p3a>0){
     anBlip("a",300);
@@ -1356,7 +1406,7 @@ function drawGameOver(t){
   ctx.beginPath(); ctx.moveTo(fx,fy4+S/2); ctx.lineTo(fx+S,fy4+S/2);
   ctx.moveTo(fx+S/2,fy4); ctx.lineTo(fx+S/2,fy4+S); ctx.stroke();
   ctx.lineWidth=1;
-  dashLine(fx,fy4+S,fx+S,fy4,"rgba(122,155,109,0.30)",[5,5]); // outcome-insensitive diagonal
+  dashLine(fx,fy4+S,fx+S,fy4,"rgba(20,20,19,0.30)",[5,5]); // outcome-insensitive diagonal
   ctx.font="9px monospace"; ctx.fillStyle="rgba(99,96,90,0.9)";
   ctx.textAlign="left";
   ctx.fillText("win-stay/lose-switch",fx+4,fy4+11);
@@ -1368,7 +1418,7 @@ function drawGameOver(t){
   glow(GOLD,6); ctx.strokeStyle=GOLD; ctx.lineWidth=1.4;
   ctx.beginPath(); ctx.moveTo(fx+S/2-5,fy4+S/2); ctx.lineTo(fx+S/2+5,fy4+S/2);
   ctx.moveTo(fx+S/2,fy4+S/2-5); ctx.lineTo(fx+S/2,fy4+S/2+5); ctx.stroke(); noglow();
-  ctx.textAlign="left"; ctx.fillStyle="rgba(122,155,109,0.7)"; ctx.font="9px monospace";
+  ctx.textAlign="left"; ctx.fillStyle="rgba(20,20,19,0.7)"; ctx.font="9px monospace";
   ctx.fillText("Bern(.5)",fx+S/2+8,fy4+S/2+3);
   // axes labels
   ctx.textAlign="center"; ctx.font="10px monospace"; ctx.fillStyle="rgba(99,96,90,0.85)";
@@ -1380,7 +1430,7 @@ function drawGameOver(t){
     const px=fx+ (0.5+(A.pSL-0.5)*p4)*S;
     const py=fy4+S-(0.5+(A.pSW-0.5)*p4)*S;
     // trail from center
-    ctx.save(); ctx.setLineDash([2,3]); ctx.strokeStyle="rgba(184,134,11,0.4)";
+    ctx.save(); ctx.setLineDash([2,3]); ctx.strokeStyle="rgba(20,20,19,0.4)";
     ctx.beginPath(); ctx.moveTo(fx+S/2,fy4+S/2); ctx.lineTo(px,py); ctx.stroke(); ctx.restore();
     glow(CYAN,12); ctx.fillStyle=CYAN;
     ctx.beginPath(); ctx.arc(px,py,4.5,0,6.283); ctx.fill(); noglow();
@@ -1396,14 +1446,14 @@ function drawGameOver(t){
     const ok=A.flaws.length===0;
     ctx.textAlign="center"; ctx.font="700 13px monospace";
     glow(ok?GOLD:RED,10);
-    ctx.fillStyle=ok?GOLD:"rgba(62,143,199,0.95)";
+    ctx.fillStyle=ok?GOLD:"rgba(90,86,80,0.95)";
     wrapText(A.nash,W/2,646,W-70,16);
     noglow();
   }
   ctx.textAlign="center"; ctx.font="10px monospace"; ctx.fillStyle="rgba(120,116,108,0.6)";
   ctx.fillText("diagnostics per Martin (2026), Dodging Proteus · Brown & Rosenthal (1990)",W/2,706);
   const a=0.5+0.5*Math.sin(t*0.005);
-  ctx.fillStyle=`rgba(122,155,109,${0.4+0.6*a})`; ctx.font="700 13px monospace";
+  ctx.fillStyle=`rgba(20,20,19,${0.4+0.6*a})`; ctx.font="700 13px monospace";
   ctx.fillText(MODE==="play"?"ENTER reload  ·  F you vs the models":"R replay  ·  F the models compared  ·  pick another model above",W/2,730);
 }
 
@@ -1427,8 +1477,8 @@ function drawField(t){
     const X=v=>x0+(Math.max(xlo,Math.min(xhi,v))-xlo)/(xhi-xlo)*w;
     const Y=v=>y0+h-(Math.max(ylo,Math.min(yhi,v))-ylo)/(yhi-ylo)*h;
     for(const [gv,dash] of marks) // reference lines: [value,axis]
-      if(gv[1]==="x") dashLine(X(gv[0]),y0,X(gv[0]),y0+h,"rgba(122,155,109,0.4)",[4,4]);
-      else dashLine(x0,Y(gv[0]),x0+w,Y(gv[0]),"rgba(122,155,109,0.4)",[4,4]);
+      if(gv[1]==="x") dashLine(X(gv[0]),y0,X(gv[0]),y0+h,"rgba(20,20,19,0.4)",[4,4]);
+      else dashLine(x0,Y(gv[0]),x0+w,Y(gv[0]),"rgba(20,20,19,0.4)",[4,4]);
     ctx.font="10px monospace"; ctx.fillStyle="rgba(99,96,90,0.85)";
     ctx.textAlign="center"; ctx.fillText(xl,x0+w/2,y0+h+16);
     ctx.save(); ctx.translate(x0-14,y0+h/2); ctx.rotate(-Math.PI/2); ctx.fillText(yl,0,0); ctx.restore();
@@ -1457,7 +1507,7 @@ function drawField(t){
   const [x2,y2]=scatter(140,406,W-280,240,"STAY/SHIFT POLICY (FIG 4)",
     0,1,0,1,"P(stay|loss)","P(stay|win)",
     c=>c.pSL,c=>c.pSW,[[[0.5,"x"]],[[0.5,"y"]]]);
-  dashLine(x2(0),y2(0),x2(1),y2(1),"rgba(122,155,109,0.3)",[5,5]);
+  dashLine(x2(0),y2(0),x2(1),y2(1),"rgba(20,20,19,0.3)",[5,5]);
   glow(CYAN,12); ctx.fillStyle=CYAN;
   ctx.beginPath(); ctx.arc(x2(A.pSL),y2(A.pSW),6,0,6.283); ctx.fill(); noglow();
   ctx.font="700 11px monospace"; ctx.fillStyle=CYAN;
@@ -1473,7 +1523,7 @@ function drawField(t){
   }
   const a=0.5+0.5*Math.sin(t*0.005);
   ctx.textAlign="center";
-  ctx.fillStyle=`rgba(122,155,109,${0.4+0.6*a})`; ctx.font="700 13px monospace";
+  ctx.fillStyle=`rgba(20,20,19,${0.4+0.6*a})`; ctx.font="700 13px monospace";
   ctx.fillText(MODE==="play"?"F back to debrief  ·  ENTER reload":"F back to debrief  ·  R replay",W/2,724);
 }
 function wrapText(txt,x,y,maxW,lh){
@@ -1491,11 +1541,11 @@ function drawGauge(x,y,w,lo,hi,target,band,val,p,label,leftTag,rightTag,ok,fmt,f
   ctx.strokeStyle="rgba(150,146,138,0.3)"; ctx.lineWidth=1;
   ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+w,y); ctx.stroke();
   // band — green = Nash/i.i.d.-consistent zone (matches the live rack gauges)
-  ctx.fillStyle="rgba(122,155,109,0.16)";
+  ctx.fillStyle="rgba(20,20,19,0.16)";
   ctx.fillRect(X(Math.max(lo,target-band)),y-10,X(Math.min(hi,target+band))-X(Math.max(lo,target-band)),20);
-  ctx.strokeStyle="rgba(122,155,109,0.45)"; ctx.lineWidth=1;
+  ctx.strokeStyle="rgba(20,20,19,0.45)"; ctx.lineWidth=1;
   ctx.strokeRect(X(Math.max(lo,target-band)),y-10,X(Math.min(hi,target+band))-X(Math.max(lo,target-band)),20);
-  dashLine(X(target),y-13,X(target),y+13,"rgba(122,155,109,0.6)",[3,3]);
+  dashLine(X(target),y-13,X(target),y+13,"rgba(20,20,19,0.6)",[3,3]);
   ctx.font="9px monospace"; ctx.fillStyle="rgba(99,96,90,0.7)";
   ctx.textAlign="left";  ctx.fillText("← "+leftTag,x,y+24);
   ctx.textAlign="right"; ctx.fillText(rightTag+" →",x+w,y+24);
@@ -1531,6 +1581,7 @@ function frame(now){
   const sx=0, sy=0;   // lab bench: no screen shake, ever
   ctx.translate(sx,sy);
   drawBackground(now);
+  drawScoreboard(now);
   drawProteus(now);
   drawShapes(now);
   drawPlayerBase(now);
@@ -1548,7 +1599,7 @@ function frame(now){
     ctx.fillText("R E A L   S E S S I O N S   ·   R E L E A S E D   S T U D Y   D A T A",W/2,266);
     const a=0.5+0.5*Math.sin(now*0.005);
     ctx.font="700 16px monospace";
-    ctx.fillStyle=`rgba(122,155,109,${0.4+0.6*a})`;
+    ctx.fillStyle=`rgba(20,20,19,${0.4+0.6*a})`;
     ctx.fillText(SESS?"— PRESS ▶ TO REPLAY THIS SESSION —":"— CHOOSE A MODEL ABOVE —",W/2,474);
     ctx.font="12.5px monospace"; ctx.fillStyle="rgba(99,96,90,0.85)";
     ctx.fillText("a real 200-trial session · SPACE play/pause · R restart · M sound",W/2,496);
