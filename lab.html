@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>🎯</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>▲</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>PROTEUS // BREAKTHROUGH</title>
+<title>PACA — Interactive Assay</title>
 <style>
   :root { color-scheme: dark; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
-    height: 100%; background: #05060f; overflow: hidden;
+    height: 100%; background: #FAF9F5; overflow: hidden;
     font-family: "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
   }
   #bar {
     position: fixed; top: 0; left: 0; right: 0; height: 58px; z-index: 8;
     display: flex; align-items: center; justify-content: center; gap: 10px;
-    background: rgba(8,10,26,0.92); border-bottom: 1px solid #232a55;
+    background: rgba(255,255,255,0.92); border-bottom: 1px solid #232a55;
     font: 12px "SF Mono", Menlo, Consolas, monospace; color: #aab4e8;
     flex-wrap: wrap; padding: 4px 60px;
   }
@@ -23,8 +23,8 @@
     background: #101538; color: #cdd6ff; border: 1px solid #39406b;
     font: inherit; padding: 4px 9px; border-radius: 4px; cursor: pointer;
   }
-  #bar button.on { border-color: #4fd8ff; color: #4fd8ff; }
-  #bar #btnPlay { border-color: #ffd24f; color: #ffd24f; min-width: 76px; }
+  #bar button.on { border-color: #B8860B; color: #B8860B; }
+  #bar #btnPlay { border-color: #C99A2E; color: #C99A2E; min-width: 76px; }
   #bar select:disabled, #bar button:disabled { opacity: .35; cursor: default; }
   #modeToggle { display: flex; width: 100%; margin: 0 0 12px;
     border: 1px solid #39406b; border-radius: 6px; overflow: hidden; }
@@ -33,18 +33,18 @@
     padding: 10px 6px; cursor: pointer; letter-spacing: 1.5px; }
   #modeToggle button + button { border-left: 1px solid #39406b; }
   #modeToggle button.on { background: #18204a; }
-  #modeToggle button.on.play { color: #4fd8ff; text-shadow: 0 0 10px rgba(79,216,255,.7); }
-  #modeToggle button.on.watch { color: #ffd24f; text-shadow: 0 0 10px rgba(255,210,79,.7); }
+  #modeToggle button.on.play { color: #B8860B; text-shadow: 0 0 10px rgba(184,134,11,.7); }
+  #modeToggle button.on.watch { color: #C99A2E; text-shadow: 0 0 10px rgba(122,155,109,.7); }
   #wrap {
     position: fixed; inset: 58px 0 0 0; display: flex;
     align-items: center; justify-content: center; gap: 16px;
-    background: radial-gradient(120% 90% at 50% 8%, #0b1030 0%, #05060f 62%);
+    background: radial-gradient(120% 90% at 50% 8%, #FAF9F5 0%, #FAF9F5 62%);
   }
   /* ---- telemetry rack: one instrument, matched to the cabinet ---- */
-  :root { --tick: rgba(255,210,79,.45); }
+  :root { --tick: rgba(122,155,109,.45); }
   #side, #leftrack { width: 312px; display: flex; flex-direction: column;
     padding: 13px 15px; overflow-y: auto; scrollbar-width: none;
-    background: rgba(8,10,26,.74); border: 1px solid #1d2450;
+    background: rgba(255,255,255,.74); border: 1px solid #1d2450;
     background-image:
       linear-gradient(var(--tick),var(--tick)),linear-gradient(var(--tick),var(--tick)),
       linear-gradient(var(--tick),var(--tick)),linear-gradient(var(--tick),var(--tick)),
@@ -57,12 +57,12 @@
   #side::-webkit-scrollbar, #leftrack::-webkit-scrollbar { display: none; }
   .racklogo { display: block; width: 100%; height: auto; mix-blend-mode: screen; }
   .rack-head { display: flex; justify-content: space-between; align-items: baseline;
-    padding-bottom: 10px; border-bottom: 1px solid rgba(120,140,220,.18); }
-  .rack-title { color: #ff4f6d; font-weight: 700; font-size: 12px; letter-spacing: 3px;
-    text-shadow: 0 0 10px rgba(255,79,109,.55); }
+    padding-bottom: 10px; border-bottom: 1px solid rgba(150,146,138,.18); }
+  .rack-title { color: #3E8FC7; font-weight: 700; font-size: 12px; letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(62,143,199,.55); }
   .rack-sub { color: #5a6390; font-size: 9px; letter-spacing: 1.5px; }
   .sect { padding-top: 10px; }
-  .sect + .sect { margin-top: 10px; border-top: 1px dashed rgba(120,140,220,.16); }
+  .sect + .sect { margin-top: 10px; border-top: 1px dashed rgba(150,146,138,.16); }
   .sect-title { color: #96a8ff; font-size: 10px; font-weight: 700; letter-spacing: 2px;
     margin-bottom: 8px; display: flex; justify-content: space-between;
     white-space: nowrap; gap: 8px; }
@@ -79,23 +79,23 @@
   .tr-seq { font-size: 10px; letter-spacing: 1px; white-space: nowrap; color: #6870a0;
             overflow: hidden; height: 13px; line-height: 13px; }
   .tr-seq .g-tri, .tr-seq .g-star { color: #9fb2d8; }
-  .tr-seq .g-win { color: #ffd24f; font-weight: 700; }
-  .tr-seq .g-loss { color: #ff4f6d; font-weight: 700; }
+  .tr-seq .g-win { color: #C99A2E; font-weight: 700; }
+  .tr-seq .g-loss { color: #3E8FC7; font-weight: 700; }
   .tr-seq .g-pair { margin-right: 4px; }
   .tr-seq .sq-all { color: #4a5488; font-style: italic; letter-spacing: .5px; }
-  .tr-track { flex: 1; height: 16px; background: rgba(79,216,255,.08); position: relative; }
+  .tr-track { flex: 1; height: 16px; background: rgba(184,134,11,.08); position: relative; }
   .tr-fill { display: block; height: 100%; background: #8890c0; opacity: .7; transition: width .18s; }
   .tr-line { position: absolute; top: 0; bottom: 0; left: 80%; width: 1px;
-    background: rgba(255,79,109,.55); }
+    background: rgba(62,143,199,.55); }
   .tr-out { width: 46px; text-align: right; color: #5a6390; font-size: 9px;
             height: 13px; line-height: 13px; }
-  .tr.warm .tr-fill { background: #ffd24f; opacity: .9; }
-  .tr.lock .tr-name { color: #ff8fa0; }
-  .tr.lock .tr-fill { background: #ff4f6d; opacity: 1; box-shadow: 0 0 8px rgba(255,79,109,.7); }
-  .tr.lock .tr-out { color: #ff4f6d; font-weight: 700; }  /* no size bump — geometry stays put */
+  .tr.warm .tr-fill { background: #C99A2E; opacity: .9; }
+  .tr.lock .tr-name { color: #3E8FC7; }
+  .tr.lock .tr-fill { background: #3E8FC7; opacity: 1; box-shadow: 0 0 8px rgba(62,143,199,.7); }
+  .tr.lock .tr-out { color: #3E8FC7; font-weight: 700; }  /* no size bump — geometry stays put */
   .tr.off { opacity: .45; }
   #commitLine { margin-top: 9px; font-size: 10px; color: #7f88b8; line-height: 1.55; min-height: 3.1em; }
-  #commitLine b { color: #ff4f6d; }
+  #commitLine b { color: #3E8FC7; }
   .trow { display: flex; align-items: flex-start; gap: 6px; }
   .glab { width: 16px; flex: none; height: 24px; display: flex; flex-direction: column;
           justify-content: space-between; font: 10px monospace; color: #9fb2d8; line-height: 1; }
@@ -106,8 +106,8 @@
   #shots { display: flex; align-items: flex-start; gap: 2px; height: 24px; }
   .sq { width: 6px; height: 10px; border-radius: 1px; flex: none; }
   .sq.L { margin-top: 0; } .sq.R { margin-top: 12px; }
-  .sq.b { background: #ffd24f; box-shadow: 0 0 4px rgba(255,210,79,.55); }
-  .sq.x { background: #ff4f6d; box-shadow: 0 0 4px rgba(255,79,109,.55); }
+  .sq.b { background: #C99A2E; box-shadow: 0 0 4px rgba(122,155,109,.55); }
+  .sq.x { background: #3E8FC7; box-shadow: 0 0 4px rgba(62,143,199,.55); }
   #fig3b, #fig4 { display: block; width: 100%; }
   /* session */
   #rateBig { text-align: center; font-size: 12px; color: #7f88b8;
@@ -118,8 +118,8 @@
   .rate-row { display: flex; justify-content: space-between; color: #7f88b8;
     font-size: 10px; margin: 3px 0; }
   .rate-row b { color: #cdd6ff; }
-  .cyan { color: #4fd8ff; } .red { color: #ff4f6d; }
-  .gold { color: #ffd24f; } .dim { color: #5a6390; }
+  .cyan { color: #B8860B; } .red { color: #3E8FC7; }
+  .gold { color: #C99A2E; } .dim { color: #5a6390; }
   @media (max-width: 940px) { #side, #leftrack { display: none; } }
   canvas {
     display: block; image-rendering: auto;
@@ -137,6 +137,75 @@
     position: fixed; inset: 0; pointer-events: none; z-index: 6;
     background: radial-gradient(85% 85% at 50% 50%, transparent 60%, rgba(0,0,0,.55) 100%);
   }
+</style>
+<style>
+  /* ============ LAB SKIN — light academic override (layout rules above still apply) ============ */
+  body { background:#FAF9F5; color:#141413;
+         font-family:-apple-system,"Helvetica Neue","Segoe UI",Arial,sans-serif; }
+  #crt, #vig { display:none; }
+  #bar { background:rgba(250,249,245,.94); border-bottom:1px solid #E8E4DB; color:#63605A;
+         font-family:inherit; }
+  #bar select, #bar button { background:#fff; color:#141413; border:1px solid #D9D4C9;
+                             font-family:inherit; }
+  #bar button.on { border-color:#141413; color:#141413; font-weight:600; }
+  #bar #btnPlay { border-color:#141413; color:#141413; font-weight:600; }
+  #modeToggle { border-color:#D9D4C9; }
+  #modeToggle button { background:#fff; color:#8A867C;
+                       font-family:inherit; font-weight:600; }
+  #modeToggle button + button { border-left:1px solid #D9D4C9; }
+  #modeToggle button.on { background:#141413; }
+  #modeToggle button.on.play  { color:#FAF9F5; text-shadow:none; }
+  #modeToggle button.on.watch { color:#FAF9F5; text-shadow:none; }
+  #leftrack, #side { background:#FFFFFF; border:1px solid #E8E4DB; border-radius:12px;
+                     box-shadow:none; }
+  .rack-brand { font:700 15px/1.3 Georgia,serif; color:#141413; padding:4px 0 2px; }
+  .rack-brand span { display:block; font:600 8.5px -apple-system,"Helvetica Neue",Arial,sans-serif;
+                     letter-spacing:1.5px; color:#8A867C; margin-top:4px; text-transform:uppercase; }
+  .rack-head { border-bottom:1px solid #E8E4DB; }
+  .rack-title { color:#141413; text-shadow:none; letter-spacing:2px; }
+  .rack-sub { color:#8A867C; }
+  .sect + .sect { border-top:1px dashed #E8E4DB; }
+  .sect-title { color:#63605A; }
+  .sect-title em { color:#A09B8F; }
+  .tr-name { color:#63605A; }
+  .tr-seq { color:#8A867C; }
+  .tr-seq .g-tri, .tr-seq .g-star { color:#63605A; }
+  .tr-seq .g-win { color:#B8860B; }
+  .tr-seq .g-loss { color:#3E8FC7; }
+  .tr-seq .sq-all { color:#B5B0A6; }
+  .tr-track { background:#EFEBE1; }
+  .tr-fill { background:#B5B0A6; opacity:.85; }
+  .tr-line { background:rgba(193,95,60,.6); }
+  .tr.warm .tr-fill { background:#C99A2E; }
+  .tr.lock .tr-name { color:#C15F3C; }
+  .tr.lock .tr-fill { background:#C15F3C; box-shadow:none; }
+  .tr.lock .tr-out { color:#C15F3C; }
+  .tr-out { color:#8A867C; }
+  #commitLine { color:#63605A; }
+  #commitLine b { color:#C15F3C; }
+  .glab { color:#63605A; }
+  .sq.b { background:#C99A2E; box-shadow:none; }
+  .sq.x { background:#3E8FC7; box-shadow:none; }
+  .crow .cell { color:#63605A; }
+  #rateBig { color:#63605A; }
+  #rateBig b { text-shadow:none; }
+  .rate-row { color:#63605A; }
+  .gold { color:#7A9B6D; } .cyan { color:#B8860B; } .red { color:#3E8FC7; }
+  .dim { color:#B5B0A6; }
+  /* the reasoning-trace panel under the cabinet */
+  #centercol { display:flex; flex-direction:column; align-items:center; gap:14px; }
+  #tracePanel { background:#fff; border:1px solid #E8E4DB; border-radius:12px;
+    padding:10px 16px 12px; overflow-y:auto; text-align:left;
+    font:10.5px/1.5 -apple-system,"Helvetica Neue","Segoe UI",Arial,sans-serif; color:#3C3A36; }
+  #traceHead { font-size:10px; font-weight:600; letter-spacing:1.5px; color:#63605A;
+    border-bottom:1px solid #E8E4DB; padding:10px 0 6px; margin:-10px 0 8px;
+    position:sticky; top:-10px; background:#fff; }
+  #traceHead em { font-style:normal; font-weight:400; color:#A09B8F; letter-spacing:.5px;
+    margin-left:10px; }
+  #traceBody .tl { margin:0 0 9px; white-space:pre-wrap; }
+  #traceBody .tl b { color:#B8860B; font-weight:700; margin-right:9px;
+    font-variant-numeric:tabular-nums; }
+  #traceBody .tr-empty { color:#B5B0A6; font-style:italic; }
 </style>
 </head>
 <body>
@@ -158,16 +227,16 @@
       <button id="mtPlay" class="play">YOU PLAY</button>
       <button id="mtWatch" class="watch">WATCH MODELS</button>
     </div>
-    <img class="racklogo" src="logo.png" alt="PROTEUS // BREAKTHROUGH">
-    <div class="sect" style="border-top:1px dashed rgba(120,140,220,.16); margin-top:12px;">
-      <div class="sect-title">SHOT TAPE <em>gold = breach · red = intercept</em></div>
+    <div class="rack-brand">Dodging Proteus<span>Protean Adversarial Choice Assay</span></div>
+    <div class="sect" style="border-top:1px dashed rgba(150,146,138,.16); margin-top:12px;">
+      <div class="sect-title">CHOICE TAPE <em>amber = match · blue = miss</em></div>
       <div class="trow">
         <div class="glab"><span>▲:</span><span>★:</span></div>
         <div id="shots"></div>
       </div>
     </div>
     <div class="sect">
-      <div class="sect-title">CHOICE + OUTCOME <em>▲★ choice · 1 breach / 0 intercept</em></div>
+      <div class="sect-title">CHOICE + OUTCOME <em>▲★ choice · 1 match / 0 miss</em></div>
       <div class="trow">
         <div class="glab"></div>
         <div class="cstack">
@@ -177,15 +246,19 @@
       </div>
     </div>
     <div class="sect">
-      <div class="sect-title">CHANNEL THREAT BOARD <em>redline p=.05</em></div>
+      <div class="sect-title">DETECTION CHANNELS <em>binomial p · threshold .05</em></div>
       <div id="chGrid"></div>
       <div id="commitLine"></div>
     </div>
-  </aside><canvas id="game"></canvas>
+  </aside><div id="centercol"><canvas id="game"></canvas>
+  <div id="tracePanel">
+    <div id="traceHead">MODEL REASONING<em id="traceMeta"></em></div>
+    <div id="traceBody"><span class="tr-empty">— traces appear here while watching models —</span></div>
+  </div></div>
   <aside id="side">
     <div class="rack-head">
-      <span class="rack-title">PROTEUS TELEMETRY</span>
-      <span class="rack-sub">POST-SHOT FEED</span>
+      <span class="rack-title">SESSION DIAGNOSTICS</span>
+      <span class="rack-sub">PER-TRIAL FEED</span>
     </div>
     <div class="sect">
       <div class="sect-title">FIG 3A · WIN RATE <em>Nash .50 + funnel</em></div>
@@ -210,12 +283,14 @@
     </div>
   </aside></div>
 <div id="crt"></div><div id="vig"></div>
-<a href="index.html" style="position:fixed;top:70px;left:14px;z-index:9;color:#8890c0;
-   font:700 12px monospace;text-decoration:none;letter-spacing:1px">◄ PACA</a>
+<a href="index.html" style="position:fixed;top:70px;left:14px;z-index:9;color:#8A867C;
+   font:600 12px -apple-system,Arial,sans-serif;text-decoration:none;letter-spacing:1px">◄ PACA</a>
 <script src="data/data.js"></script>
+<script src="data/traces.js"></script>
 <script>
 "use strict";
-/* ARCADE SKIN. ENGINE IS SHARED with lab.html (the paper-faithful skin):
+/* LAB SKIN — the paper-faithful presentation (Fig. 1: gray stimulus panels,
+   yellow choice fill, blue circle reveal). ENGINE IS SHARED with arcade.html:
    any fix to the Proteus core / replay engine / analysis must go to BOTH files. */
 /* ================================================================
    PROTEUS CORE — port of Lee, Conroy, McGreevy & Barraclough (2004)
@@ -315,11 +390,10 @@ const CHANNEL_NAMES=[
 ];
 
 /* ================================================================ GAME */
-const W=520, H=780;
+const W=928, H=780;   // wide-bench format: at the 56% height budget this displays at
+                      // exactly the arcade cabinet's width (520/0.56 ≈ 928)
 const LANE_L=W*0.30, LANE_R=W*0.70;
-const ENDZONE_Y=78, PROT_Y=148, MID_Y=440, PLAYER_Y=684;
-const BZ_R=W*0.20;         // blue-circle track radius — pivot at the core, rim at the batteries
-const BZ_REST=Math.PI/2;   // resting angle: straight up from the core (12 o'clock)
+const ENDZONE_Y=78, PROT_Y=76, MID_Y=440, PLAYER_Y=684;   // Proteus sits high — no dead space above
 const V_UP=0.65, V_AFTER=1.15, V_DOWN=0.75;   // px per ms
 const T_MID=(PLAYER_Y-MID_Y)/V_UP;            // ~375 ms to midfield
 const MAX_MISSILES=200;
@@ -332,11 +406,19 @@ const DPR=Math.min(window.devicePixelRatio||1,2);
 cv.width=W*DPR; cv.height=H*DPR;
 function fit(){
   const sideW=innerWidth>940?656:0;
-  const s=Math.min((innerWidth-sideW)/W, (innerHeight-58)/H)*0.98;
-  cv.style.width=(W*s)+"px"; cv.style.height=(H*s)+"px";
+  const avail=(innerHeight-58)*0.98;
+  const s=Math.min((innerWidth-sideW)/W, avail*0.56/H);  // cabinet takes 56% of the height —
+  cv.style.width=(W*s)+"px"; cv.style.height=(H*s)+"px"; // the trace panel gets the rest
+  const tp=document.getElementById("tracePanel");
+  let colH=H*s;
+  if(tp){
+    tp.style.width=(W*s)+"px";
+    tp.style.height=Math.max(90,avail-H*s-14)+"px";
+    colH=H*s+14+tp.offsetHeight;
+  }
   const side=document.getElementById("side"), left=document.getElementById("leftrack");
-  if(side) side.style.height=(H*s)+"px";
-  if(left) left.style.height=(H*s)+"px";
+  if(side) side.style.height=colH+"px";
+  if(left) left.style.height=colH+"px";
 }
 addEventListener("resize",fit); fit();
 
@@ -389,24 +471,15 @@ const G={
   lockCounts:new Array(9).fill(0), lockedTrials:0,
   log:[],                   // per-trial {side,cpu,hit,lockN}
   fl:null,                  // active flight
-  bz:{a:BZ_REST,ta:BZ_REST,r:0,flash:0},  // blue circle: track angle, target angle, radius, hit flash
   shake:0, endFlash:0, protFlash:0, readyAt:0, overAt:0,
   locked:false, lockAt:0,   // a Proteus channel is currently significant
   wsls:{sw:0,nw:0,sl:0,nl:0}, figHist:[], lastCommit:null,
 };
 const stars=[]; for(let i=0;i<90;i++) stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+0.3,tw:Math.random()*6.28,s:0.2+Math.random()*0.8});
 const particles=[];
-/* ---- logo (drawn on the title / idle card, screen-blended so its black vanishes) ---- */
-const LOGO=new Image(); let LOGO_OK=false;
-LOGO.onload=()=>{LOGO_OK=true;}; LOGO.src="logo.png";
-function drawLogoCentered(topY,w){
-  if(!LOGO_OK) return 0;
-  const h=w*1086/1448;
-  ctx.save(); ctx.globalCompositeOperation="screen";
-  ctx.drawImage(LOGO,(W-w)/2,topY,w,h);
-  ctx.restore();
-  return h;
-}
+/* ---- lab skin: no bitmap logo — the title card is typographic ---- */
+let LOGO_OK=false;
+function drawLogoCentered(){ return 0; }
 /* ---- play-mode engine: precomputed Proteus vs the human player ----
    NOTE: no sound or visual here — the lock must stay hidden until the player
    commits, so the pre-computed channel state can't be used to their advantage */
@@ -432,13 +505,11 @@ function fire(side){                      // side: "T"(left) | "S"(right)
     mx: side==="T"?LANE_L:LANE_R,
     cx: cpu==="T"?LANE_L:LANE_R,
     openX: cpu==="T"?LANE_R:LANE_L,   // lane Proteus is NOT defending — the breakthrough gap
-    circleHit:false,
+    landed:false, judged:false,
     exploded:false, fizzled:false, scored:false, resolved:false,
     trail:[], ctrail:[],
   };
   G.phase="flight";
-  G.bz.ta=G.fl.openX===LANE_L?Math.PI:0;   // clock hand swings the disc to the undefended
-                                           // battery NOW — revealed only at launch
   G.lastCommit={results:dec.results,pred:dec.pred,cpu:dec.cpu,ranval:dec.ranval,side};
   renderChannels();                // telemetry reveals THIS trial's commitment only
   sfx.launch(); setTimeout(()=>sfx.counter(),40);
@@ -453,7 +524,6 @@ function resetCore(){
   G.shake=0; G.endFlash=0; G.protFlash=0; particles.length=0;
   G.locked=false; G.lockAt=0; G.lastCommit=null; G.next=null;
   G.wsls={sw:0,nw:0,sl:0,nl:0}; G.figHist=[];
-  G.bz.a=BZ_REST; G.bz.ta=BZ_REST; G.bz.r=0; G.bz.flash=0;
 }
 
 /* ---- replay engine: trials come from a released study session, verbatim ----
@@ -470,14 +540,38 @@ function loadSession(){
   SESS=g?PACA_DATA.sessions[g+"_"+m]:null;   // no model chosen yet → idle prompt
   resetCore();
   G.playing=false; setPlayBtn(); renderPanels();
+  clearTrace(SESS?"press ▶ — the model's reasoning prints here, trial by trial"
+                 :"choose a model above");
 }
 function setPlayBtn(){
   document.getElementById("btnPlay").textContent=G.playing?"❚❚ PAUSE":"▶ PLAY";
 }
 
+/* ---- reasoning-trace panel: the model's verbatim response_text, trial by trial ---- */
+const TRACES=window.PACA_TRACES||{};
+function clearTrace(msg){
+  const b=document.getElementById("traceBody");
+  b.innerHTML=msg?'<span class="tr-empty">'+msg+'</span>':"";
+  document.getElementById("traceMeta").textContent="";
+}
+function pushTrace(i){
+  const k=SESS?SESS.model_group+"_"+SESS.prompt_mode:null;
+  if(!k||!TRACES[k]) return;
+  const body=document.getElementById("traceBody");
+  body.innerHTML="";                              // current trial only
+  const div=document.createElement("div"); div.className="tl";
+  const b=document.createElement("b"); b.textContent="trial "+String(i+1).padStart(3,"0");
+  div.appendChild(b);
+  div.appendChild(document.createTextNode((TRACES[k][i]||"").trim()||"—"));
+  body.appendChild(div);
+  document.getElementById("traceMeta").textContent=SESS.model_display+" · "+SESS.prompt_mode+" frame · verbatim";
+  document.getElementById("tracePanel").scrollTop=0;
+}
+
 /* ---- firing (from the log) ---- */
 function replayFire(){
   const i=G.trial;
+  pushTrace(i);
   const side=SESS.choices[i];                       // the model's real choice
   const win=SESS.wins[i]===1;                       // it matched -> breakthrough visual
   const cpu=win?(side==="T"?"S":"T"):side;          // mirrored countermeasure lane
@@ -493,13 +587,11 @@ function replayFire(){
     mx: side==="T"?LANE_L:LANE_R,
     cx: cpu==="T"?LANE_L:LANE_R,
     openX: cpu==="T"?LANE_R:LANE_L,   // lane Proteus is NOT defending — the breakthrough gap
-    circleHit:false,
+    landed:false, judged:false,
     exploded:false, fizzled:false, scored:false, resolved:false,
     trail:[], ctrail:[],
   };
   G.phase="flight";
-  G.bz.ta=G.fl.openX===LANE_L?Math.PI:0;   // clock hand swings the disc to the undefended
-                                           // battery NOW — revealed only at launch
   renderChannels();
   sfx.launch(); setTimeout(()=>sfx.counter(),40);
   if(lockN!==null) sfx.lockon();
@@ -515,7 +607,6 @@ function resolve(fl){
   else { G.you++; G.streak++; G.protStreak=0;
     G.bestStreak=Math.max(G.bestStreak,G.streak); }
   G.log.push({side:fl.side,cpu:fl.cpu,hit:fl.hit,lockN:fl.lockN});
-  G.bz.ta=BZ_REST;   // trial over — the clock hand swings back upright, neutral
   if(G.log.length>=2){
     const prev=G.log[G.log.length-2];
     const stay=fl.side===prev.side;
@@ -667,11 +758,11 @@ function renderRate(){
   const n=G.trial, rate=n?G.you/n:0;
   const pct=n?(rate*100).toFixed(1)+"%":"—";
   const cls=!n?"dim":(rate>=0.5?"gold":(rate>=0.45?"cyan":"red"));
-  document.getElementById("rateBig").innerHTML=`BREAKTHROUGH <b class="${cls}">${pct}</b>`;
+  document.getElementById("rateBig").innerHTML=`MATCH RATE <b class="${cls}">${pct}</b>`;
   document.getElementById("rate").innerHTML=
     `<div class="rate-row"><span>score</span><b><span class="cyan">YOU ${G.you}</span> <span class="dim">·</span> <span class="red">PROTEUS ${G.prot}</span></b></div>
      <div class="rate-row"><span>pattern locks</span><b>${G.lockedTrials}/${n}</b></div>
-     <div class="rate-row"><span>missiles left</span><b>${MAX_MISSILES-n}</b></div>`;
+     <div class="rate-row"><span>trials left</span><b>${MAX_MISSILES-n}</b></div>`;
   drawSpark(); drawFig3B(); drawFig3C(); drawFig4();
 }
 /* live Fig 3C: runs-test z — streaks (z<0) vs over-alternation (z>0) */
@@ -681,15 +772,15 @@ function drawFig3C(){
   x.clearRect(0,0,w,h);
   const X=v=>x0+(Math.max(LO,Math.min(HI,v))-LO)/(HI-LO)*(x1-x0);
   // Nash zone |z| < 1.96 — green = i.i.d.-consistent
-  x.fillStyle="rgba(94,232,154,0.16)";
+  x.fillStyle="rgba(122,155,109,0.16)";
   x.fillRect(X(-1.96),y-11,X(1.96)-X(-1.96),22);
-  x.strokeStyle="rgba(94,232,154,0.45)"; x.lineWidth=1;
+  x.strokeStyle="rgba(122,155,109,0.45)"; x.lineWidth=1;
   x.strokeRect(X(-1.96),y-11,X(1.96)-X(-1.96),22);
-  x.strokeStyle="rgba(120,140,220,0.3)"; x.lineWidth=1;
+  x.strokeStyle="rgba(150,146,138,0.3)"; x.lineWidth=1;
   x.beginPath(); x.moveTo(x0,y); x.lineTo(x1,y); x.stroke();
-  x.setLineDash([3,3]); x.strokeStyle="rgba(255,210,79,0.6)";
+  x.setLineDash([3,3]); x.strokeStyle="rgba(122,155,109,0.6)";
   x.beginPath(); x.moveTo(X(0),y-14); x.lineTo(X(0),y+14); x.stroke(); x.setLineDash([]);
-  x.font="9px monospace"; x.fillStyle="rgba(150,165,230,0.9)";
+  x.font="9px monospace"; x.fillStyle="rgba(99,96,90,0.9)";
   x.textAlign="left"; x.fillText("◄ streaks",x0,h-2);
   x.textAlign="right"; x.fillText("over-alternation ►",x1,h-2);
   const n=G.trial, ch=G.pastChoices;
@@ -719,15 +810,15 @@ function drawFig3B(){
   const n=G.trial;
   const band=n?Math.min(0.5,1.96*Math.sqrt(0.25/n)):0.5;
   // i.i.d. 95% band — green = Nash-consistent, tightens as n grows
-  x.fillStyle="rgba(94,232,154,0.16)";
+  x.fillStyle="rgba(122,155,109,0.16)";
   x.fillRect(X(0.5-band),y-11,X(0.5+band)-X(0.5-band),22);
-  x.strokeStyle="rgba(94,232,154,0.45)"; x.lineWidth=1;
+  x.strokeStyle="rgba(122,155,109,0.45)"; x.lineWidth=1;
   x.strokeRect(X(0.5-band),y-11,X(0.5+band)-X(0.5-band),22);
-  x.strokeStyle="rgba(120,140,220,0.3)"; x.lineWidth=1;
+  x.strokeStyle="rgba(150,146,138,0.3)"; x.lineWidth=1;
   x.beginPath(); x.moveTo(x0,y); x.lineTo(x1,y); x.stroke();
-  x.setLineDash([3,3]); x.strokeStyle="rgba(255,210,79,0.6)";
+  x.setLineDash([3,3]); x.strokeStyle="rgba(122,155,109,0.6)";
   x.beginPath(); x.moveTo(X(0.5),y-14); x.lineTo(X(0.5),y+14); x.stroke(); x.setLineDash([]);
-  x.font="9px monospace"; x.fillStyle="rgba(150,165,230,0.9)";
+  x.font="9px monospace"; x.fillStyle="rgba(99,96,90,0.9)";
   x.textAlign="left"; x.fillText("◄ all LEFT",x0,h-2);
   x.textAlign="right"; x.fillText("all RIGHT ►",x1,h-2);
   if(n){
@@ -748,17 +839,17 @@ function drawFig4(){
   const S=Math.min(w-26,h-28), ox=(w-S)/2+2, oy=7;
   const PX=v=>ox+Math.max(0,Math.min(1,v))*S;
   const PY=v=>oy+S-Math.max(0,Math.min(1,v))*S;
-  x.strokeStyle="rgba(120,140,220,0.28)"; x.lineWidth=1;
+  x.strokeStyle="rgba(150,146,138,0.28)"; x.lineWidth=1;
   x.strokeRect(ox,oy,S,S);
-  x.strokeStyle="rgba(132,152,238,0.6)"; x.lineWidth=1.3;
+  x.strokeStyle="rgba(120,116,108,0.6)"; x.lineWidth=1.3;
   x.beginPath(); x.moveTo(ox,oy+S/2); x.lineTo(ox+S,oy+S/2);
   x.moveTo(ox+S/2,oy); x.lineTo(ox+S/2,oy+S); x.stroke();
-  x.setLineDash([5,5]); x.strokeStyle="rgba(150,160,200,0.3)";
+  x.setLineDash([5,5]); x.strokeStyle="rgba(122,155,109,0.3)";
   x.beginPath(); x.moveTo(ox,oy+S); x.lineTo(ox+S,oy); x.stroke(); x.setLineDash([]);
-  x.strokeStyle="#ffd24f"; x.lineWidth=1.6;
+  x.strokeStyle="#C99A2E"; x.lineWidth=1.6;
   x.beginPath(); x.moveTo(ox+S/2-6,oy+S/2); x.lineTo(ox+S/2+6,oy+S/2);
   x.moveTo(ox+S/2,oy+S/2-6); x.lineTo(ox+S/2,oy+S/2+6); x.stroke();
-  x.font="9px monospace"; x.fillStyle="rgba(155,170,230,0.9)";
+  x.font="9px monospace"; x.fillStyle="rgba(99,96,90,0.9)";
   x.textAlign="left"; x.fillText("win-stay/lose-switch",ox+3,oy+8);
   x.fillText("always switch",ox+3,oy+S-3);
   x.textAlign="right"; x.fillText("always stay",ox+S-3,oy+8);
@@ -770,7 +861,7 @@ function drawFig4(){
   const hist=G.figHist;
   if(hist.length){
     const tail=hist.slice(-24);
-    x.strokeStyle="rgba(79,216,255,0.35)"; x.lineWidth=1;
+    x.strokeStyle="rgba(184,134,11,0.35)"; x.lineWidth=1;
     x.beginPath();
     for(let i=0;i<tail.length;i++){
       const px=PX(tail[i].x), py=PY(tail[i].y);
@@ -778,7 +869,7 @@ function drawFig4(){
     }
     x.stroke();
     const cur=hist[hist.length-1];
-    x.shadowColor="#4fd8ff"; x.shadowBlur=8; x.fillStyle="#4fd8ff";
+    x.shadowColor="#B8860B"; x.shadowBlur=8; x.fillStyle="#B8860B";
     x.beginPath(); x.arc(PX(cur.x),PY(cur.y),4.5,0,6.283); x.fill(); x.shadowBlur=0;
   }
 }
@@ -790,7 +881,7 @@ function drawSpark(){
   const yOf=v=>h-3-(Math.max(0.02,Math.min(0.98,v))-0.02)/0.96*(h-6);
   const N=MAX_MISSILES;
   if(G.trial>4){
-    x.fillStyle="rgba(150,160,200,0.12)";
+    x.fillStyle="rgba(122,155,109,0.12)";
     x.beginPath();
     for(let i=4;i<G.trial;i++){ const b=1.96*Math.sqrt(0.25/(i+1));
       const px=i/(N-1)*w;
@@ -799,12 +890,12 @@ function drawSpark(){
       x.lineTo(i/(N-1)*w,yOf(0.5-b)); }
     x.closePath(); x.fill();
   }
-  x.setLineDash([4,4]); x.strokeStyle="rgba(255,210,79,0.5)"; x.lineWidth=1;
+  x.setLineDash([4,4]); x.strokeStyle="rgba(122,155,109,0.5)"; x.lineWidth=1;
   x.beginPath(); x.moveTo(0,yOf(0.5)); x.lineTo(w,yOf(0.5)); x.stroke();
   x.setLineDash([]);
   if(G.log.length){
-    x.strokeStyle="#4fd8ff"; x.lineWidth=1.5;
-    x.shadowColor="#4fd8ff"; x.shadowBlur=5;
+    x.strokeStyle="#B8860B"; x.lineWidth=1.5;
+    x.shadowColor="#B8860B"; x.shadowBlur=5;
     x.beginPath(); let cum=0;
     for(let i=0;i<G.log.length;i++){
       cum+=G.log[i].hit?0:1;
@@ -812,7 +903,7 @@ function drawSpark(){
       if(i===0) x.moveTo(px,py); else x.lineTo(px,py);
     }
     x.stroke(); x.shadowBlur=0;
-    x.fillStyle="#4fd8ff";
+    x.fillStyle="#B8860B";
     x.beginPath();
     x.arc((G.log.length-1)/(N-1)*w,yOf(G.you/G.trial),2.4,0,6.283);
     x.fill();
@@ -824,7 +915,7 @@ function renderTapes(){
   if(!ct||!rt) return;
   const CH={T:"▲",S:"★"};
   ct.innerHTML = win.map(r=>`<span class="cell">${CH[r.side]}</span>`).join("");
-  rt.innerHTML = win.map(r=>`<span class="cell" style="color:${r.hit?"#ff6b82":"#ffd24f"}">${r.hit?"0":"1"}</span>`).join("");
+  rt.innerHTML = win.map(r=>`<span class="cell" style="color:${r.hit?"#3E8FC7":"#C99A2E"}">${r.hit?"0":"1"}</span>`).join("");
 }
 function renderPanels(){ renderChannels(); renderShots(); renderRate(); renderTapes(); }
 
@@ -892,6 +983,7 @@ function setMode(m){
   if(m==="play"){
     TURBO=1; muted=false;
     resetCore(); G.phase="title"; renderPanels();
+    clearTrace("— traces appear here while watching models —");
   } else {
     TURBO=+document.querySelector(".spd.on").dataset.s; muted=true;
     loadSession();
@@ -925,233 +1017,119 @@ for(const b of document.querySelectorAll(".spd"))
   });
 
 /* ---- drawing helpers ---- */
-function glow(color,blur){ ctx.shadowColor=color; ctx.shadowBlur=blur; }
+function glow(color,blur){ ctx.shadowColor=color; ctx.shadowBlur=blur*0.3; }  // academic: whisper, not neon
 function noglow(){ ctx.shadowBlur=0; }
-const CYAN="#4fd8ff", RED="#ff4f6d", GOLD="#ffd24f", DIM="#39406b", GRN="#5ee89a";
+const CYAN="#B8860B", RED="#3E8FC7", GOLD="#C99A2E", DIM="#B5B0A6", GRN="#7A9B6D";
+const INK="#141413", MUT="#63605A", PAINT="#FFD400", PROT=RED;
+const SANSC='-apple-system,"Helvetica Neue",Arial,sans-serif';
+const SH_Y=380, SH_W=176, SH_R=62;   // Fig-1 stimulus panels — centered exactly midway
+                                     // between the Proteus line (96) and player line (664)
 
-function drawBackground(t){
-  ctx.fillStyle="#05060f"; ctx.fillRect(0,0,W,H);
-  // grid floor hint
-  ctx.strokeStyle="rgba(70,90,180,0.08)"; ctx.lineWidth=1;
-  for(let y=110;y<H;y+=64){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
-  for(const s of stars){
-    const a=0.25+0.6*Math.abs(Math.sin(t*0.001*s.s+s.tw));
-    ctx.fillStyle=`rgba(180,200,255,${a})`;
-    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,6.283); ctx.fill();
-  }
-  // lanes
-  ctx.setLineDash([3,9]);
-  ctx.strokeStyle="rgba(90,110,200,0.16)"; ctx.lineWidth=1.5;
-  for(const x of [LANE_L,LANE_R]){
-    ctx.beginPath(); ctx.moveTo(x,ENDZONE_Y+8); ctx.lineTo(x,PLAYER_Y); ctx.stroke();
-  }
-  ctx.setLineDash([]);
-  // midfield line
-  ctx.strokeStyle="rgba(120,130,220,0.13)";
-  ctx.setLineDash([12,10]); ctx.beginPath(); ctx.moveTo(16,MID_Y); ctx.lineTo(W-16,MID_Y); ctx.stroke();
-  ctx.setLineDash([]);
+function roundRectPath(x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
 }
-function drawHitCounter(t){
-  // CIRCLE HITS — top center, above the disc's resting spot; flares when the disc is rung
-  const f=G.bz?G.bz.flash:0;
-  glow(GOLD,8+f*24);
-  ctx.textAlign="center";
-  ctx.fillStyle=`rgba(255,238,175,${(0.85+0.15*f).toFixed(3)})`;
-  ctx.font="700 15px monospace";
-  ctx.fillText(`CIRCLE HITS: ${String(G.you).padStart(2,"0")}`,W/2,22);
-  noglow();
+function shapePath(cx,cy,kind,R){
+  ctx.beginPath();
+  if(kind==="T"){
+    ctx.moveTo(cx,cy-R); ctx.lineTo(cx+R*0.866,cy+R*0.5); ctx.lineTo(cx-R*0.866,cy+R*0.5);
+    ctx.closePath();
+  } else {
+    for(let i=0;i<10;i++){
+      const rr=i%2?R*0.45:R, a=-Math.PI/2+i*Math.PI/5;
+      const px=cx+rr*Math.cos(a), py=cy+rr*Math.sin(a);
+      if(i) ctx.lineTo(px,py); else ctx.moveTo(px,py);
+    }
+    ctx.closePath();
+  }
+}
+function mix(a,b,t){
+  const pa=parseInt(a.slice(1),16), pb=parseInt(b.slice(1),16);
+  const r=Math.round(((pa>>16)&255)+(((pb>>16)&255)-((pa>>16)&255))*t);
+  const g=Math.round(((pa>>8)&255)+(((pb>>8)&255)-((pa>>8)&255))*t);
+  const bl=Math.round((pa&255)+((pb&255)-(pa&255))*t);
+  return `rgb(${r},${g},${bl})`;
+}
+function drawBackground(t){
+  ctx.fillStyle="#FAF9F5"; ctx.fillRect(0,0,W,H);
 }
 function drawProteus(t){
   const y=PROT_Y, flash=Math.max(0,G.protFlash);
-  // spine
-  glow(RED,10);
-  ctx.strokeStyle=`rgba(255,79,109,${0.75+0.25*flash})`; ctx.lineWidth=3;
-  ctx.beginPath(); ctx.moveTo(LANE_L-46,y); ctx.lineTo(LANE_R+46,y); ctx.stroke();
-  // core
-  const pulse=3+1.6*Math.sin(t*0.006);
-  ctx.fillStyle=RED;
-  ctx.beginPath(); ctx.arc(W/2,y,7+pulse*0.4,0,6.283); ctx.fill();
-  // turrets
-  for(const x of [LANE_L,LANE_R]){
-    ctx.fillStyle="#1b1030";
-    ctx.strokeStyle=RED; ctx.lineWidth=2;
-    ctx.beginPath(); ctx.moveTo(x-16,y-8); ctx.lineTo(x+16,y-8); ctx.lineTo(x+9,y+16); ctx.lineTo(x-9,y+16); ctx.closePath();
-    ctx.fill(); ctx.stroke();
-    // blinking turret status light
-    ctx.fillStyle=`rgba(255,130,150,${0.62+0.38*Math.sin(t*0.008+x)})`;
-    ctx.beginPath(); ctx.arc(x,y+3,3,0,6.283); ctx.fill();
-    // faint lane-identity emblem ensconcing the battery — ▲ left, ★ right
-    ctx.strokeStyle="rgba(255,130,150,0.25)"; ctx.lineWidth=1.25;
-    ctx.beginPath();
-    if(x===LANE_L){
-      ctx.moveTo(x,y-36); ctx.lineTo(x+31.2,y+18); ctx.lineTo(x-31.2,y+18); ctx.closePath();
-    } else {
-      for(let i=0;i<10;i++){
-        const rr=i%2?16.2:36, aa=-Math.PI/2+i*Math.PI/5;
-        const px=x+rr*Math.cos(aa), py=y+rr*Math.sin(aa);
-        if(i) ctx.lineTo(px,py); else ctx.moveTo(px,py);
-      }
-      ctx.closePath();
-    }
-    ctx.stroke();
+  ctx.strokeStyle="rgba(20,20,19,0.22)"; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(40,y+20); ctx.lineTo(W-40,y+20); ctx.stroke();
+  ctx.fillStyle="#FFFFFF"; ctx.strokeStyle="rgba(20,20,19,0.35)"; ctx.lineWidth=1;
+  roundRectPath(W/2-32,y-14,64,32,8); ctx.fill(); ctx.stroke();
+  ctx.fillStyle=PROT;
+  ctx.beginPath(); ctx.arc(W/2,y+2,6+1.6*Math.sin(t*0.004)+flash*3,0,6.283); ctx.fill();
+  ctx.fillStyle=MUT; ctx.font="600 13px "+SANSC; ctx.textAlign="center";
+  ctx.fillText("P R O T E U S",W/2,y-24);
+}
+function drawShapes(t){
+  const fl=G.fl;
+  for(const [x,kind] of [[LANE_L,"T"],[LANE_R,"S"]]){
+    // stimulus panel, Fig. 1 style: dark gray card, light gray shape
+    ctx.fillStyle="#3F3E3B";
+    roundRectPath(x-SH_W/2,SH_Y-SH_W/2,SH_W,SH_W,16); ctx.fill();
+    ctx.strokeStyle="rgba(20,20,19,0.2)"; ctx.lineWidth=1;
+    roundRectPath(x-SH_W/2,SH_Y-SH_W/2,SH_W,SH_W,16); ctx.stroke();
+    let col="#C9C5BC";
+    if(fl && fl.side===kind && (fl._fill||0)>0) col=mix("#C9C5BC","#FFD400",fl._fill);
+    ctx.fillStyle=col; shapePath(x,SH_Y,kind,SH_R); ctx.fill();
+    ctx.strokeStyle="#141413"; ctx.lineWidth=1.5; ctx.stroke();   // black shape border
   }
-  noglow();
-  ctx.fillStyle="rgba(255,140,160,0.9)";
-  ctx.font="700 13px monospace"; ctx.textAlign="center";
-  ctx.fillText("P R O T E U S",W/2,y-16);
+  // Proteus's blue circle, once landed — floating above the paint on a match
+  if(fl && fl.landed){
+    const since=(performance.now()-fl.t0)*TURBO-520;
+    ctx.fillStyle=PROT;
+    ctx.beginPath(); ctx.arc(fl.openX,SH_Y,19,0,6.283); ctx.fill();
+    ctx.strokeStyle="#FFFFFF"; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(fl.openX,SH_Y,19,0,6.283); ctx.stroke();
+    if(since<360){
+      ctx.globalAlpha=Math.max(0,1-since/360);
+      ctx.strokeStyle=PROT; ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.arc(fl.openX,SH_Y,21+since*0.09,0,6.283); ctx.stroke();
+      ctx.globalAlpha=1;
+    }
+  }
 }
 function drawPlayerBase(t){
   const y=PLAYER_Y;
-  glow(CYAN,10);
-  ctx.strokeStyle=CYAN; ctx.lineWidth=3;
-  ctx.beginPath(); ctx.moveTo(LANE_L-46,y+14); ctx.lineTo(LANE_R+46,y+14); ctx.stroke();
-  for(const x of [LANE_L,LANE_R]){
-    ctx.fillStyle="#08202e"; ctx.strokeStyle=CYAN; ctx.lineWidth=2;
-    ctx.beginPath(); ctx.moveTo(x-13,y+14); ctx.lineTo(x+13,y+14); ctx.lineTo(x+7,y-12); ctx.lineTo(x-7,y-12); ctx.closePath();
-    ctx.fill(); ctx.stroke();
-    // lane identity — LEFT = Triangle, RIGHT = Star (the lab task's two stimuli)
-    glow(CYAN,5);
-    ctx.fillStyle="rgba(190,242,255,0.92)";
-    ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.font="700 11px monospace";
-    ctx.fillText(x===LANE_L?"▲":"★", x, y+2);
-    ctx.textBaseline="alphabetic";
-    noglow();
-    // missile tip in silo when ready
-    if(G.phase==="ready"){
-      ctx.fillStyle=CYAN;
-      ctx.beginPath(); ctx.moveTo(x,y-20); ctx.lineTo(x+4.5,y-9); ctx.lineTo(x-4.5,y-9); ctx.closePath(); ctx.fill();
-    }
-  }
-  noglow();
+  ctx.strokeStyle="rgba(20,20,19,0.22)"; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(40,y-20); ctx.lineTo(W-40,y-20); ctx.stroke();
+  ctx.fillStyle="#FFFFFF"; ctx.strokeStyle="rgba(20,20,19,0.35)";
+  roundRectPath(W/2-28,y-14,56,30,8); ctx.fill(); ctx.stroke();
+  ctx.fillStyle=PAINT;
+  ctx.beginPath(); ctx.moveTo(W/2,y-24); ctx.lineTo(W/2+6,y-13); ctx.lineTo(W/2-6,y-13);
+  ctx.closePath(); ctx.fill();
+  ctx.fillStyle=MUT; ctx.font="600 13px "+SANSC; ctx.textAlign="center";
+  const who=MODE==="play"?"S U B J E C T  ·  Y O U":(SESS?WSHORT[SESS.model_group]:"M O D E L");
+  ctx.fillText(who,W/2,y+36);
   if(MODE==="play"&&G.phase==="ready"){
-    const a=0.5+0.5*Math.sin(t*0.008);
-    ctx.fillStyle=`rgba(79,216,255,${0.35+0.45*a})`;
-    ctx.font="700 15px monospace"; ctx.textAlign="center";
-    ctx.fillText("◄",LANE_L,y+40); ctx.fillText("►",LANE_R,y+40);
+    const a=0.5+0.5*Math.sin(t*0.006);
+    ctx.fillStyle=`rgba(153,121,44,${(0.35+0.5*a).toFixed(3)})`;
+    ctx.font="700 18px "+SANSC;
+    ctx.fillText("◄",LANE_L,SH_Y+SH_W/2+38); ctx.fillText("►",LANE_R,SH_Y+SH_W/2+38);
   }
 }
-/* TARGET LOCK — revealed only at the moment the player fires (never before, so
+/* TARGET LOCK/* TARGET LOCK — revealed only at the moment the player fires (never before, so
    the channel state can't inform the choice). The crosshair sits at the spot
    where Proteus anticipates the collision: midfield, on the lane its locked
    channel told it to defend. Readout text stays on Proteus's half up top. */
 function drawLockIndicator(t){
   if(G.phase!=="flight"||!G.fl||G.fl.lockN===null) return;
   const fl=G.fl;
-  if(fl.exploded) return;                       // the explosion takes over from here
-  const e=(t-fl.t0)*TURBO;
-  const tMid=(PLAYER_Y-22-MID_Y)/V_UP;
-  let alpha=1;                                  // instant-on at launch
-  if(!fl.hit && e>tMid) alpha=Math.max(0,1-(e-tMid)/260);  // whiffed — fade out
-  if(alpha<=0) return;
-  const cx=fl.cx+(Math.random()*2-1)*1.6;       // anticipated collision lane
-  const cy=MID_Y+(Math.random()*2-1)*1.6;       // anticipated collision point
-  const r=24+2.5*Math.sin(t*0.006);
-  ctx.save();
-  ctx.globalAlpha=alpha;
-  glow(RED,12);
-  ctx.strokeStyle=RED; ctx.lineWidth=1.6;
-  ctx.setLineDash([8,7]); ctx.lineDashOffset=-t*0.02;
-  ctx.beginPath(); ctx.arc(cx,cy,r,0,6.283); ctx.stroke();
+  // dashed outline on the panel Proteus committed to defend, plus a quiet caption
+  ctx.setLineDash([6,5]); ctx.strokeStyle="#C15F3C"; ctx.lineWidth=1.5;
+  roundRectPath(fl.cx-SH_W/2-7,SH_Y-SH_W/2-7,SH_W+14,SH_W+14,20); ctx.stroke();
   ctx.setLineDash([]);
-  for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
-    ctx.beginPath();
-    ctx.moveTo(cx+dx*(r-7),cy+dy*(r-7));
-    ctx.lineTo(cx+dx*(r+7),cy+dy*(r+7));
-    ctx.stroke();
-  }
-  ctx.fillStyle=RED; ctx.beginPath(); ctx.arc(cx,cy,2.2,0,6.283); ctx.fill();
-  noglow();
-  // readout on Proteus's half, below its battery — steady, no blink, no fade:
-  // constant 100% opacity the entire time it is on screen
-  ctx.globalAlpha=1;
-  ctx.textAlign="center"; ctx.font="700 13px monospace";
-  glow(RED,8);
-  ctx.fillStyle="rgb(255,79,109)";
-  ctx.fillText("⚠ TARGET LOCK ⚠",W/2,PROT_Y+46);
-  noglow();
-  ctx.font="11px monospace";
-  ctx.fillStyle="rgb(255,150,165)";
-  ctx.fillText(`channel: ${CHANNEL_NAMES[fl.lockN]} · confidence ${fl.lockProb.toFixed(0)}%`,W/2,PROT_Y+62);
-  // static speckle inside the reticle
-  for(let i=0;i<14;i++){
-    const a=Math.random()*6.283, rr=Math.random()*r*0.9;
-    ctx.fillStyle=`rgba(255,120,140,${(Math.random()*0.5*alpha).toFixed(3)})`;
-    ctx.fillRect(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr,1.6,1.6);
-  }
-  ctx.restore();
-}
-/* Proteus's blue circle (Fig. 1) on a semicircular track. The arm is a clock hand
-   pivoting at the pulsing core: upright at rest between trials, and on fire it
-   swings the disc along the arc to the countermeasure battery Proteus left open —
-   revealed only at launch, like the target lock (moving it sooner would leak the
-   hidden commitment). A breakthrough rings the disc — white-hot flash + gold
-   shockwave — but it persists; no dissolve, so rapid trials never lose the target. */
-function bzPos(){
-  const b=G.bz;
-  return [W/2+BZ_R*Math.cos(b.a), PROT_Y-BZ_R*Math.sin(b.a)];
-}
-function updateBlueDisc(dt){
-  const b=G.bz;
-  b.a+=(b.ta-b.a)*(1-Math.exp(-dt*TURBO/70));    // clock-hand sweep (~0.2s)
-  b.r+=(10-b.r)*(1-Math.exp(-dt*TURBO/170));     // grow-in at session start (~0.5s);
-                                                 // no dissolve, so it never shrinks after
-  b.flash=Math.max(0,b.flash-dt*TURBO*0.0035);   // hit flash decays over ~0.3s
-}
-function drawBlueTarget(t){
-  if(G.phase!=="ready"&&G.phase!=="flight") return;
-  const b=G.bz, [x,y]=bzPos();
-  ctx.save();
-  // the clock hand — Proteus red at the pivot, blue where it grips the disc
-  const lg=ctx.createLinearGradient(W/2,PROT_Y,x,y);
-  lg.addColorStop(0,"rgba(255,79,109,0.50)");
-  lg.addColorStop(0.5,"rgba(150,110,220,0.32)");
-  lg.addColorStop(1,"rgba(79,155,255,0.75)");
-  glow("#4f9bff",5);
-  ctx.strokeStyle=lg; ctx.lineWidth=1.6;
-  ctx.beginPath(); ctx.moveTo(W/2,PROT_Y); ctx.lineTo(x,y); ctx.stroke();
-  if(b.r>0.5){
-    const r=b.r*(1+0.05*Math.sin(t*0.006)), f=b.flash;
-    glow("#4f9bff",14+f*18);
-    ctx.strokeStyle=`rgba(150,196,255,${(0.9*Math.min(1,b.r/10)).toFixed(3)})`; ctx.lineWidth=2;
-    ctx.beginPath(); ctx.arc(x,y,r+3,0,6.283); ctx.stroke();
-    const g=ctx.createRadialGradient(x-r*0.3,y-r*0.4,1,x,y,r);
-    g.addColorStop(0,"#cfe6ff"); g.addColorStop(0.55,"#4f9bff"); g.addColorStop(1,"#1f5fd0");
-    ctx.fillStyle=g;
-    ctx.beginPath(); ctx.arc(x,y,r,0,6.283); ctx.fill();
-    if(f>0){
-      // hit registration: disc flashes white-hot and throws an expanding gold ring
-      ctx.globalAlpha=f;
-      ctx.fillStyle="#fff7d9";
-      ctx.beginPath(); ctx.arc(x,y,r,0,6.283); ctx.fill();
-      ctx.globalAlpha=f*0.9;
-      glow(GOLD,20);
-      ctx.strokeStyle=GOLD; ctx.lineWidth=2.5;
-      ctx.beginPath(); ctx.arc(x,y,r+4+(1-f)*30,0,6.283); ctx.stroke();
-      ctx.globalAlpha=1;
-    }
-  }
-  ctx.restore(); noglow();
-}
-function drawMissile(x,y,color,up){
-  glow(color,14);
-  ctx.fillStyle=color;
-  ctx.beginPath();
-  if(up){ ctx.moveTo(x,y-10); ctx.lineTo(x+4.5,y+4); ctx.lineTo(x-4.5,y+4); }
-  else  { ctx.moveTo(x,y+10); ctx.lineTo(x+4.5,y-4); ctx.lineTo(x-4.5,y-4); }
-  ctx.closePath(); ctx.fill();
-  noglow();
-}
-function drawTrail(trail,color){
-  for(let i=0;i<trail.length;i++){
-    const p=trail[i], a=(i/trail.length)*0.5;
-    ctx.fillStyle=color.replace("ALPHA",a.toFixed(3));
-    ctx.beginPath(); ctx.arc(p.x,p.y,1.6+2*(i/trail.length),0,6.283); ctx.fill();
-  }
+  ctx.textAlign="center"; ctx.font="600 13px "+SANSC; ctx.fillStyle="#C15F3C";
+  ctx.fillText(`pattern lock — ch ${fl.lockN} ${CHANNEL_NAMES[fl.lockN]} · ${fl.lockProb.toFixed(0)}% confidence`,W/2,PROT_Y+46);
 }
 const WSHORT={opus:"OPUS 4.8",sonnet:"SONNET 4.6",haiku:"HAIKU 4.5",gpt54:"GPT-5.4",
   gpt54mini:"GPT-5.4-MINI",gemini31fl:"GEMINI 3.1 FL",gemini3fp:"GEMINI 3 FP"};
 function drawHUD(){
-  ctx.textAlign="left"; ctx.font=MODE==="play"?"700 15px monospace":"700 13px monospace";
+  ctx.textAlign="left"; ctx.font=MODE==="play"?"700 18px monospace":"700 16px monospace";
   glow(CYAN,8); ctx.fillStyle=CYAN;
   ctx.fillText((MODE==="play"?"YOU":(SESS?WSHORT[SESS.model_group]:"MODEL"))+" "+String(G.you).padStart(2,"0"),16,H-14);
   noglow();
@@ -1161,69 +1139,65 @@ function drawHUD(){
   noglow();
   // ammo bar
   const left=MAX_MISSILES-G.trial, bw=150, x0=W/2-bw/2, y0=H-24;
-  ctx.fillStyle="rgba(120,140,220,0.25)"; ctx.fillRect(x0,y0,bw,7);
-  ctx.fillStyle="rgba(160,190,255,0.85)"; ctx.fillRect(x0,y0,bw*left/MAX_MISSILES,7);
-  ctx.textAlign="center"; ctx.font="11px monospace";
-  ctx.fillStyle="rgba(170,190,255,0.8)";
+  ctx.fillStyle="rgba(150,146,138,0.25)"; ctx.fillRect(x0,y0,bw,7);
+  ctx.fillStyle="rgba(20,20,19,0.85)"; ctx.fillRect(x0,y0,bw*left/MAX_MISSILES,7);
+  ctx.textAlign="center"; ctx.font="13px monospace";
+  ctx.fillStyle="rgba(99,96,90,0.9)";
   if(MODE==="play"){
-    ctx.fillText(left+" MISSILES",W/2,y0-5);
+    ctx.fillText(left+" TRIALS LEFT",W/2,y0-5);
     if(G.streak>=3){
-      ctx.fillStyle=GOLD; ctx.font="700 12px monospace";
-      ctx.fillText("STREAK ×"+G.streak,W/2,H-52);
+      ctx.fillStyle=GOLD; ctx.font="700 14px monospace";
+      ctx.fillText("streak ×"+G.streak,W/2,H-52);
     }
   } else {
     ctx.fillText(`TRIAL ${G.trial}/${SESS?SESS.choices.length:200} · ${SESS?SESS.prompt_mode.toUpperCase():""} FRAME`,W/2,y0-5);
   }
 }
-/* ---- flight update/draw ---- */
+/* ---- flight update/draw: yellow paint stream + Proteus's growing disc ---- */
 function updateFlight(now){
   const fl=G.fl; if(!fl) return;
   const e=(now-fl.t0)*TURBO;
-  const tMid=(PLAYER_Y-22-MID_Y)/V_UP;
-  // positions
-  let my = PLAYER_Y - 22 - V_UP*e;                     // missile
-  if(!fl.hit && e>tMid) my = MID_Y - V_AFTER*(e-tMid); // afterburner past midfield
-  let cy = PROT_Y + 18 + V_DOWN*e;                     // countermeasure
-  // trails
-  if(!fl.exploded && (fl.hit || my>PROT_Y)) fl.trail.push({x:fl.mx,y:Math.max(my+8,PROT_Y)});
-  if(fl.trail.length>26) fl.trail.shift();
-  if(!fl.exploded && !fl.fizzled) fl.ctrail.push({x:fl.cx,y:cy-8});
-  if(fl.ctrail.length>20) fl.ctrail.shift();
-
-  if(fl.hit){
-    if(!fl.exploded && e>=tMid){
-      fl.exploded=true;
-      burst(fl.mx,MID_Y,RED,42,0.32,650); burst(fl.mx,MID_Y,GOLD,20,0.22,500);
-      G.shake=6.5; G.protFlash=1; sfx.boom();
-    }
-    if(fl.exploded && e>=tMid+330 && !fl.resolved) resolve(fl);
-  } else {
-    if(!fl.fizzled && e>=tMid+60){
-      fl.fizzled=true;
-      burst(fl.cx,cy,"#8a90c0",12,0.12,380); sfx.fizzle();
-    }
-    if(!fl.scored && my<=PROT_Y+4){
-      fl.scored=true; fl.circleHit=true;
-      // breakthrough missile rings Proteus's blue circle at the battery it capped —
-      // white-hot flash + gold shockwave; the disc persists (no dissolve)
-      const [bx,by]=bzPos();
-      burst(bx,by,"#8fc4ff",24,0.30,560);
-      burst(bx,by,GOLD,20,0.26,520);
-      G.bz.flash=1; G.shake=Math.max(G.shake,5);
-      sfx.score();
-    }
-    if(fl.scored && e>=tMid+((MID_Y-PROT_Y)/V_AFTER)+230 && !fl.resolved) resolve(fl);
+  const T1=520, T2=T1+300, T3=T2+520;   // travel · land+fill · read the outcome
+  fl._p=Math.min(1,e/T1);
+  fl._fill=Math.max(0,Math.min(1,(e-T1+80)/240));
+  if(!fl.landed && e>=T1){
+    fl.landed=true;
+    burst(fl.mx,SH_Y,"#FFD400",10,0.10,300);   // paint splat
+    sfx.counter();
   }
-  fl._my=my; fl._cy=cy;
+  if(!fl.judged && e>=T2){
+    fl.judged=true;
+    if(fl.hit){ sfx.fizzle(); G.protFlash=1; }              // mismatch — Proteus point
+    else { sfx.score();                                     // match!
+           burst(fl.openX,SH_Y,"#FFD400",16,0.15,420); }
+  }
+  if(!fl.resolved && e>=T3) resolve(fl);
 }
 function drawFlight(){
   const fl=G.fl; if(!fl) return;
-  drawTrail(fl.trail,"rgba(79,216,255,ALPHA)");
-  if(!fl.exploded && !(fl.scored))
-    { if(fl._my>PROT_Y-4) drawMissile(fl.mx,fl._my,CYAN,true); }
-  if(!fl.exploded){
-    drawTrail(fl.ctrail,"rgba(255,79,109,ALPHA)");
-    if(!fl.fizzled && fl._cy<MID_Y+70) drawMissile(fl.cx,fl._cy,RED,false);
+  const p=fl._p||0;
+  if(p<1){
+    // yellow paint stream — subject → chosen shape
+    const x0=W/2, y0=PLAYER_Y-24, x1=fl.mx, y1=SH_Y+SH_R*0.35;
+    const tail=Math.max(0,p-0.28);
+    const jx0=x0+(x1-x0)*tail, jy0=y0+(y1-y0)*tail;
+    const jx1=x0+(x1-x0)*p,    jy1=y0+(y1-y0)*p;
+    ctx.lineCap="round";
+    ctx.strokeStyle="#141413"; ctx.lineWidth=7;    // thin black border around the jet
+    ctx.beginPath(); ctx.moveTo(jx0,jy0); ctx.lineTo(jx1,jy1); ctx.stroke();
+    ctx.strokeStyle="#FFD400"; ctx.lineWidth=4.5;  // bright paint core
+    ctx.beginPath(); ctx.moveTo(jx0,jy0); ctx.lineTo(jx1,jy1); ctx.stroke();
+    ctx.lineWidth=1; ctx.lineCap="butt";
+    // blue disc — Proteus → its chosen shape, growing as it approaches
+    const bx0=W/2, by0=PROT_Y+16, bx1=fl.openX, by1=SH_Y;
+    ctx.fillStyle=PROT;
+    ctx.beginPath(); ctx.arc(bx0+(bx1-bx0)*p, by0+(by1-by0)*p, 4+15*p, 0, 6.283); ctx.fill();
+  }
+  if(fl.judged && !fl.resolved){
+    ctx.textAlign="center"; ctx.font="700 17px "+SANSC;
+    const who=MODE==="play"?"you":(SESS?WSHORT[SESS.model_group]:"the model");
+    if(fl.hit){ ctx.fillStyle=PROT; ctx.fillText("MISMATCH — point to Proteus",W/2,SH_Y+SH_W/2+64); }
+    else { ctx.fillStyle="#8F6E14"; ctx.fillText("MATCH — point to "+who,W/2,SH_Y+SH_W/2+64); }
   }
 }
 function updateParticles(dt){
@@ -1245,33 +1219,43 @@ function drawParticles(){
 
 /* ---- screens ---- */
 function drawTitle(t){
-  ctx.fillStyle="rgba(5,6,15,0.92)"; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle="rgba(250,249,245,0.97)"; ctx.fillRect(0,0,W,H);
   ctx.textAlign="center";
-  if(LOGO_OK) drawLogoCentered(44,420);
-  else {
-    glow(RED,26); ctx.fillStyle=RED; ctx.font="700 44px monospace";
-    ctx.fillText("PROTEUS",W/2,210); noglow();
-    glow(CYAN,18); ctx.fillStyle=CYAN; ctx.font="700 26px monospace";
-    ctx.fillText("// BREAKTHROUGH",W/2,252); noglow();
+  ctx.fillStyle=MUT; ctx.font="600 11px "+SANSC;
+  ctx.fillText("T H E   P R O T E A N   A D V E R S A R I A L   C H O I C E   A S S A Y",W/2,124);
+  ctx.fillStyle=INK; ctx.font="700 32px Georgia, serif";
+  ctx.fillText("Matching pennies,",W/2,172);
+  ctx.fillText("against Proteus",W/2,210);
+  // miniature Figure 1 — the match condition
+  const my=306, pw=88;
+  for(const [px,kind,chosen] of [[W/2-58,"T",true],[W/2+58,"S",false]]){
+    ctx.fillStyle="#3F3E3B"; roundRectPath(px-pw/2,my-pw/2,pw,pw,12); ctx.fill();
+    ctx.fillStyle=chosen?PAINT:"#C9C5BC"; shapePath(px,my,kind,30); ctx.fill();
+    ctx.strokeStyle="#141413"; ctx.lineWidth=1.2; ctx.stroke();
+    if(chosen){
+      ctx.fillStyle=PROT; ctx.beginPath(); ctx.arc(px,my,9,0,6.283); ctx.fill();
+      ctx.strokeStyle="#fff"; ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.arc(px,my,9,0,6.283); ctx.stroke();
+    }
   }
-  ctx.fillStyle="rgba(200,210,255,0.9)"; ctx.font="14px monospace";
+  ctx.fillStyle="#3C3A36"; ctx.font="15px "+SANSC;
   const lines=[
-    "◄ / ►  fire LEFT or RIGHT.",
-    "PROTEUS commits its countermeasure BEFORE you",
-    "press — dodge it and hit the blue circle to score.",
+    "◄ / ►  choose the triangle or the star.",
+    "Your pick floods yellow; Proteus's blue circle",
+    "lands on its own choice at the same instant.",
+    "Match the circle — you score. Miss — Proteus scores.",
     "",
-    "200 missiles. The only unbeatable strategy is",
-    "a fair coin. Can you be random?",
+    "200 trials. The only unexploitable strategy is a",
+    "fair coin — Proteus exploits everything else.",
   ];
-  lines.forEach((s,i)=>ctx.fillText(s,W/2,408+i*24));
+  lines.forEach((s,i)=>ctx.fillText(s,W/2,398+i*23));
   const a=0.5+0.5*Math.sin(t*0.005);
-  ctx.fillStyle=`rgba(255,210,79,${0.4+0.6*a})`;
-  ctx.font="700 16px monospace";
-  ctx.fillText("— PRESS ◄ OR ► TO LAUNCH —",W/2,596);
-  ctx.fillStyle="rgba(140,150,200,0.55)"; ctx.font="11px monospace";
-  ctx.fillText("M = mute   ·   Lee et al. (2004) Algorithm 2, intercept-modified",W/2,630);
+  ctx.fillStyle=`rgba(153,121,44,${(0.4+0.6*a).toFixed(3)})`; ctx.font="700 16px "+SANSC;
+  ctx.fillText("— press ◄ or ► to begin —",W/2,600);
+  ctx.fillStyle="rgba(120,116,108,0.8)"; ctx.font="12px "+SANSC;
+  ctx.fillText("M sound · Lee et al. (2004) Algorithm 2, intercept-modified",W/2,632);
 }
-/* ---- animated debrief (drawn in place of the old game-over card) ---- */
+/* ---- animated debrief/* ---- animated debrief (drawn in place of the old game-over card) ---- */
 function easeOut(u){ u=Math.max(0,Math.min(1,u)); return 1-Math.pow(1-u,3); }
 function anBlip(key,f){ if(!G.anFx[key]){ G.anFx[key]=true; tone(f,f*1.5,0.08,"square",0.08); } }
 function panelTitle(x,y,txt){
@@ -1285,25 +1269,25 @@ function dashLine(x1,y1,x2,y2,color,dash){
 function drawGameOver(t){
   const A=G.an; if(!A) return;
   const e=(t-G.overAt)*Math.min(TURBO,4);   // debrief never faster than 4x
-  ctx.fillStyle="rgba(5,6,15,0.90)"; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle="rgba(250,249,245,0.97)"; ctx.fillRect(0,0,W,H);
   ctx.textAlign="center";
 
   // header: verdict + score
   const won=G.you>G.prot, tie=G.you===G.prot;
   glow(won?GOLD:RED,20);
   ctx.fillStyle=won?GOLD:(tie?CYAN:RED); ctx.font="700 27px monospace";
-  ctx.fillText(won?"BREAKTHROUGH!":(tie?"DEAD HEAT":"INTERCEPTED"),W/2,48);
+  ctx.fillText(won?"YOU OUT-PLAYED PROTEUS":(tie?"DEAD HEAT":"PROTEUS WINS"),W/2,48);
   noglow();
   glow(CYAN,8); ctx.fillStyle=CYAN; ctx.textAlign="right"; ctx.font="700 30px monospace";
   ctx.fillText(G.you,W/2-24,84); noglow();
-  ctx.fillStyle="rgba(200,210,255,0.6)"; ctx.textAlign="center"; ctx.font="18px monospace"; ctx.fillText("–",W/2,81);
+  ctx.fillStyle="rgba(60,58,54,0.6)"; ctx.textAlign="center"; ctx.font="18px monospace"; ctx.fillText("–",W/2,81);
   glow(RED,8); ctx.fillStyle=RED; ctx.textAlign="left"; ctx.font="700 30px monospace";
   ctx.fillText(G.prot,W/2+24,84); noglow();
-  ctx.textAlign="center"; ctx.font="11px monospace"; ctx.fillStyle="rgba(180,195,255,0.8)";
+  ctx.textAlign="center"; ctx.font="11px monospace"; ctx.fillStyle="rgba(99,96,90,0.8)";
   const lockTxt=A.locks.length?` · top channel: ${CHANNEL_NAMES[A.locks[0][0]]} (${A.locks[0][1]})`:" · no channel ever locked";
   ctx.fillText(`PROTEUS pattern lock on ${G.lockedTrials}/${A.n} trials${lockTxt}`,W/2,104);
   if(MODE==="watch"&&SESS){
-    ctx.fillStyle="rgba(150,165,230,0.75)";
+    ctx.fillStyle="rgba(99,96,90,0.75)";
     ctx.fillText(`${SESS.model_display} · ${SESS.prompt_mode} frame · released session ${SESS.session_id.slice(0,8)}`,W/2,118);
   }
 
@@ -1312,12 +1296,12 @@ function drawGameOver(t){
   const p3a=easeOut((e-300)/1800);
   panelTitle(ax,ay-6,"FIG 3A · WIN RATE vs PROTEUS");
   // frame + axis
-  ctx.strokeStyle="rgba(120,140,220,0.25)"; ctx.lineWidth=1;
+  ctx.strokeStyle="rgba(150,146,138,0.25)"; ctx.lineWidth=1;
   ctx.strokeRect(ax,ay,aw,ah);
   const yOf=v=>ay+ah-(Math.max(0.05,Math.min(0.95,v))-0.05)/0.9*ah;
   // i.i.d. funnel band around .5
   if(p3a>0){
-    ctx.fillStyle="rgba(150,160,200,0.10)";
+    ctx.fillStyle="rgba(122,155,109,0.10)";
     ctx.beginPath();
     const iMax=Math.max(2,Math.floor(A.n*p3a));
     for(let i=4;i<iMax;i++){ const b=1.96*Math.sqrt(0.25/(i+1));
@@ -1326,8 +1310,8 @@ function drawGameOver(t){
       ctx.lineTo(ax+i/(A.n-1)*aw,yOf(0.5-b)); }
     ctx.closePath(); ctx.fill();
   }
-  dashLine(ax,yOf(0.5),ax+aw,yOf(0.5),"rgba(255,210,79,0.55)",[5,5]);
-  ctx.textAlign="left"; ctx.font="10px monospace"; ctx.fillStyle="rgba(255,210,79,0.7)";
+  dashLine(ax,yOf(0.5),ax+aw,yOf(0.5),"rgba(122,155,109,0.55)",[5,5]);
+  ctx.textAlign="left"; ctx.font="10px monospace"; ctx.fillStyle="rgba(122,155,109,0.7)";
   ctx.fillText("Nash .50",ax+3,yOf(0.5)-4);
   if(p3a>0){
     anBlip("a",300);
@@ -1366,14 +1350,14 @@ function drawGameOver(t){
   const S=196, fx=W/2-S/2, fy4=396;
   const p4=easeOut((e-3800)/900);
   panelTitle(fx,fy4-8,"FIG 4 · STAY/SHIFT POLICY");
-  ctx.strokeStyle="rgba(120,140,220,0.28)"; ctx.strokeRect(fx,fy4,S,S);
+  ctx.strokeStyle="rgba(150,146,138,0.28)"; ctx.strokeRect(fx,fy4,S,S);
   // solid quadrant dividers — same style as the live rack FIG 4
-  ctx.strokeStyle="rgba(132,152,238,0.6)"; ctx.lineWidth=1.3;
+  ctx.strokeStyle="rgba(120,116,108,0.6)"; ctx.lineWidth=1.3;
   ctx.beginPath(); ctx.moveTo(fx,fy4+S/2); ctx.lineTo(fx+S,fy4+S/2);
   ctx.moveTo(fx+S/2,fy4); ctx.lineTo(fx+S/2,fy4+S); ctx.stroke();
   ctx.lineWidth=1;
-  dashLine(fx,fy4+S,fx+S,fy4,"rgba(150,160,200,0.30)",[5,5]); // outcome-insensitive diagonal
-  ctx.font="9px monospace"; ctx.fillStyle="rgba(155,170,230,0.9)";
+  dashLine(fx,fy4+S,fx+S,fy4,"rgba(122,155,109,0.30)",[5,5]); // outcome-insensitive diagonal
+  ctx.font="9px monospace"; ctx.fillStyle="rgba(99,96,90,0.9)";
   ctx.textAlign="left";
   ctx.fillText("win-stay/lose-switch",fx+4,fy4+11);
   ctx.fillText("always switch",fx+4,fy4+S-5);
@@ -1384,10 +1368,10 @@ function drawGameOver(t){
   glow(GOLD,6); ctx.strokeStyle=GOLD; ctx.lineWidth=1.4;
   ctx.beginPath(); ctx.moveTo(fx+S/2-5,fy4+S/2); ctx.lineTo(fx+S/2+5,fy4+S/2);
   ctx.moveTo(fx+S/2,fy4+S/2-5); ctx.lineTo(fx+S/2,fy4+S/2+5); ctx.stroke(); noglow();
-  ctx.textAlign="left"; ctx.fillStyle="rgba(255,210,79,0.7)"; ctx.font="9px monospace";
+  ctx.textAlign="left"; ctx.fillStyle="rgba(122,155,109,0.7)"; ctx.font="9px monospace";
   ctx.fillText("Bern(.5)",fx+S/2+8,fy4+S/2+3);
   // axes labels
-  ctx.textAlign="center"; ctx.font="10px monospace"; ctx.fillStyle="rgba(170,185,255,0.85)";
+  ctx.textAlign="center"; ctx.font="10px monospace"; ctx.fillStyle="rgba(99,96,90,0.85)";
   ctx.fillText("P(stay|loss) →",fx+S/2,fy4+S+14);
   ctx.save(); ctx.translate(fx-12,fy4+S/2); ctx.rotate(-Math.PI/2);
   ctx.fillText("P(stay|win) →",0,0); ctx.restore();
@@ -1396,7 +1380,7 @@ function drawGameOver(t){
     const px=fx+ (0.5+(A.pSL-0.5)*p4)*S;
     const py=fy4+S-(0.5+(A.pSW-0.5)*p4)*S;
     // trail from center
-    ctx.save(); ctx.setLineDash([2,3]); ctx.strokeStyle="rgba(79,216,255,0.4)";
+    ctx.save(); ctx.setLineDash([2,3]); ctx.strokeStyle="rgba(184,134,11,0.4)";
     ctx.beginPath(); ctx.moveTo(fx+S/2,fy4+S/2); ctx.lineTo(px,py); ctx.stroke(); ctx.restore();
     glow(CYAN,12); ctx.fillStyle=CYAN;
     ctx.beginPath(); ctx.arc(px,py,4.5,0,6.283); ctx.fill(); noglow();
@@ -1412,25 +1396,25 @@ function drawGameOver(t){
     const ok=A.flaws.length===0;
     ctx.textAlign="center"; ctx.font="700 13px monospace";
     glow(ok?GOLD:RED,10);
-    ctx.fillStyle=ok?GOLD:"rgba(255,150,165,0.95)";
+    ctx.fillStyle=ok?GOLD:"rgba(62,143,199,0.95)";
     wrapText(A.nash,W/2,646,W-70,16);
     noglow();
   }
-  ctx.textAlign="center"; ctx.font="10px monospace"; ctx.fillStyle="rgba(140,150,200,0.6)";
+  ctx.textAlign="center"; ctx.font="10px monospace"; ctx.fillStyle="rgba(120,116,108,0.6)";
   ctx.fillText("diagnostics per Martin (2026), Dodging Proteus · Brown & Rosenthal (1990)",W/2,706);
   const a=0.5+0.5*Math.sin(t*0.005);
-  ctx.fillStyle=`rgba(255,210,79,${0.4+0.6*a})`; ctx.font="700 13px monospace";
+  ctx.fillStyle=`rgba(122,155,109,${0.4+0.6*a})`; ctx.font="700 13px monospace";
   ctx.fillText(MODE==="play"?"ENTER reload  ·  F you vs the models":"R replay  ·  F the models compared  ·  pick another model above",W/2,730);
 }
 
 /* ---- FIELD PLACEMENT: the user among the paper's 14 model x frame cells ---- */
 function drawField(t){
   const A=G.an; if(!A||typeof PACA_DATA==="undefined"){ G.phase="gameover"; return; }
-  ctx.fillStyle="rgba(5,6,15,0.94)"; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle="rgba(250,249,245,0.94)"; ctx.fillRect(0,0,W,H);
   ctx.textAlign="center";
   glow(CYAN,14); ctx.fillStyle=CYAN; ctx.font="700 20px monospace";
   ctx.fillText(MODE==="play"?"YOU vs THE MODELS":"THE MODELS COMPARED",W/2,40); noglow();
-  ctx.fillStyle="rgba(180,195,255,0.8)"; ctx.font="11px monospace";
+  ctx.fillStyle="rgba(99,96,90,0.8)"; ctx.font="11px monospace";
   ctx.fillText("open = minimalist · filled = informed · Martin (2026)",W/2,60);
   const FAM={Anthropic:"#ff9d5c",OpenAI:"#7ee08a",Google:"#c792ff"};
   const SHORT={"opus":"Opus","sonnet":"Sonnet","haiku":"Haiku","gpt54":"GPT-5.4",
@@ -1439,13 +1423,13 @@ function drawField(t){
 
   function scatter(x0,y0,w,h,title,xlo,xhi,ylo,yhi,xl,yl,fx,fy,marks){
     panelTitle(x0,y0-8,title);
-    ctx.strokeStyle="rgba(120,140,220,0.25)"; ctx.lineWidth=1; ctx.strokeRect(x0,y0,w,h);
+    ctx.strokeStyle="rgba(150,146,138,0.25)"; ctx.lineWidth=1; ctx.strokeRect(x0,y0,w,h);
     const X=v=>x0+(Math.max(xlo,Math.min(xhi,v))-xlo)/(xhi-xlo)*w;
     const Y=v=>y0+h-(Math.max(ylo,Math.min(yhi,v))-ylo)/(yhi-ylo)*h;
     for(const [gv,dash] of marks) // reference lines: [value,axis]
-      if(gv[1]==="x") dashLine(X(gv[0]),y0,X(gv[0]),y0+h,"rgba(255,210,79,0.4)",[4,4]);
-      else dashLine(x0,Y(gv[0]),x0+w,Y(gv[0]),"rgba(255,210,79,0.4)",[4,4]);
-    ctx.font="10px monospace"; ctx.fillStyle="rgba(170,185,255,0.85)";
+      if(gv[1]==="x") dashLine(X(gv[0]),y0,X(gv[0]),y0+h,"rgba(122,155,109,0.4)",[4,4]);
+      else dashLine(x0,Y(gv[0]),x0+w,Y(gv[0]),"rgba(122,155,109,0.4)",[4,4]);
+    ctx.font="10px monospace"; ctx.fillStyle="rgba(99,96,90,0.85)";
     ctx.textAlign="center"; ctx.fillText(xl,x0+w/2,y0+h+16);
     ctx.save(); ctx.translate(x0-14,y0+h/2); ctx.rotate(-Math.PI/2); ctx.fillText(yl,0,0); ctx.restore();
     for(const c of cells){
@@ -1473,7 +1457,7 @@ function drawField(t){
   const [x2,y2]=scatter(140,406,W-280,240,"STAY/SHIFT POLICY (FIG 4)",
     0,1,0,1,"P(stay|loss)","P(stay|win)",
     c=>c.pSL,c=>c.pSW,[[[0.5,"x"]],[[0.5,"y"]]]);
-  dashLine(x2(0),y2(0),x2(1),y2(1),"rgba(150,160,200,0.3)",[5,5]);
+  dashLine(x2(0),y2(0),x2(1),y2(1),"rgba(122,155,109,0.3)",[5,5]);
   glow(CYAN,12); ctx.fillStyle=CYAN;
   ctx.beginPath(); ctx.arc(x2(A.pSL),y2(A.pSW),6,0,6.283); ctx.fill(); noglow();
   ctx.font="700 11px monospace"; ctx.fillStyle=CYAN;
@@ -1484,12 +1468,12 @@ function drawField(t){
   for(const fam of ["Anthropic","OpenAI","Google"]){
     ctx.fillStyle=FAM[fam];
     ctx.beginPath(); ctx.arc(lx,690,4,0,6.283); ctx.fill();
-    ctx.fillStyle="rgba(200,210,255,0.85)"; ctx.textAlign="left";
+    ctx.fillStyle="rgba(60,58,54,0.85)"; ctx.textAlign="left";
     ctx.fillText(fam,lx+8,693); lx+=95;
   }
   const a=0.5+0.5*Math.sin(t*0.005);
   ctx.textAlign="center";
-  ctx.fillStyle=`rgba(255,210,79,${0.4+0.6*a})`; ctx.font="700 13px monospace";
+  ctx.fillStyle=`rgba(122,155,109,${0.4+0.6*a})`; ctx.font="700 13px monospace";
   ctx.fillText(MODE==="play"?"F back to debrief  ·  ENTER reload":"F back to debrief  ·  R replay",W/2,724);
 }
 function wrapText(txt,x,y,maxW,lh){
@@ -1504,15 +1488,15 @@ function wrapText(txt,x,y,maxW,lh){
 /* horizontal gauge: dashed target, gray 95% band, animated marker */
 function drawGauge(x,y,w,lo,hi,target,band,val,p,label,leftTag,rightTag,ok,fmt,fxKey){
   const X=v=>x+(v-lo)/(hi-lo)*w;
-  ctx.strokeStyle="rgba(120,140,220,0.3)"; ctx.lineWidth=1;
+  ctx.strokeStyle="rgba(150,146,138,0.3)"; ctx.lineWidth=1;
   ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+w,y); ctx.stroke();
   // band — green = Nash/i.i.d.-consistent zone (matches the live rack gauges)
-  ctx.fillStyle="rgba(94,232,154,0.16)";
+  ctx.fillStyle="rgba(122,155,109,0.16)";
   ctx.fillRect(X(Math.max(lo,target-band)),y-10,X(Math.min(hi,target+band))-X(Math.max(lo,target-band)),20);
-  ctx.strokeStyle="rgba(94,232,154,0.45)"; ctx.lineWidth=1;
+  ctx.strokeStyle="rgba(122,155,109,0.45)"; ctx.lineWidth=1;
   ctx.strokeRect(X(Math.max(lo,target-band)),y-10,X(Math.min(hi,target+band))-X(Math.max(lo,target-band)),20);
-  dashLine(X(target),y-13,X(target),y+13,"rgba(255,210,79,0.6)",[3,3]);
-  ctx.font="9px monospace"; ctx.fillStyle="rgba(150,165,230,0.7)";
+  dashLine(X(target),y-13,X(target),y+13,"rgba(122,155,109,0.6)",[3,3]);
+  ctx.font="9px monospace"; ctx.fillStyle="rgba(99,96,90,0.7)";
   ctx.textAlign="left";  ctx.fillText("← "+leftTag,x,y+24);
   ctx.textAlign="right"; ctx.fillText(rightTag+" →",x+w,y+24);
   if(p>0){
@@ -1527,7 +1511,7 @@ function drawGauge(x,y,w,lo,hi,target,band,val,p,label,leftTag,rightTag,ok,fmt,f
       ctx.fillText(fmt(val),X(Math.max(lo+0.06*(hi-lo),Math.min(hi-0.06*(hi-lo),v))),y-18);
     }
   }
-  ctx.textAlign="center"; ctx.font="10px monospace"; ctx.fillStyle="rgba(170,185,255,0.85)";
+  ctx.textAlign="center"; ctx.font="10px monospace"; ctx.fillStyle="rgba(99,96,90,0.85)";
   ctx.fillText(label,x+w/2,y+38);
 }
 
@@ -1542,15 +1526,13 @@ function frame(now){
   if(MODE==="watch"&&G.phase==="ready"&&G.playing&&SESS&&G.trial<SESS.choices.length) replayFire();
   if(G.phase==="flight") updateFlight(now);
   updateParticles(dt);
-  updateBlueDisc(dt);
 
   ctx.setTransform(DPR,0,0,DPR,0,0);
-  const sx=(Math.random()*2-1)*G.shake, sy=(Math.random()*2-1)*G.shake;
+  const sx=0, sy=0;   // lab bench: no screen shake, ever
   ctx.translate(sx,sy);
   drawBackground(now);
-  drawHitCounter(now);
   drawProteus(now);
-  drawBlueTarget(now);   // after Proteus so the disc caps the battery it swings onto
+  drawShapes(now);
   drawPlayerBase(now);
   drawLockIndicator(now);
   drawFlight();
@@ -1558,22 +1540,19 @@ function frame(now){
   drawHUD();
   if(G.phase==="title") drawTitle(now);
   if(MODE==="watch"&&!G.playing&&G.phase==="ready"&&G.trial===0){
-    ctx.fillStyle="rgba(5,6,15,0.92)"; ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(250,249,245,0.92)"; ctx.fillRect(0,0,W,H);
     ctx.textAlign="center";
-    if(LOGO_OK) drawLogoCentered(74,420);
-    else {
-      glow(RED,20); ctx.fillStyle=RED; ctx.font="700 40px monospace";
-      ctx.fillText("PROTEUS",W/2,230); noglow();
-      glow(CYAN,14); ctx.fillStyle=CYAN; ctx.font="700 22px monospace";
-      ctx.fillText("// BREAKTHROUGH",W/2,266); noglow();
-    }
+    ctx.fillStyle=INK; ctx.font="700 30px Georgia, serif";
+    ctx.fillText("Watch the models",W/2,236);
+    ctx.font="600 11px "+SANSC; ctx.fillStyle=MUT;
+    ctx.fillText("R E A L   S E S S I O N S   ·   R E L E A S E D   S T U D Y   D A T A",W/2,266);
     const a=0.5+0.5*Math.sin(now*0.005);
-    ctx.font="700 15px monospace";
-    ctx.fillStyle=`rgba(255,210,79,${0.4+0.6*a})`;
+    ctx.font="700 16px monospace";
+    ctx.fillStyle=`rgba(122,155,109,${0.4+0.6*a})`;
     ctx.fillText(SESS?"— PRESS ▶ TO REPLAY THIS SESSION —":"— CHOOSE A MODEL ABOVE —",W/2,474);
-    ctx.font="11px monospace"; ctx.fillStyle="rgba(180,195,255,0.8)";
+    ctx.font="12.5px monospace"; ctx.fillStyle="rgba(99,96,90,0.85)";
     ctx.fillText("a real 200-trial session · SPACE play/pause · R restart · M sound",W/2,496);
-    ctx.fillStyle="rgba(150,165,230,0.72)"; ctx.font="11px monospace";
+    ctx.fillStyle="rgba(99,96,90,0.78)"; ctx.font="12.5px monospace";
     ctx.fillText("choose model & frame above, then press ▶",W/2,516);
   }
   if(G.phase==="gameover") drawGameOver(now);
