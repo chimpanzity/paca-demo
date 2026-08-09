@@ -318,8 +318,6 @@ const CHANNEL_NAMES=[
 const W=520, H=780;
 const LANE_L=W*0.30, LANE_R=W*0.70;
 const ENDZONE_Y=78, PROT_Y=148, MID_Y=440, PLAYER_Y=684;
-const BZ_R=W*0.20;         // blue-circle track radius — pivot at the core, rim at the batteries
-const BZ_REST=Math.PI/2;   // resting angle: straight up from the core (12 o'clock)
 const V_UP=0.65, V_AFTER=1.15, V_DOWN=0.75;   // px per ms
 const T_MID=(PLAYER_Y-MID_Y)/V_UP;            // ~375 ms to midfield
 const MAX_MISSILES=200;
@@ -389,7 +387,7 @@ const G={
   lockCounts:new Array(9).fill(0), lockedTrials:0,
   log:[],                   // per-trial {side,cpu,hit,lockN}
   fl:null,                  // active flight
-  bz:{a:BZ_REST,ta:BZ_REST,r:0,flash:0},  // blue circle: track angle, target angle, radius, hit flash
+  bz:{x:W/2,tx:W/2,r:0,flash:0},  // blue circle: rail position, slide target, radius, hit flash
   shake:0, endFlash:0, protFlash:0, readyAt:0, overAt:0,
   locked:false, lockAt:0,   // a Proteus channel is currently significant
   wsls:{sw:0,nw:0,sl:0,nl:0}, figHist:[], lastCommit:null,
@@ -437,8 +435,8 @@ function fire(side){                      // side: "T"(left) | "S"(right)
     trail:[], ctrail:[],
   };
   G.phase="flight";
-  G.bz.ta=G.fl.openX===LANE_L?Math.PI:0;   // clock hand swings the disc to the undefended
-                                           // battery NOW — revealed only at launch
+  G.bz.tx=G.fl.openX;              // disc slides along the rail to the undefended
+                                   // battery NOW — revealed only at launch
   G.lastCommit={results:dec.results,pred:dec.pred,cpu:dec.cpu,ranval:dec.ranval,side};
   renderChannels();                // telemetry reveals THIS trial's commitment only
   sfx.launch(); setTimeout(()=>sfx.counter(),40);
@@ -453,7 +451,7 @@ function resetCore(){
   G.shake=0; G.endFlash=0; G.protFlash=0; particles.length=0;
   G.locked=false; G.lockAt=0; G.lastCommit=null; G.next=null;
   G.wsls={sw:0,nw:0,sl:0,nl:0}; G.figHist=[];
-  G.bz.a=BZ_REST; G.bz.ta=BZ_REST; G.bz.r=0; G.bz.flash=0;
+  G.bz.x=W/2; G.bz.tx=W/2; G.bz.r=0; G.bz.flash=0;
 }
 
 /* ---- replay engine: trials come from a released study session, verbatim ----
@@ -498,8 +496,8 @@ function replayFire(){
     trail:[], ctrail:[],
   };
   G.phase="flight";
-  G.bz.ta=G.fl.openX===LANE_L?Math.PI:0;   // clock hand swings the disc to the undefended
-                                           // battery NOW — revealed only at launch
+  G.bz.tx=G.fl.openX;              // disc slides along the rail to the undefended
+                                   // battery NOW — revealed only at launch
   renderChannels();
   sfx.launch(); setTimeout(()=>sfx.counter(),40);
   if(lockN!==null) sfx.lockon();
@@ -515,7 +513,7 @@ function resolve(fl){
   else { G.you++; G.streak++; G.protStreak=0;
     G.bestStreak=Math.max(G.bestStreak,G.streak); }
   G.log.push({side:fl.side,cpu:fl.cpu,hit:fl.hit,lockN:fl.lockN});
-  G.bz.ta=BZ_REST;   // trial over — the clock hand swings back upright, neutral
+  G.bz.tx=W/2;   // trial over — the disc slides home to center, eclipsing the core
   if(G.log.length>=2){
     const prev=G.log[G.log.length-2];
     const stay=fl.side===prev.side;
@@ -1080,19 +1078,18 @@ function drawLockIndicator(t){
   }
   ctx.restore();
 }
-/* Proteus's blue circle (Fig. 1) on a semicircular track. The arm is a clock hand
-   pivoting at the pulsing core: upright at rest between trials, and on fire it
-   swings the disc along the arc to the countermeasure battery Proteus left open —
-   revealed only at launch, like the target lock (moving it sooner would leak the
-   hidden commitment). A breakthrough rings the disc — white-hot flash + gold
-   shockwave — but it persists; no dissolve, so rapid trials never lose the target. */
+/* Proteus's blue circle (Fig. 1) on the countermeasure rail. Between trials it
+   rests at center, eclipsing the pulsing core; on fire it slides along the spine
+   to the battery Proteus left open — revealed only at launch, like the target
+   lock (moving it sooner would leak the hidden commitment). A breakthrough rings
+   the disc — white-hot flash + gold shockwave — but it persists; no dissolve,
+   so rapid trials never lose the target. */
 function bzPos(){
-  const b=G.bz;
-  return [W/2+BZ_R*Math.cos(b.a), PROT_Y-BZ_R*Math.sin(b.a)];
+  return [G.bz.x, PROT_Y];
 }
 function updateBlueDisc(dt){
   const b=G.bz;
-  b.a+=(b.ta-b.a)*(1-Math.exp(-dt*TURBO/70));    // clock-hand sweep (~0.2s)
+  b.x+=(b.tx-b.x)*(1-Math.exp(-dt*TURBO/70));    // rail slide (~0.2s)
   b.r+=(10-b.r)*(1-Math.exp(-dt*TURBO/170));     // grow-in at session start (~0.5s);
                                                  // no dissolve, so it never shrinks after
   b.flash=Math.max(0,b.flash-dt*TURBO*0.0035);   // hit flash decays over ~0.3s
@@ -1101,14 +1098,6 @@ function drawBlueTarget(t){
   if(G.phase!=="ready"&&G.phase!=="flight") return;
   const b=G.bz, [x,y]=bzPos();
   ctx.save();
-  // the clock hand — Proteus red at the pivot, blue where it grips the disc
-  const lg=ctx.createLinearGradient(W/2,PROT_Y,x,y);
-  lg.addColorStop(0,"rgba(255,79,109,0.50)");
-  lg.addColorStop(0.5,"rgba(150,110,220,0.32)");
-  lg.addColorStop(1,"rgba(79,155,255,0.75)");
-  glow("#4f9bff",5);
-  ctx.strokeStyle=lg; ctx.lineWidth=1.6;
-  ctx.beginPath(); ctx.moveTo(W/2,PROT_Y); ctx.lineTo(x,y); ctx.stroke();
   if(b.r>0.5){
     const r=b.r*(1+0.05*Math.sin(t*0.006)), f=b.flash;
     glow("#4f9bff",14+f*18);
