@@ -62,8 +62,8 @@
           font-family:var(--sans); }
   .eyebrow { font-size:12px; letter-spacing:.5px; color:var(--clay); font-weight:500;
              margin-bottom:22px; }
-  h1 { font-size:46px; line-height:1.12; font-weight:700; letter-spacing:-.5px;
-       text-wrap:balance; }
+  h1 { font-size:clamp(28px, 5vw, 38px); line-height:1.12; font-weight:700;
+       letter-spacing:-.5px; text-wrap:balance; }
   .subhead { font-family:var(--serif); font-style:italic; font-size:18.5px; line-height:1.5;
              font-weight:400; color:var(--muted); margin:16px 0 0; max-width:620px;
              text-wrap:balance; }
@@ -245,7 +245,7 @@
 
 <header class="hero">
   <div class="eyebrow">PACA-LAB · A MACHINE PSYCHOLOGY RESEARCH PROGRAM</div>
-  <h1>An adaptive opponent for language models.</h1>
+  <h1>An adaptive opponent for language models</h1>
   <div class="subhead">The Protean Adversarial Choice Assay relies on established methods
     from Behavioral Game Theory, Decision Neuroscience, and Primate Cognition to test how
     language models respond to strategic exploitation in a closed-loop interactive setting.</div>
