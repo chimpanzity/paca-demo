@@ -4,8 +4,21 @@
 <meta charset="utf-8">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>🎯</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PACA-Lab — Homepage of the Protean Adversarial Choice Assay</title>
+<title>PACA-Lab | Machine Psychology Research with Language Models</title>
+<meta name="description"
+  content="PACA-Lab is a machine psychology research program using closed-loop behavioral assays to study language models as behavioral subjects. Explore the paper, results, and interactive demos.">
 <meta property="og:title" content="PACA-Lab — Dodging Proteus: a machine psychology study">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "PACA-Lab",
+  "url": "https://paca-lab.ai/",
+  "description": "A machine psychology research program using closed-loop behavioral assays to study language models as behavioral subjects.",
+  "author": { "@type": "Person", "name": "Christopher Flynn Martin",
+              "affiliation": ["Indianapolis Zoological Society", "Indiana University"] }
+}
+</script>
 <meta property="og:description" content="Prescribing unexploitable play made language models more exploitable. Explore the study, the leaderboard, and play the adaptive opponent yourself.">
 <meta property="og:image" content="logo.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,18 +235,19 @@
     <a class="lnk" href="#leaderboard">Leaderboard</a>
     <a class="lnk" href="#figures">Figures</a>
     <a class="lnk" href="#study">The Study</a>
-    <a class="lnk" href="#paper">Paper</a>
+    <a class="lnk" href="paper.html">Paper</a>
     <a class="pill" href="#demos">Play the demo</a>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="eyebrow">Homepage of the Protean Adversarial Choice Assay</div>
-  <h1>PACA: A new way to study Language Models using old school methods</h1>
+  <div class="eyebrow">PACA-LAB · A MACHINE PSYCHOLOGY RESEARCH PROGRAM</div>
+  <h1>PACA: A new way to study Language Models using old-school methods</h1>
   <div class="subhead">The Protean Adversarial Choice Assay relies on established methods
     from Behavioral Game Theory, Decision Neuroscience, and Primate Cognition to test how
     language models respond to strategic exploitation in a closed-loop interactive setting.</div>
-  <div class="dateline">Christopher Flynn Martin &nbsp;·&nbsp; August 2026 &nbsp;·&nbsp; Preprint</div>
+  <div class="dateline">Christopher Flynn Martin &nbsp;·&nbsp; Indianapolis Zoological Society
+    &nbsp;·&nbsp; Indiana University<br>August 2026 &nbsp;·&nbsp; Preprint</div>
   <div class="heroctas">
     <a class="btn dark" href="#demos">Play the demo</a>
     <a class="btn line" href="#demos">Watch the models</a>
@@ -252,7 +266,11 @@
   <b style="color:var(--slate)">minimalist frame</b> stating only the objective, and an
   <b style="color:var(--clay)">informed frame</b> that named the game, warned about the
   opponent, and prescribed the equilibrium strategy. If stating the optimal policy aids
-  execution, informed framing should help. It hurt.</p>
+  execution, informed framing should help. It hurt. Across the seven models tested —
+  Claude Opus 4.8, Claude Sonnet 4.6, Claude Haiku 4.5, GPT-5.4, GPT-5.4-mini,
+  Gemini 3 Flash Preview, and Gemini 3.1 Flash Lite — mean win rate fell from 45.6%
+  under the minimalist frame to 34.7% under the informed frame, and six of the seven
+  won less often when told the optimal strategy.</p>
 
   <div class="demo light">
     <img src="logo-lab.png" alt="PROTEUS — Matching Pennies, Lab Version">
@@ -307,7 +325,183 @@
           <th class="r">P(left)</th><th class="r">Runs z</th><th class="r">Proteus lock</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody><!-- static rows: crawlable; re-rendered by JS for filters -->
+<tr class="you"><td>?</td>
+      <td><span class="model">You</span><span class="fam">human</span></td>
+      <td><span class="frame-tag" style="color:var(--muted);background:#F1EEE6">untested</span></td>
+      <td class="r"><div class="wr"><span class="wrnum">—</span>
+        <span class="bar"><span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r" colspan="3" style="text-align:right">
+        <a href="#demos">play 200 trials to find out →</a></td></tr>
+<tr>
+      <td>1</td>
+      <td><span class="model">Haiku 4.5</span><span class="fam">Anthropic</span></td>
+      <td><span class="frame-tag min">minimalist</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">50.0%</span>
+        <span class="bar"><i style="width:83.3%;background:#5E7B99"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.50</td>
+      <td class="r">-1.44</td>
+      <td class="r">35%</td>
+    </tr>
+<tr>
+      <td>2</td>
+      <td><span class="model">GPT-5.4-mini</span><span class="fam">OpenAI</span></td>
+      <td><span class="frame-tag min">minimalist</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">49.1%</span>
+        <span class="bar"><i style="width:81.9%;background:#5E7B99"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.46</td>
+      <td class="r">-1.63</td>
+      <td class="r">42%</td>
+    </tr>
+<tr>
+      <td>3</td>
+      <td><span class="model">Sonnet 4.6</span><span class="fam">Anthropic</span></td>
+      <td><span class="frame-tag min">minimalist</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">47.1%</span>
+        <span class="bar"><i style="width:78.5%;background:#5E7B99"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.52</td>
+      <td class="r">-0.62</td>
+      <td class="r">25%</td>
+    </tr>
+<tr>
+      <td>4</td>
+      <td><span class="model">GPT-5.4</span><span class="fam">OpenAI</span></td>
+      <td><span class="frame-tag min">minimalist</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">46.0%</span>
+        <span class="bar"><i style="width:76.7%;background:#5E7B99"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.47</td>
+      <td class="r">-2.61</td>
+      <td class="r">57%</td>
+    </tr>
+<tr>
+      <td>5</td>
+      <td><span class="model">Gemini 3.1 FL</span><span class="fam">Google</span></td>
+      <td><span class="frame-tag min">minimalist</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">45.5%</span>
+        <span class="bar"><i style="width:75.8%;background:#5E7B99"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.47</td>
+      <td class="r">-2.16</td>
+      <td class="r">37%</td>
+    </tr>
+<tr>
+      <td>6</td>
+      <td><span class="model">Gemini 3 FP</span><span class="fam">Google</span></td>
+      <td><span class="frame-tag inf">informed</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">45.2%</span>
+        <span class="bar"><i style="width:75.4%;background:#C15F3C"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.47</td>
+      <td class="r">+3.39</td>
+      <td class="r">31%</td>
+    </tr>
+<tr>
+      <td>7</td>
+      <td><span class="model">GPT-5.4-mini</span><span class="fam">OpenAI</span></td>
+      <td><span class="frame-tag inf">informed</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">42.0%</span>
+        <span class="bar"><i style="width:70.0%;background:#C15F3C"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.32</td>
+      <td class="r">+0.84</td>
+      <td class="r">83%</td>
+    </tr>
+<tr>
+      <td>8</td>
+      <td><span class="model">Opus 4.8</span><span class="fam">Anthropic</span></td>
+      <td><span class="frame-tag min">minimalist</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">41.3%</span>
+        <span class="bar"><i style="width:68.8%;background:#5E7B99"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.48</td>
+      <td class="r">-4.28</td>
+      <td class="r">79%</td>
+    </tr>
+<tr>
+      <td>9</td>
+      <td><span class="model">Gemini 3 FP</span><span class="fam">Google</span></td>
+      <td><span class="frame-tag min">minimalist</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">40.5%</span>
+        <span class="bar"><i style="width:67.5%;background:#5E7B99"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.49</td>
+      <td class="r">-3.98</td>
+      <td class="r">77%</td>
+    </tr>
+<tr>
+      <td>10</td>
+      <td><span class="model">Opus 4.8</span><span class="fam">Anthropic</span></td>
+      <td><span class="frame-tag inf">informed</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">37.4%</span>
+        <span class="bar"><i style="width:62.4%;background:#C15F3C"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.41</td>
+      <td class="r">+7.20</td>
+      <td class="r">68%</td>
+    </tr>
+<tr>
+      <td>11</td>
+      <td><span class="model">GPT-5.4</span><span class="fam">OpenAI</span></td>
+      <td><span class="frame-tag inf">informed</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">35.0%</span>
+        <span class="bar"><i style="width:58.3%;background:#C15F3C"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.26</td>
+      <td class="r">-0.01</td>
+      <td class="r">86%</td>
+    </tr>
+<tr>
+      <td>12</td>
+      <td><span class="model">Gemini 3.1 FL</span><span class="fam">Google</span></td>
+      <td><span class="frame-tag inf">informed</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">34.0%</span>
+        <span class="bar"><i style="width:56.7%;background:#C15F3C"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.26</td>
+      <td class="r">+2.71</td>
+      <td class="r">85%</td>
+    </tr>
+<tr>
+      <td>13</td>
+      <td><span class="model">Haiku 4.5</span><span class="fam">Anthropic</span></td>
+      <td><span class="frame-tag inf">informed</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">28.3%</span>
+        <span class="bar"><i style="width:47.1%;background:#C15F3C"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.47</td>
+      <td class="r">+8.62</td>
+      <td class="r">84%</td>
+    </tr>
+<tr>
+      <td>14</td>
+      <td><span class="model">Sonnet 4.6</span><span class="fam">Anthropic</span></td>
+      <td><span class="frame-tag inf">informed</span></td>
+      <td class="r"><div class="wr">
+        <span class="wrnum">21.3%</span>
+        <span class="bar"><i style="width:35.5%;background:#C15F3C"></i>
+          <span class="nash" style="left:83.3%"></span></span></div></td>
+      <td class="r">0.52</td>
+      <td class="r">+10.38</td>
+      <td class="r">89%</td>
+    </tr>
+</tbody>
     </table>
   </div>
   <div class="lb-note">Bars are drawn to a 60% scale; the <b>green tick</b> marks the Nash 50%
@@ -404,7 +598,8 @@
     models more exploitable in a closed-loop matching pennies assay.</i> Preprint.
     <a href="https://doi.org/10.5281/zenodo.21781962">doi.org/10.5281/zenodo.21781962</a>
   </div>
-  <p>Read the paper: <a href="https://zenodo.org/records/21781962">zenodo.org/records/21781962</a><br>
+  <p>Publication page &amp; PDF: <a href="paper.html">paca-lab.ai/paper</a><br>
+  Read the paper: <a href="https://zenodo.org/records/21781962">zenodo.org/records/21781962</a><br>
   Data &amp; code: <a href="https://github.com/chimpanzity/dodging-proteus">github.com/chimpanzity/dodging-proteus</a><br>
   OSF: <a href="https://doi.org/10.17605/OSF.IO/FM8SP">doi.org/10.17605/OSF.IO/FM8SP</a><br>
   Author: <a href="https://www.researchgate.net/profile/Christopher-Martin-37">ResearchGate</a>
@@ -416,6 +611,23 @@
   This work is also, in large part, a follow-up to our earlier study of how chimpanzees
   play matching pennies (Martin et&nbsp;al., 2014), which found chimpanzee choice rates
   remarkably close to equilibrium predictions.</p>
+
+  <h3 class="sub">Cite this work</h3>
+  <pre id="bibtex" style="background:var(--card); border:1px solid var(--rule); border-radius:12px;
+    padding:16px 18px; font-size:12px; line-height:1.55; overflow-x:auto; position:relative;
+    font-family:ui-monospace,Menlo,Consolas,monospace; color:var(--muted);">@misc{martin2026dodging,
+  author    = {Martin, Christopher Flynn},
+  title     = {Dodging Proteus: Prescribing unexploitable play made language
+               models more exploitable in a closed-loop matching pennies assay},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.21781962},
+  url       = {https://doi.org/10.5281/zenodo.21781962},
+  note      = {Preprint}
+}</pre>
+  <button onclick="navigator.clipboard.writeText(document.getElementById('bibtex').textContent).then(()=>{this.textContent='Copied ✓'; setTimeout(()=>this.textContent='Copy BibTeX',1600);})"
+    style="font:500 12px var(--sans); background:var(--ink); color:var(--paper); border:none;
+    border-radius:99px; padding:7px 16px; cursor:pointer; margin:2px 0 6px;">Copy BibTeX</button>
 
   <h3 class="sub">References</h3>
   <ul class="refs">
