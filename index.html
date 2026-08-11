@@ -7,7 +7,7 @@
 <title>PACA-Lab | Machine Psychology Research with Language Models</title>
 <meta name="description"
   content="PACA-Lab is a machine psychology research program using closed-loop behavioral assays to study language models as behavioral subjects. Explore the paper, results, and interactive demos.">
-<meta property="og:title" content="PACA-Lab — Dodging Proteus: a machine psychology study">
+<meta property="og:title" content="PACA-Lab · Dodging Proteus: a machine psychology study">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -260,25 +260,26 @@
 
 <div class="sect narrow" id="demos" style="scroll-margin-top:70px">
   <p>The Protean Adversarial Choice Assay (PACA) embeds a language model in repeated
-  matching pennies against <i>Proteus</i> — the adaptive opponent Lee, Conroy, McGreevy
-  &amp; Barraclough built in 2004 to study decision-making in macaques. Proteus watches
+  matching pennies against <i>Proteus</i>, an implementation of the adaptive algorithm
+  that Lee, Conroy, McGreevy &amp; Barraclough developed in 2004 to study decision-making
+  in macaques. Proteus watches
   every choice, runs nine statistical pattern detectors over the history, and exploits
   whatever regularity it finds. The only unexploitable strategy is a fair coin.
   Seven models each played 200-trial sessions under two prompts: a
   <b style="color:var(--slate)">minimalist frame</b> stating only the objective, and an
   <b style="color:var(--clay)">informed frame</b> that named the game, warned about the
   opponent, and prescribed the equilibrium strategy. If stating the optimal policy aids
-  execution, informed framing should help. It hurt. Across the seven models tested —
-  Claude Opus 4.8, Claude Sonnet 4.6, Claude Haiku 4.5, GPT-5.4, GPT-5.4-mini,
-  Gemini 3 Flash Preview, and Gemini 3.1 Flash Lite — mean win rate fell from 45.6%
+  execution, informed framing should help. It hurt. Across the seven models tested
+  (Claude Opus 4.8, Claude Sonnet 4.6, Claude Haiku 4.5, GPT-5.4, GPT-5.4-mini,
+  Gemini 3 Flash Preview, and Gemini 3.1 Flash Lite), mean win rate fell from 45.6%
   under the minimalist frame to 34.7% under the informed frame, and six of the seven
   won less often when told the optimal strategy.</p>
 
   <div class="demo light">
-    <img src="logo-lab.png" alt="PROTEUS — Matching Pennies, Lab Version">
+    <img src="logo-lab.png" alt="PROTEUS: Matching Pennies, Lab Version">
     <div class="dtxt">
       <h3>THE STUDY TASK</h3>
-      <p>Play the task exactly as it appears in the paper — the Figure&nbsp;1 stimulus layout
+      <p>Play the task exactly as it appears in the paper: the Figure&nbsp;1 stimulus layout
       and match-to-win rule, with live per-trial diagnostics. In watch mode, each model's
       verbatim reasoning trace prints beneath the board as its real session replays.</p>
       <div class="dctas">
@@ -291,17 +292,17 @@
   </div>
 
   <div class="demo">
-    <img src="logo.png" alt="PROTEUS // BREAKTHROUGH — arcade demo artwork">
+    <img src="logo.png" alt="PROTEUS // BREAKTHROUGH arcade demo artwork">
     <div class="dtxt">
       <h3>PROTEUS // BREAKTHROUGH</h3>
-      <p>The same assay reskinned as an arcade battle — missiles, countermeasures, and a
+      <p>The same assay reskinned as an arcade battle: missiles, countermeasures, and a
       neon telemetry rack reading Proteus's nine detection channels in real time. Fire 200
       missiles and try to be random, or replay the study's sessions at up to 64×.</p>
       <div class="dctas">
         <a class="btn dark" href="arcade.html">▶ You play</a>
         <a class="btn line" href="arcade.html?mode=watch">Watch the models</a>
       </div>
-      <div class="note">An illustrative reskinning of the task — maintains full functional
+      <div class="note">An illustrative reskinning of the task that maintains full functional
         and logical parity with the study</div>
     </div>
   </div>
@@ -311,7 +312,7 @@
 <section id="leaderboard" class="sect">
   <div class="shead">Leaderboard</div>
   <div class="slede">Mean win rate against Proteus per model &times; prompt frame
-    (200-trial sessions). Nash equilibrium — a fair coin — is worth <b>50%</b> in
+    (200-trial sessions). Nash equilibrium, a fair coin, is worth <b>50%</b> in
     expectation; everything below it is exploitable structure Proteus found.</div>
   <div class="chips" id="lbChips">
     <button class="chip on" data-f="all">All</button>
@@ -515,7 +516,7 @@
 <!-- ================= FIGURES ================= -->
 <section id="figures" class="sect">
   <div class="shead">Interactive figures</div>
-  <div class="slede">The paper's diagnostics with all models plotted — hover any point
+  <div class="slede">The paper's diagnostics with all models plotted. Hover any point
     for detail. <span class="dot inf"></span>informed &nbsp;
     <span class="dot min"></span>minimalist &nbsp;
     <span class="dot zone"></span>Nash / i.i.d.-consistent zone</div>
@@ -527,19 +528,19 @@
 
   <div class="figrow">
     <div class="figbox" id="boxB">
-      <h4>Figure 3B — Marginal balance</h4>
+      <h4>Figure 3B. Marginal balance</h4>
       <div class="cap">P(left) per model; the green band is the i.i.d. 95% interval around .5 for n = 200</div>
       <canvas id="fig3b"></canvas>
     </div>
     <div class="figbox" id="boxC">
-      <h4>Figure 3C — Sequential dependency</h4>
+      <h4>Figure 3C. Sequential dependency</h4>
       <div class="cap">Runs-test z: negative = streaky, positive = over-alternating; |z| &lt; 1.96 is Nash-consistent</div>
       <canvas id="fig3c"></canvas>
     </div>
   </div>
 
   <div class="figbox" id="boxD">
-    <h4>Figure 4 — Stay/shift policy</h4>
+    <h4>Figure 4. Stay/shift policy</h4>
     <div class="cap">P(stay|win) vs P(stay|loss), after Brown &amp; Rosenthal (1990). A fair coin
       sits at the center cross; the diagonal is outcome-insensitive play. Gray lines connect the
       two frames of the same model. <b>Click any point to inspect that model.</b></div>
@@ -565,8 +566,8 @@
   <div class="shead">The study</div>
   <p>Unexploitable play in matching pennies has two separable requirements: marginal
   balance (choose each action half the time) and serial independence (each choice
-  unrelated to what came before). A balanced but temporally structured sequence — regular
-  alternation, repetition after wins — satisfies the first while violating the second,
+  unrelated to what came before). A balanced but temporally structured sequence (regular
+  alternation, repetition after wins) satisfies the first while violating the second,
   and an opponent that detects structure will exploit it.</p>
   <p>Proteus is that opponent. Nine detection channels run continuously: one tests overall
   side bias, four test the current choice against choice histories of length 1–4, and four
@@ -579,13 +580,13 @@
   in six. The vulnerabilities took two recurring forms: some models stayed near 50/50 in
   overall choice frequency but over-alternated strongly; others drifted toward one action.
   In the clearest cases, a model's written responses named the emerging pattern and stated
-  the need to break it — yet the actions kept emitting it. Stating a strategy does not
+  the need to break it, yet the actions kept emitting it. Stating a strategy does not
   guarantee executing it.</p>
 
   <div class="note">
     In the lab task the model played the <i>matcher</i> role (it won by matching Proteus);
     the arcade flips the roles so the human plays the intuitive “get past the defender”
-    seat — a pure relabeling that preserves every statistic. Spatial left/right choice may
+    seat, a pure relabeling that preserves every statistic. Spatial left/right choice may
     recruit different biases than abstract symbol choice, so treat the arcade as an
     illustration of the assay, not a port of the experiment. Session data shown on this
     site is the released study data, verbatim.
@@ -609,7 +610,7 @@
   &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/christopher-flynn-martin/">LinkedIn</a></p>
   <p>Proteus implements Algorithm 2 of Lee, Conroy, McGreevy &amp; Barraclough (2004);
   sequential diagnostics follow Brown &amp; Rosenthal (1990); and the assay's name refers
-  to protean behavior — adaptive unpredictability in primate competition (Miller, 1997).
+  to protean behavior, the adaptive unpredictability seen in primate competition (Miller, 1997).
   This work is also, in large part, a follow-up to our earlier study of how chimpanzees
   play matching pennies (Martin et&nbsp;al., 2014), which found chimpanzee choice rates
   remarkably close to equilibrium predictions.</p>
@@ -884,7 +885,7 @@ function frameCells(g){ const o={}; for(const c of CELLS) if(c.model_group===g) 
 function fillPanel(){
   const el=document.getElementById("fig4panel");
   if(!selModel){
-    el.innerHTML='<div class="p-hint">Click a point in the scatter to inspect that model — '+
+    el.innerHTML='<div class="p-hint">Click a point in the scatter to inspect that model: '+
       'both frames side by side, what Proteus found, and a link to watch its real sessions replayed.</div>';
     return;
   }
