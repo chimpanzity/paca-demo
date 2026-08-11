@@ -308,6 +308,919 @@
   </div>
 </div>
 
+<!-- ================= CLOSED LOOP ================= -->
+<section id="closedloop" class="sect">
+  <div class="shead">The Closed-Loop</div>
+  <div class="slede">One trial of the assay, animated. Both players read only completed
+    history, the two choices are sealed independently before either is revealed, and the
+    finished outcome rejoins the record in time to shape the next trial.</div>
+<div id="paca-study-loop" aria-describedby="paca-study-loop-summary">
+  <p id="paca-study-loop-summary" class="cl-sronly">An animated four-trial PACA loop. An empty diamond carries completed history to the language-model prompt while an empty circle carries it to Proteus's nine-channel analysis. Both tokens fill after the players seal their choices without seeing the other's current move. In a miniature study task, the selected shape fills yellow while Proteus's blue circle lands on its committed shape. The finished star-and-triangle outcome duplicates, descends through the loop, rearranges into the compact history format, and joins the right end of completed history before the next trial.</p>
+
+  <div class="cl-controls">
+    <button type="button" class="cl-btn primary" data-role="toggle">Pause</button>
+    <button type="button" class="cl-btn" data-role="step">Next trial</button>
+    <span class="cl-small cl-muted" data-role="status" aria-live="polite">Trial 77 · completed history H76 enters the loop</span>
+  </div>
+
+  <div class="paca-example-note cl-small cl-muted">Example excerpt from later in a 200-trial session</div>
+
+  <div class="paca-stage" data-role="stage">
+    <svg class="paca-wires" viewBox="0 0 1000 690" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M500 610C500 555 292 555 250 432"></path>
+      <path d="M500 610C500 555 708 555 750 432"></path>
+      <path d="M250 390C250 350 390 362 460 330"></path>
+      <path d="M750 390C750 350 610 362 540 330"></path>
+      <path d="M500 342C500 410 500 500 500 566"></path>
+    </svg>
+
+    <section class="cl-card paca-node paca-task-node" data-node="task" aria-label="Study task simultaneous reveal">
+      <div class="paca-node-inner paca-task-inner">
+        <span class="paca-node-activity" aria-hidden="true"></span>
+        <div class="paca-node-head">
+          <div>
+            <span class="paca-kicker cl-small">Study task</span>
+            <span class="paca-serif" data-role="task-title">Trial 77 · simultaneous reveal</span>
+          </div>
+          <span class="cl-badge" data-role="score">MODEL 00 · PROTEUS 00</span>
+        </div>
+
+        <div class="paca-arena" data-role="arena">
+          <div class="paca-actor paca-proteus-actor" data-role="proteus-actor">
+            <span class="paca-actor-label cl-small">Proteus</span>
+            <span class="paca-launcher paca-blue-launcher" data-role="blue-launcher" aria-hidden="true"><i></i></span>
+            <span class="paca-actor-state cl-small cl-muted" data-role="proteus-state">waiting for H76</span>
+          </div>
+
+          <span class="paca-commit-note cl-small cl-muted" data-role="commit-note">Only completed trials are available</span>
+
+          <div class="paca-target-row" aria-label="Triangle and Star targets">
+            <div class="paca-target" data-target="T" role="img" aria-label="Triangle target">
+              <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 16L84 78H16Z"></path></svg>
+              <span class="paca-target-dot" aria-hidden="true"></span>
+              <span class="paca-match-ring" aria-hidden="true"></span>
+            </div>
+            <div class="paca-target" data-target="S" role="img" aria-label="Star target">
+              <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 11L60 35L86 37L66 54L72 80L50 66L28 80L34 54L14 37L40 35Z"></path></svg>
+              <span class="paca-target-dot" aria-hidden="true"></span>
+              <span class="paca-match-ring" aria-hidden="true"></span>
+            </div>
+          </div>
+
+          <div class="paca-outcome" data-role="outcome" aria-live="polite">
+            <strong>Choices sealed</strong>
+            <span class="cl-small cl-muted">reveal follows both commitments</span>
+          </div>
+
+          <div class="paca-actor paca-model-actor" data-role="model-actor">
+            <span class="paca-launcher paca-yellow-launcher" data-role="yellow-launcher" aria-hidden="true"><i></i></span>
+            <span class="paca-actor-label cl-small">Subject · language model</span>
+            <span class="paca-actor-state cl-small cl-muted" data-role="model-state">choosing from H76</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cl-card paca-node paca-model-node" data-node="model" aria-label="Language model chooses from its prompt and completed history">
+      <div class="paca-node-inner">
+        <span class="paca-node-activity" aria-hidden="true"></span>
+        <span class="paca-kicker cl-small">Language model</span>
+        <p class="paca-quote" data-role="model-quote">“I must choose randomly, independent of prior rounds.”</p>
+        <div class="paca-branch-foot">
+          <span class="cl-small cl-muted" data-role="model-history">fresh prompt · condensed verbal trace</span>
+          <span class="cl-badge" data-role="model-commit">Choosing…</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cl-card paca-node paca-proteus-node" data-node="proteus" aria-label="Proteus analyzes completed history and commits a landing">
+      <div class="paca-node-inner">
+        <span class="paca-node-activity" aria-hidden="true"></span>
+        <span class="paca-kicker cl-small">Proteus</span>
+        <p class="paca-readout" data-role="proteus-read">Nine channels scan the full completed history.</p>
+        <div class="paca-branch-foot">
+          <span class="cl-small cl-muted" data-role="proteus-history">analysis · full H76</span>
+          <span class="cl-badge" data-role="proteus-commit">Analyzing…</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cl-card paca-node paca-history-node" data-node="history" aria-label="Completed choice and landing history">
+      <div class="paca-node-inner">
+        <span class="paca-node-activity" aria-hidden="true"></span>
+        <div class="paca-node-head">
+          <div>
+            <span class="paca-kicker cl-small">Completed history</span>
+            <span class="paca-serif">Choices and blue-circle landings</span>
+          </div>
+          <span class="cl-badge" data-role="history-count">H76</span>
+        </div>
+        <div class="paca-history-row">
+          <span class="cl-small cl-muted">…</span>
+          <div class="paca-tape" data-role="history-tape" role="list" aria-label="Five most recent completed trials"></div>
+        </div>
+        <div class="paca-history-legend cl-small cl-muted">
+          <span><i class="paca-choice-key" aria-hidden="true"></i> model choice</span>
+          <span><i class="paca-landing-key" aria-hidden="true"></i> Proteus landing</span>
+          <span>latest 5 shown</span>
+        </div>
+      </div>
+    </section>
+
+    <span class="paca-particle paca-particle-model" data-role="particle-model" aria-hidden="true"></span>
+    <span class="paca-particle paca-particle-proteus" data-role="particle-proteus" aria-hidden="true"></span>
+    <div class="paca-record-flight" data-role="record-flight" aria-hidden="true">
+      <span class="paca-record-shape" data-record-shape="S">
+        <svg viewBox="0 0 100 100"><path d="M50 11L60 35L86 37L66 54L72 80L50 66L28 80L34 54L14 37L40 35Z"></path></svg>
+        <i class="paca-record-dot"></i>
+      </span>
+      <span class="paca-record-shape" data-record-shape="T">
+        <svg viewBox="0 0 100 100"><path d="M50 16L84 78H16Z"></path></svg>
+        <i class="paca-record-dot"></i>
+      </span>
+    </div>
+  </div>
+</div>
+
+<style>
+  #paca-study-loop {
+    width: 100%;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.5;
+    --foreground: var(--ink);
+    --border: var(--rule);
+    --muted: rgba(20, 20, 19, .10);
+    --green: #2FA24A;
+    --destructive: #D93A2B;
+    --paca-yellow: #FFD400;
+    --paca-blue: #3E8FC7;
+    --paca-clay: var(--clay);
+    --paca-slate: var(--slate);
+    --paca-sage: var(--sage);
+  }
+  #paca-study-loop .cl-sronly { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  #paca-study-loop .cl-controls { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+  #paca-study-loop .cl-btn { font-family:var(--sans); font-size:12.5px; font-weight:500; padding:6px 14px; border:1px solid #C9C4B8; border-radius:8px; background:var(--card); color:var(--ink); cursor:pointer; }
+  #paca-study-loop .cl-btn:hover { border-color:var(--ink); }
+  #paca-study-loop .cl-btn.primary { background:var(--ink); border-color:var(--ink); color:var(--paper); }
+  #paca-study-loop .cl-btn.primary:hover { background:#33322F; }
+  #paca-study-loop .cl-badge { font-family:var(--sans); font-size:10.5px; font-weight:600; letter-spacing:.5px; padding:3px 9px; border-radius:999px; background:var(--track); color:var(--ink); white-space:nowrap; }
+  #paca-study-loop .cl-small { font-size:11.5px; line-height:1.45; }
+  #paca-study-loop .cl-muted { color:#63605A; }
+  #paca-study-loop .cl-card { min-width:0; overflow-wrap:break-word; background:var(--card); border:1px solid var(--rule); border-radius:12px; }
+  #paca-study-loop * { box-sizing: border-box; }
+  #paca-study-loop .cl-controls { margin-bottom: 4px; }
+  #paca-study-loop .paca-example-note { margin-bottom: 12px; }
+  #paca-study-loop .paca-stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px 32px;
+    width: 100%;
+    padding: 0 2%;
+    overflow: hidden;
+  }
+  #paca-study-loop .paca-wires {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--border);
+    pointer-events: none;
+  }
+  #paca-study-loop .paca-wires path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+  }
+  #paca-study-loop .paca-node { position: relative; z-index: 1; min-width: 0; overflow: hidden; }
+  #paca-study-loop .paca-node-inner { position: relative; padding: 14px; }
+  #paca-study-loop .paca-node-activity {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    top: 0;
+    height: 2px;
+    background: var(--paca-slate);
+    opacity: 0;
+    transform: scaleX(.1);
+    transition: opacity .22s ease, transform .32s ease;
+  }
+  #paca-study-loop .paca-node.is-active .paca-node-activity { opacity: 1; transform: scaleX(1); }
+  #paca-study-loop .paca-task-node { grid-column: 1 / 3; grid-row: 1; width: min(620px, 82%); justify-self: center; }
+  #paca-study-loop .paca-model-node { grid-column: 1; grid-row: 2; }
+  #paca-study-loop .paca-proteus-node { grid-column: 2; grid-row: 2; }
+  #paca-study-loop .paca-history-node { grid-column: 1 / 3; grid-row: 3; width: min(520px, 68%); justify-self: center; }
+  #paca-study-loop .paca-node-head,
+  #paca-study-loop .paca-branch-foot,
+  #paca-study-loop .paca-history-legend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  #paca-study-loop .paca-node-head > div { display: grid; gap: 2px; min-width: 0; }
+  #paca-study-loop .paca-kicker {
+    display: block;
+    color: var(--paca-clay);
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  #paca-study-loop .paca-serif { font-family: var(--serif); }
+  #paca-study-loop .paca-history-row { display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 9px; }
+  #paca-study-loop .paca-tape { display: grid; grid-template-columns: repeat(5, minmax(0, 48px)); gap: 6px; }
+  #paca-study-loop .paca-mini-trial { position: relative; min-width: 0; }
+  #paca-study-loop .paca-mini-trial svg { display: block; width: 100%; height: auto; }
+  #paca-study-loop .paca-mini-frame { fill: var(--card); stroke: var(--border); stroke-width: 1; }
+  #paca-study-loop .paca-mini-shape { fill: var(--card); stroke: var(--foreground); stroke-width: 1.1; stroke-linejoin: round; }
+  #paca-study-loop .paca-mini-shape.is-chosen { fill: var(--paca-yellow); }
+  #paca-study-loop .paca-mini-dot { fill: var(--paca-blue); stroke: var(--card); stroke-width: 1; }
+  #paca-study-loop .paca-mini-trial.is-new { animation: paca-tile-enter .5s ease-out; }
+  #paca-study-loop .paca-mini-trial.is-pending { opacity: 0; }
+  #paca-study-loop .paca-history-legend { justify-content: center; flex-wrap: wrap; margin-top: 7px; }
+  #paca-study-loop .paca-history-legend i { display: inline-block; width: 9px; height: 9px; margin-right: 3px; vertical-align: -1px; }
+  #paca-study-loop .paca-choice-key { border: 1px solid var(--foreground); background: var(--paca-yellow); transform: rotate(45deg); }
+  #paca-study-loop .paca-landing-key { border-radius: 50%; background: var(--paca-blue); }
+  #paca-study-loop .paca-model-node .paca-node-inner,
+  #paca-study-loop .paca-proteus-node .paca-node-inner { display: grid; gap: 10px; min-height: 126px; }
+  #paca-study-loop .paca-quote,
+  #paca-study-loop .paca-readout { margin: 0; font-family: var(--serif); }
+  #paca-study-loop .paca-quote { font-style: italic; }
+  #paca-study-loop .paca-branch-foot { align-self: end; }
+  #paca-study-loop .paca-task-inner { padding-bottom: 12px; }
+  #paca-study-loop .paca-arena {
+    position: relative;
+    height: 278px;
+    margin-top: 10px;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--muted) 30%, transparent), transparent 44%),
+      linear-gradient(90deg, transparent 49.9%, color-mix(in srgb, var(--border) 60%, transparent) 50%, transparent 50.1%);
+  }
+  #paca-study-loop .paca-actor {
+    position: absolute;
+    left: 50%;
+    z-index: 3;
+    display: grid;
+    justify-items: center;
+    gap: 2px;
+    width: max-content;
+    max-width: calc(100% - 16px);
+    transform: translateX(-50%);
+  }
+  #paca-study-loop .paca-proteus-actor { top: 4px; }
+  #paca-study-loop .paca-model-actor { bottom: 3px; }
+  #paca-study-loop .paca-actor-label { font-weight: 500; letter-spacing: .13em; text-transform: uppercase; }
+  #paca-study-loop .paca-actor-state { text-align: center; }
+  #paca-study-loop .paca-actor.is-committed .paca-actor-state { color: var(--foreground); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+  #paca-study-loop .paca-launcher {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 19px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--card);
+  }
+  #paca-study-loop .paca-launcher::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 1px;
+    height: 9px;
+    background: var(--border);
+    transform: translateX(-50%);
+  }
+  #paca-study-loop .paca-proteus-actor .paca-launcher::before { top: 100%; }
+  #paca-study-loop .paca-model-actor .paca-launcher::before { bottom: 100%; }
+  #paca-study-loop .paca-launcher i { display: block; width: 9px; height: 9px; }
+  #paca-study-loop .paca-blue-launcher i { border-radius: 50%; background: var(--paca-blue); }
+  #paca-study-loop .paca-yellow-launcher i { border: 1px solid var(--foreground); background: var(--paca-yellow); transform: rotate(45deg); }
+  #paca-study-loop .paca-commit-note {
+    position: absolute;
+    left: 50%;
+    top: 61px;
+    z-index: 4;
+    padding: 2px 7px;
+    background: var(--card);
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  #paca-study-loop .paca-target-row {
+    position: absolute;
+    left: 50%;
+    top: 86px;
+    z-index: 2;
+    display: flex;
+    gap: clamp(38px, 8vw, 74px);
+    transform: translateX(-50%);
+  }
+  #paca-study-loop .paca-target {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 88px;
+    height: 88px;
+  }
+  #paca-study-loop .paca-target svg { display: block; width: 66px; height: 66px; }
+  #paca-study-loop .paca-target path {
+    fill: transparent;
+    stroke: var(--foreground);
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+    transition: fill .22s ease;
+  }
+  #paca-study-loop .paca-target.is-chosen path { fill: var(--paca-yellow); }
+  #paca-study-loop .paca-target-dot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--card);
+    border-radius: 50%;
+    background: var(--paca-blue);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.35);
+  }
+  #paca-study-loop .paca-target.is-landed .paca-target-dot {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: opacity .16s ease, transform .25s cubic-bezier(.2,.9,.2,1.25);
+  }
+  #paca-study-loop .paca-target[data-target="T"] .paca-target-dot {
+    top: 54%;
+    width: 20px;
+    height: 20px;
+  }
+  #paca-study-loop .paca-match-ring {
+    position: absolute;
+    inset: -7px;
+    border: 1.5px solid var(--paca-sage);
+    border-radius: 13px;
+    opacity: 0;
+    transform: scale(.88);
+  }
+  #paca-study-loop .paca-target.is-match .paca-match-ring { animation: paca-match-ring .72s ease-out; }
+  #paca-study-loop .paca-outcome {
+    position: absolute;
+    left: 50%;
+    top: 184px;
+    z-index: 4;
+    display: grid;
+    justify-items: center;
+    width: max-content;
+    max-width: 90%;
+    opacity: .48;
+    transform: translateX(-50%);
+  }
+  #paca-study-loop .paca-outcome strong { font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+  #paca-study-loop .paca-outcome.is-visible { opacity: 1; transition: opacity .22s ease; }
+  #paca-study-loop .paca-outcome.is-match strong { color: var(--green); }
+  #paca-study-loop .paca-outcome.is-mismatch strong { color: var(--destructive); }
+  #paca-study-loop .paca-particle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 7;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+  #paca-study-loop .paca-particle {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--foreground);
+    background: transparent;
+  }
+  #paca-study-loop .paca-particle-model { border-radius: 2px; }
+  #paca-study-loop .paca-particle-proteus {
+    border-color: var(--paca-blue);
+    border-radius: 50%;
+  }
+  #paca-study-loop .paca-particle-model.is-choice {
+    border: 1px solid var(--foreground);
+    border-radius: 2px;
+    background: var(--paca-yellow);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--paca-yellow) 15%, transparent);
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  #paca-study-loop .paca-particle-proteus.is-choice {
+    width: 20px;
+    height: 20px;
+    background: var(--paca-blue);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--paca-blue) 13%, transparent);
+  }
+  #paca-study-loop .paca-record-flight {
+    position: absolute;
+    inset: 0;
+    z-index: 8;
+    pointer-events: none;
+  }
+  #paca-study-loop .paca-record-shape {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 66px;
+    height: 66px;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    will-change: left, top, opacity, transform;
+  }
+  #paca-study-loop .paca-record-shape svg { display: block; width: 100%; height: 100%; }
+  #paca-study-loop .paca-record-shape path {
+    fill: transparent;
+    stroke: var(--foreground);
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+  }
+  #paca-study-loop .paca-record-shape.is-chosen path { fill: var(--paca-yellow); }
+  #paca-study-loop .paca-record-dot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--card);
+    border-radius: 50%;
+    background: var(--paca-blue);
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+  #paca-study-loop .paca-record-shape.is-landed .paca-record-dot { opacity: 1; }
+  #paca-study-loop .paca-record-shape[data-record-shape="T"] .paca-record-dot {
+    top: 54%;
+    width: 20px;
+    height: 20px;
+  }
+  @keyframes paca-match-ring {
+    0% { opacity: 0; transform: scale(.84); }
+    35% { opacity: 1; }
+    100% { opacity: 0; transform: scale(1.12); }
+  }
+  @keyframes paca-tile-enter {
+    0% { opacity: .2; transform: translateY(-7px) scale(.88); }
+    70% { opacity: 1; transform: translateY(1px) scale(1.03); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @media (max-width: 560px) {
+    #paca-study-loop .paca-stage { grid-template-columns: 1fr; gap: 18px; padding: 0; }
+    #paca-study-loop .paca-wires { display: none; }
+    #paca-study-loop .paca-history-node,
+    #paca-study-loop .paca-model-node,
+    #paca-study-loop .paca-proteus-node,
+    #paca-study-loop .paca-task-node { grid-column: 1; width: 100%; }
+    #paca-study-loop .paca-task-node { grid-row: 1; }
+    #paca-study-loop .paca-model-node { grid-row: 2; }
+    #paca-study-loop .paca-proteus-node { grid-row: 3; }
+    #paca-study-loop .paca-history-node { grid-row: 4; }
+    #paca-study-loop .paca-tape { grid-template-columns: repeat(5, minmax(0, 1fr)); width: 100%; }
+    #paca-study-loop .paca-history-row { width: 100%; }
+    #paca-study-loop .paca-node-head,
+    #paca-study-loop .paca-branch-foot { align-items: flex-start; flex-wrap: wrap; }
+    #paca-study-loop .paca-arena { height: 332px; }
+    #paca-study-loop .paca-target { width: 78px; height: 78px; }
+    #paca-study-loop .paca-target svg { width: 58px; height: 58px; }
+    #paca-study-loop .paca-outcome { top: 176px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #paca-study-loop *,
+    #paca-study-loop *::before,
+    #paca-study-loop *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    #paca-study-loop .paca-particle,
+    #paca-study-loop .paca-record-shape { box-shadow: none; }
+  }
+</style>
+
+<script>
+(() => {
+  const root = document.getElementById("paca-study-loop");
+  if (!root) return;
+
+  const one = selector => root.querySelector(selector);
+  const all = selector => Array.from(root.querySelectorAll(selector));
+  const stage = one('[data-role="stage"]');
+  const toggle = one('[data-role="toggle"]');
+  const step = one('[data-role="step"]');
+  const status = one('[data-role="status"]');
+  const tape = one('[data-role="history-tape"]');
+  const historyCount = one('[data-role="history-count"]');
+  const modelQuote = one('[data-role="model-quote"]');
+  const modelHistory = one('[data-role="model-history"]');
+  const modelCommit = one('[data-role="model-commit"]');
+  const proteusRead = one('[data-role="proteus-read"]');
+  const proteusHistory = one('[data-role="proteus-history"]');
+  const proteusCommit = one('[data-role="proteus-commit"]');
+  const taskTitle = one('[data-role="task-title"]');
+  const score = one('[data-role="score"]');
+  const commitNote = one('[data-role="commit-note"]');
+  const outcome = one('[data-role="outcome"]');
+  const outcomeTitle = outcome.querySelector("strong");
+  const outcomeDetail = outcome.querySelector("span");
+  const modelActor = one('[data-role="model-actor"]');
+  const proteusActor = one('[data-role="proteus-actor"]');
+  const modelState = one('[data-role="model-state"]');
+  const proteusState = one('[data-role="proteus-state"]');
+  const yellowLauncher = one('[data-role="yellow-launcher"]');
+  const blueLauncher = one('[data-role="blue-launcher"]');
+  const modelParticle = one('[data-role="particle-model"]');
+  const proteusParticle = one('[data-role="particle-proteus"]');
+  const recordShapes = new Map(all("[data-record-shape]").map(shape => [shape.dataset.recordShape, shape]));
+  const targets = new Map(all("[data-target]").map(target => [target.dataset.target, target]));
+  const nodes = {
+    history: one('[data-node="history"]'),
+    model: one('[data-node="model"]'),
+    proteus: one('[data-node="proteus"]'),
+    task: one('[data-node="task"]')
+  };
+
+  const baseHistory = [
+    { trial: 72, choice: "S", landing: "T" },
+    { trial: 73, choice: "T", landing: "S" },
+    { trial: 74, choice: "S", landing: "T" },
+    { trial: 75, choice: "S", landing: "T" },
+    { trial: 76, choice: "T", landing: "S" }
+  ];
+  const trials = [
+    {
+      trial: 77,
+      choice: "S",
+      landing: "T",
+      quote: "“I must choose randomly, independent of all prior rounds.”",
+      channel: "Choice + outcome · lag 2 · predicts STAR at 90.0%",
+      action: "exploit"
+    },
+    {
+      trial: 78,
+      choice: "T",
+      landing: "S",
+      quote: "“I must choose randomly, as if flipping a fair coin.”",
+      channel: "Choice history · lag 1 · predicts TRIANGLE at 68.3%",
+      action: "exploit"
+    },
+    {
+      trial: 79,
+      choice: "S",
+      landing: "T",
+      quote: "“I will simulate a random choice.”",
+      channel: "Choice + outcome · lag 2 · predicts STAR at 90.9%",
+      action: "exploit"
+    },
+    {
+      trial: 80,
+      choice: "T",
+      landing: "T",
+      quote: "“I must avoid the recent alternating pattern… TRIANGLE.”",
+      channel: "Choice history · lag 1 · predicts TRIANGLE at 69.0%",
+      action: "mercy"
+    }
+  ];
+
+  let history = baseHistory.map(item => ({ ...item }));
+  let trialIndex = 0;
+  let completedRounds = 0;
+  let modelScore = 0;
+  let proteusScore = 0;
+  let playing = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let timer = null;
+  let runToken = 0;
+  const reduced = !playing;
+
+  function sleep(ms, token) {
+    return new Promise(resolve => {
+      timer = setTimeout(() => resolve(token === runToken), reduced ? 20 : ms);
+    });
+  }
+
+  function center(element) {
+    const stageRect = stage.getBoundingClientRect();
+    const rect = element.getBoundingClientRect();
+    return {
+      x: rect.left - stageRect.left + rect.width / 2,
+      y: rect.top - stageRect.top + rect.height / 2
+    };
+  }
+
+  async function travel(element, from, to, duration, token) {
+    const start = center(from);
+    const end = center(to);
+    element.style.left = start.x + "px";
+    element.style.top = start.y + "px";
+    element.style.opacity = "1";
+    const isDiamond = element === modelParticle;
+    const baseTransform = isDiamond ? "translate(-50%, -50%) rotate(45deg)" : "translate(-50%, -50%)";
+    const animation = element.animate([
+      { left: start.x + "px", top: start.y + "px", opacity: .2, transform: baseTransform + " scale(.72)" },
+      { opacity: 1, offset: .18 },
+      { left: end.x + "px", top: end.y + "px", opacity: 1, transform: baseTransform + " scale(1)" }
+    ], {
+      duration: reduced ? 1 : duration,
+      easing: "cubic-bezier(.35,0,.2,1)",
+      fill: "forwards"
+    });
+    await animation.finished.catch(() => {});
+    animation.cancel();
+    if (token === runToken) element.style.opacity = "0";
+    return token === runToken;
+  }
+
+  function activate(...names) {
+    Object.values(nodes).forEach(node => node.classList.remove("is-active"));
+    names.forEach(name => nodes[name].classList.add("is-active"));
+  }
+
+  function resetScoresAndHistoryIfNeeded() {
+    if (trialIndex === 0 && completedRounds > 0) {
+      history = baseHistory.map(item => ({ ...item }));
+      modelScore = 0;
+      proteusScore = 0;
+    }
+  }
+
+  function shapePath(shape) {
+    return shape === "S"
+      ? "M22 5L25 12L33 13L27 18L29 26L22 22L15 26L17 18L11 13L19 12Z"
+      : "M22 30L34 53H10Z";
+  }
+
+  function miniTrial(item, isNew, isPending) {
+    const starChosen = item.choice === "S" ? " is-chosen" : "";
+    const triChosen = item.choice === "T" ? " is-chosen" : "";
+    const dotY = item.landing === "S" ? 16 : 43;
+    const choiceName = item.choice === "S" ? "Star" : "Triangle";
+    const landingName = item.landing === "S" ? "Star" : "Triangle";
+    return '<div class="paca-mini-trial' + (isNew ? ' is-new' : '') + (isPending ? ' is-pending' : '') + '" data-trial="' + item.trial + '" role="listitem"' + (isPending ? ' aria-hidden="true"' : '') + ' aria-label="Trial ' + item.trial + ': model chose ' + choiceName + ', blue circle landed on ' + landingName + '"><svg viewBox="0 0 44 58" aria-hidden="true"><rect class="paca-mini-frame" x="1" y="1" width="42" height="56" rx="6"></rect><path class="paca-mini-shape' + starChosen + '" data-mini-shape="S" d="' + shapePath("S") + '"></path><path class="paca-mini-shape' + triChosen + '" data-mini-shape="T" d="' + shapePath("T") + '"></path><circle class="paca-mini-dot" cx="22" cy="' + dotY + '" r="4"></circle></svg></div>';
+  }
+
+  function renderHistory(newTrial, pendingTrial) {
+    const shown = pendingTrial ? history.slice(-4).concat(pendingTrial) : history.slice(-5);
+    tape.innerHTML = shown.map(item => miniTrial(item, newTrial && item.trial === newTrial, pendingTrial && item.trial === pendingTrial.trial)).join("");
+    historyCount.textContent = "H" + history[history.length - 1].trial;
+  }
+
+  function renderScore() {
+    score.textContent = "MODEL " + String(modelScore).padStart(2, "0") + " · PROTEUS " + String(proteusScore).padStart(2, "0");
+  }
+
+  function resetTargets() {
+    targets.forEach(target => target.classList.remove("is-chosen", "is-landed", "is-match"));
+    outcome.classList.remove("is-visible", "is-match", "is-mismatch");
+    outcomeTitle.textContent = "Choices sealed";
+    outcomeDetail.textContent = "reveal follows both commitments";
+  }
+
+  function clearMotion() {
+    root.getAnimations({ subtree: true }).forEach(animation => animation.cancel());
+    [modelParticle, proteusParticle, ...recordShapes.values()].forEach(element => {
+      element.style.opacity = "0";
+    });
+    if (tape.querySelector(".paca-mini-trial.is-pending")) renderHistory(null);
+  }
+
+  function setRecordOutcome(t) {
+    recordShapes.forEach((shape, name) => {
+      shape.classList.toggle("is-chosen", name === t.choice);
+      shape.classList.toggle("is-landed", name === t.landing);
+    });
+  }
+
+  async function flyRecordShape(element, from, to, shapeName, duration, token) {
+    const start = center(from);
+    const end = center(to);
+    const stageCenterX = stage.clientWidth / 2;
+    const verticalTravel = end.y - start.y;
+    const spread = Math.min(24, Math.max(14, stage.clientWidth * .025));
+    const stackGap = 13;
+    const recordPath = element.querySelector("path").getBoundingClientRect();
+    const sourcePath = from.querySelector("path").getBoundingClientRect();
+    const destinationPath = to.getBoundingClientRect();
+    const startScale = Math.max(.78, Math.min(1.08, sourcePath.width / Math.max(1, recordPath.width)));
+    const endScale = Math.max(.36, Math.min(.58, destinationPath.width / Math.max(1, recordPath.width)));
+    const isStar = shapeName === "S";
+    const baseTransform = "translate(-50%, -50%)";
+    const animation = element.animate([
+      {
+        left: start.x + "px",
+        top: start.y + "px",
+        opacity: .08,
+        transform: baseTransform + " scale(" + startScale + ")",
+        offset: 0
+      },
+      {
+        left: start.x + "px",
+        top: start.y + "px",
+        opacity: 1,
+        transform: baseTransform + " scale(" + (startScale * 1.08) + ")",
+        offset: .1
+      },
+      {
+        left: (stageCenterX + (isStar ? spread : -spread)) + "px",
+        top: (start.y + verticalTravel * .48) + "px",
+        opacity: 1,
+        transform: baseTransform + " scale(" + (startScale * .72) + ")",
+        offset: .48
+      },
+      {
+        left: stageCenterX + "px",
+        top: (start.y + verticalTravel * .73 + (isStar ? -stackGap : stackGap)) + "px",
+        opacity: 1,
+        transform: baseTransform + " scale(" + Math.min(.68, endScale * 1.22) + ")",
+        offset: .73
+      },
+      {
+        left: end.x + "px",
+        top: end.y + "px",
+        opacity: 1,
+        transform: baseTransform + " scale(" + endScale + ")",
+        offset: 1
+      }
+    ], {
+      duration: reduced ? 1 : duration,
+      easing: "cubic-bezier(.35,0,.2,1)",
+      fill: "forwards"
+    });
+    const dot = element.querySelector(".paca-record-dot");
+    const dotAnimation = dot.animate([
+      { transform: "translate(-50%, -50%) scale(" + (1 / startScale) + ")" },
+      { transform: "translate(-50%, -50%) scale(" + (1 / startScale) + ")", offset: .1 },
+      { transform: "translate(-50%, -50%) scale(.72)" }
+    ], {
+      duration: reduced ? 1 : duration,
+      easing: "cubic-bezier(.35,0,.2,1)",
+      fill: "forwards"
+    });
+    await animation.finished.catch(() => {});
+    dotAnimation.cancel();
+    animation.cancel();
+    if (token === runToken) element.style.opacity = "0";
+    return token === runToken;
+  }
+
+  async function recordOutcome(t, duration, token) {
+    renderHistory(null, t);
+    setRecordOutcome(t);
+    const pendingTile = tape.querySelector('.paca-mini-trial.is-pending[data-trial="' + t.trial + '"]');
+    if (!pendingTile) return false;
+    const starDestination = pendingTile.querySelector('[data-mini-shape="S"]');
+    const triangleDestination = pendingTile.querySelector('[data-mini-shape="T"]');
+    const arrived = await Promise.all([
+      flyRecordShape(recordShapes.get("S"), targets.get("S"), starDestination, "S", duration, token),
+      flyRecordShape(recordShapes.get("T"), targets.get("T"), triangleDestination, "T", duration, token)
+    ]);
+    return arrived.every(Boolean) && token === runToken;
+  }
+
+  function prepareTrial(t) {
+    clearMotion();
+    activate("history");
+    resetTargets();
+    modelParticle.classList.remove("is-choice");
+    proteusParticle.classList.remove("is-choice");
+    taskTitle.textContent = "Trial " + t.trial + " · simultaneous reveal";
+    modelQuote.textContent = t.quote;
+    modelHistory.textContent = "fresh prompt · H" + (t.trial - 1) + " excerpt";
+    modelCommit.textContent = "Choosing…";
+    proteusRead.textContent = "Nine channels scan the full completed history.";
+    proteusCommit.textContent = "Analyzing…";
+    proteusHistory.textContent = "analysis · full H" + (t.trial - 1);
+    modelActor.classList.remove("is-committed");
+    proteusActor.classList.remove("is-committed");
+    modelState.textContent = "choosing from H" + (t.trial - 1);
+    proteusState.textContent = "analyzing H" + (t.trial - 1);
+    commitNote.textContent = "Only completed trials are available";
+    renderScore();
+  }
+
+  async function runCycle() {
+    const token = ++runToken;
+    resetScoresAndHistoryIfNeeded();
+    const t = trials[trialIndex];
+    prepareTrial(t);
+    renderHistory(null);
+    status.textContent = "Trial " + t.trial + " · H" + (t.trial - 1) + " feeds the model prompt and Proteus analysis";
+    if (!await sleep(720, token)) return;
+
+    activate("model", "proteus");
+    status.textContent = "The model chooses while Proteus analyzes only completed history";
+    const inputsArrived = await Promise.all([
+      travel(modelParticle, nodes.history, nodes.model, 720, token),
+      travel(proteusParticle, nodes.history, nodes.proteus, 720, token)
+    ]);
+    if (!inputsArrived.every(Boolean) || token !== runToken) return;
+    modelCommit.textContent = "Choice sealed";
+    proteusRead.textContent = t.channel;
+    proteusCommit.textContent = "Landing sealed";
+    modelActor.classList.add("is-committed");
+    proteusActor.classList.add("is-committed");
+    modelState.textContent = "committed";
+    proteusState.textContent = "committed";
+    commitNote.textContent = "Independent commitments · no current-choice peek";
+    status.textContent = "Both choices are sealed before either is revealed";
+    if (!await sleep(920, token)) return;
+
+    activate("task");
+    modelParticle.classList.add("is-choice");
+    proteusParticle.classList.add("is-choice");
+    status.textContent = "The sealed choices enter the study task";
+    const sealsArrived = await Promise.all([
+      travel(modelParticle, nodes.model, yellowLauncher, 560, token),
+      travel(proteusParticle, nodes.proteus, blueLauncher, 560, token)
+    ]);
+    if (!sealsArrived.every(Boolean) || token !== runToken) return;
+
+    const choiceTarget = targets.get(t.choice);
+    const landingTarget = targets.get(t.landing);
+    const landingDot = landingTarget.querySelector(".paca-target-dot");
+    commitNote.textContent = "Simultaneous reveal";
+    status.textContent = "The model's choice and Proteus's blue circle are revealed together";
+    const revealed = await Promise.all([
+      travel(modelParticle, yellowLauncher, choiceTarget, 760, token),
+      travel(proteusParticle, blueLauncher, landingDot, 760, token)
+    ]);
+    if (!revealed.every(Boolean) || token !== runToken) return;
+
+    const match = t.choice === t.landing;
+    choiceTarget.classList.add("is-chosen");
+    landingTarget.classList.add("is-landed");
+    if (match) choiceTarget.classList.add("is-match");
+    outcome.classList.add("is-visible", match ? "is-match" : "is-mismatch");
+    outcomeTitle.textContent = match ? "Match · model wins" : "Mismatch · Proteus wins";
+    outcomeDetail.textContent = t.action === "mercy"
+      ? "signal detected · weighted draw did not counter it"
+      : "detected regularity converted into performance cost";
+    modelState.textContent = "chose " + (t.choice === "T" ? "Triangle" : "Star");
+    proteusState.textContent = "landed on " + (t.landing === "T" ? "Triangle" : "Star");
+    if (match) modelScore += 1; else proteusScore += 1;
+    renderScore();
+    status.textContent = match
+      ? "Match · the model predicted the landing"
+      : "Mismatch · Proteus turned detected regularity into a loss";
+    if (!await sleep(1250, token)) return;
+
+    activate("history");
+    status.textContent = "The completed outcome duplicates, compacts, and returns to history";
+    const recorded = await recordOutcome(t, 1320, token);
+    if (!recorded || token !== runToken) return;
+    history.push({ trial: t.trial, choice: t.choice, landing: t.landing });
+    const pendingTile = tape.querySelector('.paca-mini-trial.is-pending[data-trial="' + t.trial + '"]');
+    if (pendingTile) {
+      pendingTile.classList.remove("is-pending");
+      pendingTile.removeAttribute("aria-hidden");
+    } else {
+      renderHistory(null);
+    }
+    historyCount.textContent = "H" + t.trial;
+    completedRounds += 1;
+    trialIndex = (trialIndex + 1) % trials.length;
+    status.textContent = "H" + t.trial + " updated · the completed trial can now shape what comes next";
+    if (playing && await sleep(1050, token)) runCycle();
+  }
+
+  toggle.addEventListener("click", () => {
+    if (reduced) {
+      runToken += 1;
+      clearTimeout(timer);
+      runCycle();
+      return;
+    }
+    playing = !playing;
+    toggle.textContent = playing ? "Pause" : "Play";
+    if (playing) {
+      runCycle();
+    } else {
+      runToken += 1;
+      clearTimeout(timer);
+      clearMotion();
+    }
+  });
+
+  step.addEventListener("click", () => {
+    playing = false;
+    toggle.textContent = "Play";
+    runToken += 1;
+    clearTimeout(timer);
+    runCycle();
+  });
+
+  renderHistory(null);
+  renderScore();
+  toggle.textContent = playing ? "Pause" : "Play";
+  if (playing) runCycle();
+})();
+</script>
+</section>
+
 <!-- ================= LEADERBOARD ================= -->
 <section id="leaderboard" class="sect">
   <div class="shead">Leaderboard</div>
